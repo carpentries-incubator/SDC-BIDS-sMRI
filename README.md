@@ -27,12 +27,12 @@ This lesson covers a typrical sMRI imaging pipeline by introducing 1) image moda
 ||Setup|Download files required for the lesson|
 | 00:00 | 1. Course Overview and Prereqs | What steps do I need to take before beginning to work with sMRI data? |
 | 00:30 | 2. Introduction to structural MR image modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
-| 01:00 | 3. Image preprocessing with smriprep (Part 1) | How do we clean-up MR images and extract brains? |
-| 01:30 | 4. Image preprocessing with smriprep (Part 2) | What are "templates", "spaces", "atlases"? What is spatial normalization? |
+| 01:00 | 3. Image preprocessing with smriprep (Part 1: image clean-up) | How do we clean-up MR images and extract brains? |
+| 01:30 | 4. Image preprocessing with smriprep (Part 2: image registration) | What are "templates", "spaces", "atlases"? What is spatial normalization? |
 | 02:00 | 6. Image quantification | How do we delineate brain anatomy and quantify phenotypes? |
-| 02:30 | 7. Statistical analysis with ROIs (Part 1) | How to perform case-control analysis of volumetric or cortical features? |
-| 03:00 | 8. Statistical analysis with voxels (Part 2) | How to perform voxel-based-morphometry? |
-| 03:30 | 9. Statistical analysis with signal abnormality (Part 3) | How to segment pathologies such as white-matter hyper-intensities? |
+| 02:30 | 7. Statistical analysis (Part 1: ROIs) | How to perform case-control analysis of volumetric or cortical features? |
+| 03:00 | 8. Statistical analysis (Part 2: voxels) | How to perform voxel-based-morphometry? |
+| 03:30 | 9. Statistical analysis (Part 3: signal abnormality) | How to segment pathologies such as white-matter hyper-intensities? |
 | 04:00 | 10. Reproducibility considerations | How sensitive are your findings to your MR pipeline parameters? |
 | 04:30 | Finish | |
  

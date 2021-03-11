@@ -67,6 +67,6 @@ A list of contributors to the lesson can be found in [AUTHORS](AUTHORS)
 To cite this lesson, please consult with [CITATION](CITATION)
 
 [lesson-example]: https://carpentries.github.io/lesson-example
-[nikhil_bhagwat]: [https://github.com/nikhil153]
+[nikhil_bhagwat]: https://github.com/nikhil153
 [erin_dickie]: https://github.com/edickie
 [neuro_cirriculum]: https://carpentries.org/community-lessons/#neuroimaging

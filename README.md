@@ -18,7 +18,7 @@ The **sMRI Analysis in Python** is a workshop series started up via a collaborat
 
 ## About the lesson
 
-This lesson covers sMRI imaging pipeline by introducing 1) image modalities, 2) image preprocessing, 3) phoenotype quantification, and 4) statistical analyses.  
+This lesson covers a typrical sMRI imaging pipeline by introducing 1) image modalities, 2) image preprocessing, 3) phoenotype quantification, and 4) statistical analyses.  
 
 ### Episodes
 
@@ -67,6 +67,6 @@ A list of contributors to the lesson can be found in [AUTHORS](AUTHORS)
 To cite this lesson, please consult with [CITATION](CITATION)
 
 [lesson-example]: https://carpentries.github.io/lesson-example
-[Nikhil Bhagwat][https://github.com/nikhil153]
+[nikhil_bhagwat]: [https://github.com/nikhil153]
 [erin_dickie]: https://github.com/edickie
 [neuro_cirriculum]: https://carpentries.org/community-lessons/#neuroimaging

@@ -1,13 +1,14 @@
 ---
-title: "Course_Overview"
-teaching: 0
+title: "Course Overview"
+teaching: 30
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "What steps do I need to take before beginning to work with structural MR imgaging (sMRI) data"
+- "What is a sMRI pipeline"
 objectives:
-- "First learning objective. (FIXME)"
+- "Overview of various (pre)processing tasks involved in a sMRI pipeling "
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "sMRI preprocessing is a starting point to gain insight into brain anatomy and its variations"
 ---
 FIXME
 

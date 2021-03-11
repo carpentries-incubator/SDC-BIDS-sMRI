@@ -25,7 +25,7 @@ This lesson covers a typrical sMRI imaging pipeline by introducing 1) image moda
 | Time | Episode | Question(s) Answered |
 | ---  | ---     | ---                  |
 ||Setup|Download files required for the lesson|
-| 00:00 | 1. Course Overview and Prereqs | What steps do I need to take before beginning to work with sMRI data? |
+| 00:00 | 1. Course Overview and Prereqs | What is a structural MR imaging pipeline? |
 | 00:30 | 2. Introduction to structural MR image modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
 | 01:00 | 3. Image preprocessing with smriprep (Part 1: image clean-up) | How do we clean-up MR images and extract brains? |
 | 01:30 | 4. Image preprocessing with smriprep (Part 2: image registration) | What are "templates", "spaces", "atlases"? What is spatial normalization? |

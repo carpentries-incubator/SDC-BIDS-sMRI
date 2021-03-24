@@ -46,11 +46,11 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 
 |        T1w        | T2w |
 | :-------------: | :-----------: |
-| ![T1](../fig/T1.gif) | ![T1](../fig/T2.gif) |
+| ![T1](../fig/T1.gif) | ![T2](../fig/T2.gif) |
 
 
 ### Applications per modality
-|        Modality    | contrast characteristics  | Use-case     |
+|        Modality    | Contrast Characteristics  | Use Cases     |
 | :-------------: | :-----------: | :-----------: |
 |  T1w | Cerebrospinal fluid is dark  | Quantifying anatomy e.g. measure structrual volumes  |
 |  T2w | CSF is light, but white matter is darker than with T1  | Identify pathologies related to lesions and tumors |

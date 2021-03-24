@@ -24,7 +24,7 @@ keypoints:
 Here we see signal from two different tissues as the nuclei are tilted and realigned. 
 ![MR_relax](https://user-images.githubusercontent.com/7978607/112332334-08750c80-8c90-11eb-90fc-33956c037a1c.gif)
 
-### T1w, T2w, and PD acquition
+### T1w, T2w, and PD acquisition
 
 |                | TE short      | TE ~ T2 of tissue of interest|
 | :-------------: | :----------: | :-----------: |
@@ -53,7 +53,7 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 
 |        Modality    | Contrast Characteristics  | Use Cases     |
 | :-------------: | :-----------: | :-----------: |
-|  T1w | Cerebrospinal fluid is dark  | Quantifying anatomy e.g. measure structrual volumes  |
+|  T1w | Cerebrospinal fluid is dark  | Quantifying anatomy _e.g. measure structrual volumes_  |
 |  T2w | CSF is light, but white matter is darker than with T1  | Identify pathologies related to lesions and tumors |
 |  PD  | CSF is bright. Gray matter is brighter than white matter | Identify demyelination|
 |  FLAIR  | Similar to T2 with the CSF signal suppressed| Identify demyelination |

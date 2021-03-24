@@ -10,6 +10,9 @@ objectives:
 keypoints:
 - "Different acquisition techniques will offer better quantification of specific brain tissues"
 ---
+## You Are Here!
+![course_flow](../fig/Course_flow_1.png)
+
 
 ## Image acquisition
 1. The acquition starts with application of strong magnetic field B<sub>0</sub> (e.g. 1.5 or 3.0 Tesla > 10000x earth's magnetic field) which forces the hydrogen nuclei of the abundant water molecules in soft tissues in the body to align with the field. You can think of hydrogen nuclei as tiny magnets of their own. 

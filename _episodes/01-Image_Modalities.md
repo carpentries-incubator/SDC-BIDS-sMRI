@@ -17,7 +17,19 @@ keypoints:
 3. This signal has two components: 1) _Longitudinal_ (z-axis along the scanner's magnetic field) 2) _Transverse_ (xy-plane orthogonal to the scanner's magnetic field). 
 4. Initially the longitudinal signal is weak as most nuclei are tilted away from the z-axis. However this signal grows as nuclei realign. The time constant that dectects the speed of re-alignment is denoted by T1. 
 5. Initially the transverse signal is strong as most nuclei are in phase _coherence_. The signal decays as the nuclei dephase as they realign. This decay is denoted by T2 time constant. 
-6. T1 and T2 relaxation times for various tissues
+6. 7. Bones and lungs have a short T2 (0.1ms - 2ms) whereas soft tissues such as white-matter and grey-matter have a long T2 (90ms - 100ms) 
+8. The tissue specific differences in T1 and T2 relaxation times is what enables us to _see_ anatomy from image contrast. The final image contrast depends on when you _listen_ to the signal (design parameter: echo time (TE)) and how fast you repeat the _tilt-relax_ process i.e. RF pulse freuqency (design parameter: repeatation time (TR)). 
+9. Short TE and TR ~ T1 of tissue of interest --> t1 weighted image
+10. Long TR (>>T1 of tissue of interest) and TE ~ T2 of tissue of interest --> T2 weighted image
+11. Long TR (>>T1 of tissue of interest) and TE ~ 0 --> proton density (PD) image
+12. This is referred to as *T2 Weighted Image*. 
+
+### T1 and T2 relaxation
+Here we see signal from two different tissues as the nuclei are tilted and realigned. 
+![MR_relax](https://user-images.githubusercontent.com/7978607/112332334-08750c80-8c90-11eb-90fc-33956c037a1c.gif)
+
+
+### T1 and T2 relaxation times for various tissues
 
 |                | T1 (ms)      | T2 (ms)     |
 | :------------- | :----------: | -----------: |
@@ -26,22 +38,7 @@ keypoints:
 |  Grey Matter | 1300   | 110    |
 |  White Matter   | 800 | 80 \| |
 
-7. Bones and lungs have a short T2 (0.1ms - 2ms) whereas soft tissues such as white-matter and grey-matter have a long T2 (90ms - 100ms) 
-8. The tissue specific differences in T1 and T2 relaxation times is what enables us to _see_ anatomy from image contrast. The final image contrast depends on when you _listen_ to the signal (design parameter: echo time (TE)) and how fast you repeat the _tilt-relax_ process i.e. RF pulse freuqency (design parameter: repeatation time (TR)). 
-9. Short TE and TR ~ T1 of tissue of interest --> t1 weighted image
-10. Long TR (>>T1 of tissue of interest) and TE ~ T2 of tissue of interest --> T2 weighted image
-11. Long TR (>>T1 of tissue of interest) and TE ~ 0 --> proton density (PD) image
-12. This is referred to as *T2 Weighted Image*. 
-
-Here we see signal from two different tissues as the nuclei are tilted and realigned. 
-
-https://user-images.githubusercontent.com/7978607/112330700-a667d780-8c8e-11eb-9ba7-242280a9e374.mp4
-
-
-
-
-
-Note: Here we have only talked about image contrast which is most relevent to sMRI image pipelines. The details of signal-source localization and k-space transforms are out of the scope. 
+_Note: In this lesson, we have only talked about image contrast which is most relevent to sMRI image pipelines. The details of spatial encoding and k-space transforms are out of the scope._
 
 {% include links.md %}
 

@@ -25,8 +25,8 @@ All of this may sound complicated, but we'll explain things step-by-step in dept
 ## Topics Covered
 
 1. sMRI modalities 
-2. Preprocessing sMRI data (Part 1: image clean-up)
-3. Preprocessing sMRI data (Part 2: image registration)
+2. sMRI Preprocessing (Part 1: image clean-up)
+3. sMRI Preprocessing (Part 2: image registration)
 4. sMRI quantification
 5. sMRI quality control
 6. Statistical analyses (Part 1: ROIs)

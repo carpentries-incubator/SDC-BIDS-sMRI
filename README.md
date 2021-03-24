@@ -57,6 +57,8 @@ Look for the tag ![good_first_issue](https://img.shields.io/badge/-good%20first%
 
 * [Nikhil Bhagwat][nikhil_bhagwat]
 * [Erin Dickie][erin_dickie]
+* [Michael Dayan][Michael_Dayan]
+* [Swapna Premasiri][Swapna_Premasiri]
 
 ## Authors
 
@@ -69,4 +71,6 @@ To cite this lesson, please consult with [CITATION](CITATION)
 [lesson-example]: https://carpentries.github.io/lesson-example
 [nikhil_bhagwat]: https://github.com/nikhil153
 [erin_dickie]: https://github.com/edickie
+[Michael_Dayan]: https://github.com/neurorepro
+[Swapna_Premasiri]: https://github.com/devdinie
 [neuro_cirriculum]: https://carpentries.org/community-lessons/#neuroimaging

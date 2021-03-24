@@ -31,6 +31,8 @@ Here we see signal from two different tissues as the nuclei are tilted and reali
 | **TR ~ T1 of tissue of interest**  |   T1w | - |
 | **TR long**  | proton density (PD) | T2w |
 
+_Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence has replaced the PD image. FLAIR images are T2-weighted with the CSF signal suppressed.
+
 ### T1 and T2 relaxation times for various tissues
 
 |                | T1 (ms)      | T2 (ms)     |
@@ -44,10 +46,16 @@ Here we see signal from two different tissues as the nuclei are tilted and reali
 
 |        T1w        | T2w |
 | :-------------: | :-----------: |
-| 
- |  |
+| ![T1](../fig/T1.gif) | ![T1](../fig/T1.gif) |
 
 
+### Applications per modality
+|        Modality    | contrast characteristics  | Use-case     |
+| :-------------: | :-----------: |
+|  T1w | Cerebrospinal fluid is dark  | Quantifying anatomy e.g. measure structrual volumes  |
+|  T2w | CSF is light, but white matter is darker than with T1  | Identify pathologies related to lesions and tumors |
+|  PD  | CSF is bright. Gray matter is brighter than white matter | Identify demyelination|
+|  FLAIR  | Similar to T2 with the CSF signal suppressed| Identify demyelination |
 
 _Note: In this lesson, we have only talked about image contrast which is most relevent to sMRI image pipelines. The details of spatial encoding and k-space transforms are out of the scope._
 

@@ -10,6 +10,7 @@ keypoints:
 - "sMRI preprocessing is a starting point to gain insight into brain anatomy and its variations"
 ---
 
+![course_flow](../fig/Course_flow_0.png)
 Welcome to the **Structural Neuroimaging Analysis in Python** workshop! The primary goals of this workshop are:
 
 1. Understand basics of strcutural MR image acquisition

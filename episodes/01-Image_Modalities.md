@@ -40,6 +40,15 @@ Here we see signal from two different tissues as the nuclei are tilted and reali
 |  Grey Matter | 1300   | 110    |
 |  White Matter   | 800 | 80 |
 
+### T1w, T2w image contrasts
+
+|        T1w        | T2w |
+| :-------------: | :-----------: |
+| 
+ |  |
+
+
+
 _Note: In this lesson, we have only talked about image contrast which is most relevent to sMRI image pipelines. The details of spatial encoding and k-space transforms are out of the scope._
 
 {% include links.md %}

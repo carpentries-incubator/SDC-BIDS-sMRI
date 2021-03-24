@@ -25,17 +25,16 @@ This lesson covers a typrical sMRI imaging pipeline by introducing 1) image moda
 | Time | Episode | Question(s) Answered |
 | ---  | ---     | ---                  |
 ||Setup|Download files required for the lesson|
-| 00:00 | 1. Course Overview and Prereqs | What is a structural MR imaging pipeline? |
-| 00:30 | 2. Introduction to structural MR image modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
-| 01:00 | 3. Image preprocessing with smriprep (Part 1: image clean-up) | How do we clean-up MR images and extract brains? |
-| 01:30 | 4. Image preprocessing with smriprep (Part 2: image registration) | What are "templates", "spaces", "atlases"? What is spatial normalization? |
-| 02:00 | 5. Image quantification | How do we delineate brain anatomy and quantify phenotypes? |
-| 02:30 | 6. Image quality-control | How do we identify image preprocessing failures? |
+| 00:00 | 0. Course Overview and Prereqs | What is a structural MR imaging pipeline? |
+| 00:30 | 1. sMRI modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
+| 01:00 | 2. sMRI preprocessing (Part 1: image clean-up) | How do we clean-up MR images and extract brains? |
+| 01:30 | 3. sMRI preprocessing (Part 2: image registration) | What are "templates", "spaces", "atlases"? What is spatial normalization? |
+| 02:00 | 4. sMRI quantification | How do we delineate brain anatomy and quantify phenotypes? |
+| 02:30 | 5. sMRI quality-control | How do we identify image preprocessing failures? |
 | 03:00 | 6. Statistical analysis (Part 1: ROIs) | How to look at group differences in regional anatomical features? |
 | 03:30 | 7. Statistical analysis (Part 2: voxels) | How to look at group differences at voxel-level features? |
-| 04:00 | 8. Statistical analysis (Part 3: signal abnormality) | How to segment pathologies such as white-matter hyper-intensities? |
-| 04:30 | 9. Reproducibility considerations | How sensitive are the findings to your MR pipeline parameters? |
-| 05:00 | Finish | |
+| 04:00 | 8. Reproducibility considerations | How sensitive are the findings to your MR pipeline parameters? |
+| 04:30 | Finish | |
  
 
 ## Contributing

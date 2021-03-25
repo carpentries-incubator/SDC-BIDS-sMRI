@@ -27,14 +27,14 @@ All of this may sound complicated, but we'll explain things step-by-step in dept
 
 ## Topics Covered
 
-1. sMRI modalities 
+1. sMRI Modalities 
 2. sMRI Preprocessing (Part 1: image clean-up)
-3. sMRI Preprocessing (Part 2: image registration)
-4. sMRI quantification
-5. sMRI quality control
-6. Statistical analyses (Part 1: ROIs)
-7. Statistical analyses (Part 2: voxels)
-8. Reproducibility considerations 
+3. sMRI Preprocessing (Part 2: spatial normalization)
+4. sMRI Quantification
+5. sMRI Quality-Control
+6. Statistical Analyses (Part 1: ROIs)
+7. Statistical Analyses (Part 2: voxels)
+8. Reproducibility Considerations 
 
 In the next section we'll begin with looking at commonly used sMRI modalities in neuroanatomical studies!
 

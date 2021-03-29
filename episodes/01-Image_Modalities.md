@@ -11,7 +11,7 @@ keypoints:
 - "Different acquisition techniques will offer better quantification of specific brain tissues"
 ---
 ## You Are Here!
-![course_flow](../fig/Course_flow_1.png)
+![course_flow](../fig/episode_1/Course_flow_1.png)
 
 
 ## Image acquisition
@@ -49,7 +49,7 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 
 |        T1w        | T2w |
 | :-------------: | :-----------: |
-| ![T1](../fig/T1.gif) | ![T2](../fig/T2.gif) |
+| ![T1](../fig/episode_1/T1.gif) | ![T2](../fig/episode_1/T2.gif) |
 
 
 ### Applications per modality

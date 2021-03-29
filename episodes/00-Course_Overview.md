@@ -11,7 +11,7 @@ keypoints:
 ---
 
 ## You Are Here!
-![course_flow](../fig/Course_flow_0.png)
+![course_flow](../fig/episode_0/Course_flow_0.png)
 
 Welcome to the **Structural Neuroimaging Analysis in Python** workshop! The primary goals of this workshop are:
 

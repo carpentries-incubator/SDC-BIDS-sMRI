@@ -28,7 +28,7 @@ variations in the sensitivity of the reception coil, and the interaction between
 - ANTs N4 correction
 - ![N4_bias](../fig/episode_2/N4_bias.jpeg)
 
-- Impact of correction:
+- Impact of correction (_source: [Despotović et al.](https://www.hindawi.com/journals/cmmm/2015/450341/)_)
 - ![bias_correction](../fig/episode_2/Despotovic_bias_correction.png)
 
 
@@ -47,5 +47,7 @@ the cerebral cortex and subcortical structures, including the brain stem and cer
 
 - FSL BET 
 - ![FSL_brain_extract](../fig/episode_2/bet2_eg_small.png)
+
+
 {% include links.md %}
 

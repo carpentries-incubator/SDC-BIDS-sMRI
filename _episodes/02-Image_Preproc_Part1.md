@@ -25,11 +25,11 @@ variations in the sensitivity of the reception coil, and the interaction between
     - [ANTs N4 bias correction](https://pubmed.ncbi.nlm.nih.gov/20378467/) (See figure below)
     - [FSL FAST](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FAST) (_Note:FSL FAST is a multi-purpose segmentation tool that includes the bias field correction._)
 
-ANTs N4 correction
-![N4_bias](../fig/episode_2/N4_bias.jpeg)
+- ANTs N4 correction
+- ![N4_bias](../fig/episode_2/N4_bias.jpeg)
 
-Impact of correction:
-![bias_correction](../fig/episode_2/Despotovic_bias_correction.png)
+- Impact of correction:
+- ![bias_correction](../fig/episode_2/Despotovic_bias_correction.png)
 
 
 ### Brain extraction (a.k.a skull-stripping)
@@ -42,10 +42,10 @@ the cerebral cortex and subcortical structures, including the brain stem and cer
     - [antsBrainExtraction](https://nipype.readthedocs.io/en/latest/api/generated/nipype.interfaces.ants.html#brainextraction)
     - [FSL brain extraction tool (BET)](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET)
 
-ANTs Brain Extraction
-![ANTs_brain_extract](../fig/episode_2/brainextraction_t1.jpeg)
+- ANTs Brain Extraction
+- ![ANTs_brain_extract](../fig/episode_2/brainextraction_t1.jpg)
 
-FSL BET 
-![FSL_brain_extract](../fig/episode_2/bet2_eg_small.jpeg)
+- FSL BET 
+- ![FSL_brain_extract](../fig/episode_2/bet2_eg_small.png)
 {% include links.md %}
 

@@ -36,12 +36,11 @@ keypoints:
         - 305 normal MRI brains were linearly coregistered (9-param) to 241 brains that had been coregistered (roughly) to the Talairach atlas. 
     - [Collin27](https://journals.lww.com/jcat/Abstract/1998/03000/Enhancement_of_MR_Images_Using_Registration_for.32.aspx)
         - One individual scanned 27 times and the images linearly registered to create an average with high SNR and structure definition 
-        - linearly registered to the MNI 305.
-        - Used by SPM
+        - Linearly registered to the MNI 305
     - [MNI152 linear a.k.a. ICBM152](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1088516/) (International Consortium for Brain Mapping) 
-        - an average of 152 T1-weighted MRI scans from young adults
-        - linearly coregistered (9-param) to the MNI 305
-        - higher resolution and better contrast than the MNI305
+        - An average of 152 T1-weighted MRI scans from young adults
+        - Linearly coregistered (9-param) to the MNI 305
+        - Higher resolution and better contrast than the MNI305
         - Used by SPM
     - [MNI152 nonlinear](https://link.springer.com/chapter/10.1007%2F11866763_8)
         - Version of MNI152 nonlinearly registered to MNI 305 
@@ -49,11 +48,11 @@ keypoints:
             - MNI152NLin6Asym: used by FSL
             - MNI152NLin2009cAsym: used by fMRIprep
     - [MIITRA](https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.25327) 
-        - An average of 222 T1-weighted MRI scans from older adults 
-
+        - An average of 222 T1-weighted MRI scans from _older adults_
+        - Nonlinearly registered to MNI/ICBM152 2009 version.
     - [fsaverage](https://pubmed.ncbi.nlm.nih.gov/10619420/)
         - _Surface template_ characterized by "vertices and faces/triangles" 
-        - spherical alignment of 40 participants 
+        - Spherical alignment of 40 participants 
         - 163,842 vertices per hemispheres
 
 ### T1 templates (MNI305, Collin27, MNI152 (linear)m MNI152 (nonlinear))
@@ -81,7 +80,6 @@ keypoints:
 
 
 ![MNI_spaces](../fig/episode_3/MNI_space_offset.png)
-<!-- <img src=../fig/episode_3/MNI_space_offset.png width="400"> -->
 
 ## Image registration
 - An process that aligns an image from one coordinate space to another. 
@@ -110,13 +108,15 @@ keypoints:
 |  DARTEL Toolbox |  Non-linear (diffeomorphic)  | 6.4M    |
 |  ANTs (SyN)   | Non-linear (bi-directional diffeomorphic) | 28M |
 
-Rigid registration example (_source: [SimpleITK](https://github.com/InsightSoftwareConsortium/SimpleITK-Notebooks)_): 
+- Rigid registration example (_source: [SimpleITK](https://github.com/InsightSoftwareConsortium/SimpleITK-Notebooks)_): 
+    - The figure below shows the source image being registered to the target (left) in an iterative process. The optimized loss is shown on the right. 
 
 ![rigid_process](../fig/episode_3/registration_visualization_itk.gif)
 
 
 
-Nonlinear deformation example _(source: 3D Slicer [publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3466397/), [wiki](https://www.slicer.org/wiki/Documentation:Nightly:Registration:RegistrationLibrary:RegLib_C42))_:
+- Nonlinear deformation example _(source: 3D Slicer [publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3466397/), [wiki](https://www.slicer.org/wiki/Documentation:Nightly:Registration:RegistrationLibrary:RegLib_C42))_
+    - The figure below shows local deformation (i.e. warping) of source image due to nonlinear registration. 
 
 ![nonlinear_deform_process](../fig/episode_3/Silcer_DeformOnly.gif)
 

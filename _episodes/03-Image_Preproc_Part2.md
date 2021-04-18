@@ -29,8 +29,8 @@ keypoints:
     - Automated internsity based WM, GM, and CSF tissue‐segmentation of MR images 
     - Anatomical atlas creation for region of interest analyses
     - Automated seed selection for connectivity analyses
-- A _good_ template is supposed to be _representative_ averages of the study cohort. However for computational reasons (template creation is a computationally intensive process), and to maintain comparability across studies, typically several commonly used templates exist.
-- Pulically available commonly used templates
+- A _good_ template is supposed to be a _representative_ average of the study cohort. However for computational reasons (template creation is a computationally intensive process), and to maintain comparability across studies, image processing pipelines typically use publicly available templates. 
+- Commonly used templates:
     - [MNI 305](https://ieeexplore.ieee.org/document/373602)
         - an average of 305 T1-weighted MRI scans from young healthy adults
         - 305 normal MRI brains were linearly coregistered (9-param) to 241 brains that had been coregistered (roughly) to the Talairach atlas. 
@@ -78,7 +78,7 @@ keypoints:
 - MNI space(s)
     - Similar to the original Talairach space with the Z-coordinate is approximately +3.5 mm offset relative to the Talairach coordinate.
 
-<img src=../fig/episode_3/MNI_space_offset.png width="60%">
+<img src="../fig/episode_3/MNI_space_offset.png" alt="Drawing" align="middle" width="500px"/>
 
 ## Image registration
 - An process that aligns an image from one coordinate space to another. 

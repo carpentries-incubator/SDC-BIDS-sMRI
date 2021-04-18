@@ -83,12 +83,41 @@ keypoints:
 
 
 ## Image registration
-- An algorithm that transforms an image from one coordinate space to another. 
-    - used to build templates 
-    - used to align new images to these templates or to each other
-- Linear / Affine
-
-- Nonlinear
+- An process that aligns an image from one coordinate space to another. 
+- Used for
+    - building templates 
+    - native (subject) space to template-space alignment (normalization)
+    - inter-subject aligninment (typically for cohort specific)
+    - intra-subject aligment (co-registration of image modalities or longitudinal analyses)
+- Transfomrations
+    - Image similarity metrics: correlation ratio (CR), cross-correlation (CC), mutual information (MI)
+    - Linear: global feature aligment
+        - Rigid (6 parameters): rotation, translation
+        - Affine (12 parameters): rotation, translation, scaling, skewing  
+    - Nonlinear (a.k.a elastic): local feature aligment via warping
+        - Computationally intensive deformation models with large number of parameters
+        - Employ diffeomorphic models that preserve toplogy and source-target symmetry
 
 ![registration_cartoon](../fig/episode_3/Registration.png)
+
+- Commonly used algorithms
+
+|        Algorithm        | Deformation      | ~ parameters     |
+| :-------------: | :----------: | :-----------: |
+|  FLIRT | Linear   | 9    |
+|  ANIMAL | Non-linear (Local translation)   | 69K    |
+|  DARTEL Toolbox |  Non-linear (diffeomorphic)  | 6.4M    |
+|  ANTs (SyN)   | Non-linear (bi-directional diffeomorphic) | 28M |
+
+Rigid registration example (_source: [SimpleITK](https://github.com/InsightSoftwareConsortium/SimpleITK-Notebooks)_): 
+
+![rigid_process](../fig/episode_3/registration_visualization_itk.gif)
+
+
+
+Nonlinear deformation example _(source: 3D Slicer [publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3466397/), [wiki](https://www.slicer.org/wiki/Documentation:Nightly:Registration:RegistrationLibrary:RegLib_C42))_:
+
+![nonlinear_deform_process](../fig/episode_3/Silcer_DeformOnly.gif)
+
+
 {% include links.md %}

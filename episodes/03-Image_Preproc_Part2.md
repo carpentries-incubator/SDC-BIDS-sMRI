@@ -6,9 +6,9 @@ questions:
 - "What is spatial normalization?"
 - "What are 'templates', 'spaces', 'atlases'?"
 objectives:
-- "Understand reference spaces"
+- "Understand reference spaces and registration process"
 keypoints:
-- "Reference spaces offer a way to map and compare brain anatomy across individuals, modalities, and timepoints"
+- "spatial normalization offer a way to map and compare brain anatomy across individuals, modalities, and timepoints"
 ---
 ## You Are Here!
 ![course_flow](../fig/episode_3/Course_flow_3.png)
@@ -79,8 +79,9 @@ keypoints:
 - MNI space(s)
     - Similar to the original Talairach space with the Z-coordinate is approximately +3.5 mm offset relative to the Talairach coordinate.
 
-<img src=../fig/episode_3/MNI_space_offset.png width="400">
 
+![MNI_spaces](../fig/episode_3/MNI_space_offset.png)
+<!-- <img src=../fig/episode_3/MNI_space_offset.png width="400"> -->
 
 ## Image registration
 - An process that aligns an image from one coordinate space to another. 

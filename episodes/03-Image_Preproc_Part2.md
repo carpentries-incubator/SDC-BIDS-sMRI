@@ -59,11 +59,11 @@ keypoints:
 ![MNI_spaces](../fig/episode_3/MNI_spaces_caption.jpeg)
 
 ### Multimodal MNI/ICBM152 atlas
-![MNI_spaces](../fig/episode_3/mni_icbm152_sym_09c_small.jpeg)
+![mni_icbm152](../fig/episode_3/mni_icbm152_sym_09c_small.jpeg)
 
 
 ## Stereotaxic space 
-- A 3-dimensional coordinate reference frame based on anatomical landmarks - originally used to guide neurosurginal procedures. 
+- A 3-dimensional coordinate reference frame based on anatomical landmarks - originally used to guide neurosurgical procedures. 
     - A/P means anterior/posterior
     - L/R means left/right
     - S/I means superior/inferior
@@ -78,8 +78,7 @@ keypoints:
 - MNI space(s)
     - Similar to the original Talairach space with the Z-coordinate is approximately +3.5 mm offset relative to the Talairach coordinate.
 
-
-![MNI_spaces](../fig/episode_3/MNI_space_offset.png)
+<img src=../fig/episode_3/MNI_space_offset.png width="60%">
 
 ## Image registration
 - An process that aligns an image from one coordinate space to another. 

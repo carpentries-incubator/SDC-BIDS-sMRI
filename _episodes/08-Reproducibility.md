@@ -13,57 +13,32 @@ keypoints:
 ![course_flow](../fig/episode_8/Course_flow_8.png)
 
 ## MR image processing pipeline selection choices
-- Algorithms 
+- Compute environment 
+    - OS
+    - math-libs
+
+- Software (algorithms and their versions)
     - image clean-up
     - image preproc
     - image quantification
-
-- Biological priors
-    - templates
-    - atlases
 
 - Quality control
     - manual
     - automatic
 
-## Example analysis
-- Cortical thickness calculation
-    - FreeSurfer vs CIVET
-    - Add table for preproc and templates and atlases and QC
-        - (FS cortical thickness)[https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferAnalysisPipelineOverview]
-            - clean up 
-                - affine registration to the MNI305 atlas 
-                - Bias field removal 
-                - brain extraction (Segonne et al., 2004)
+- Biological priors
+    - templates
+    - atlases
 
-            - preproc
-                - segmentation of the subcortical white matter and deep gray matter volumetric structures (Fischl et al., 2002; Fischl et al., 2004a)
-                - intensity normalization (Sled et al., 1998)
-                - tessellation of the gray matter white matter boundary (Fischl et al., 2001; Segonne et al., 2007)
-                - nonlinear registration to the fsaveage surface atlas
-            
-            - quantification
-                - calculation of cortical thickness as the closest distance from the gray/white boundary to the gray/CSF boundary at each vertex on the tessellated surface (Fischl and Dale, 2000). 
-                - vertex space: fsaverage=163,842, fsaverage6=40,962, fsaverage5=10,242 vertices per hemisphere
-                - aggregation of cortical thickness into regions of interests using DKT or Destrieux Atlas
+## Example software analysis
 
-        - (CIVET cortical thickness)[https://www.bic.mni.mcgill.ca/ServicesSoftware/CIVET-2-1-0-Introduction]
-            - clean up
-                - affine registration to MNI ICBM152 model
-                - intensity normalization (Sled et al., 1998)
-                - brain extraction 
+- Task: compare cortical thickness between two FreeSurfer and CIVET
+![reproducibility](../fig/episode_8/Reproducibility.png)
 
-            - preproc 
-                - tissue classification into white matter (WM), gray matter (GM), and cerebrospinal fluid (CSF)
-                - calculation of boundary between cortical GM and subcortical WM: white matter surface
-                - calculation of boundary between cortical GM and the extra-cortical CSF: gray matter surface
-                - registered to the MNI ICBM152 surface template
+_Note: See [this]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) for details on brain plots]_
 
-            - quantification
-                - cortical thickness is computed by evaluating the distance between the original WM and GM surfaces
-                - vertex space: 81,920 triangles (polygons) and 40,962 vertices. High resolution at 327,680 polygons and 163,842 vertices.
-                - ROI aggregation: major lobes, AAL, or DKT-40
-
+- Correlation between thickness measurements from FreeSurfer and CIVET pipelines aggregated with DKT parcellation 
+![software_compare](../fig/episode_8/CT_compare_software.png)
 
 {% include links.md %}
 

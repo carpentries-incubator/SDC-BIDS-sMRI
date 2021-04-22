@@ -19,19 +19,19 @@ Course flow image edited for this episode to be placed here.
 **Assumptions:**
 * the source of contrast in T1, T2, PD has been explained in another episode in terms of GM, WM , CSF. If possible, also include FLAIR.
 **Data:**
-0068
-0184
+
 
 ## Tissue and region segmentation
 Brain anatomy is different for every individual. Brain tissues are typically divided into grey matter (GM), white matter (WM) and cerebro-spinal fluid (CSF) classes. Each class can inform on a different aspect of the brain studied. Therefore it is often useful to segment the brain in these tissue components for further processing. GM contains neuron cell bodies, WM includes neuron connection fibers wrapped in a special signal-accelerating substance called myelin, and CSF is a protecting fluid present mostly around the brain but also within brain cavities called ventricles.
 
 ![Brain tissue types](../fig/episode_4/GM_WM_CSF.png)
 
-In addition of identifying tissue classes, it is of interest to sub-divide these classes in sub-components. As such, GM is commonly split into non-overlapping regions of interests (ROIs) either defined from either a data-driven or an anatomically-driven approach. These approaches are referred to as parcellation or atlasing respectively, although these terms are sometimes used interchangeably. WM can also be split into group of fibers called white matter bundles (for more details please see lesson on dMRI).
+In addition of identifying tissue classes, it is of interest to sub-divide these classes in sub-components. As such, GM is commonly split into non-overlapping regions of interests (ROIs) via a parcellation scheme either defined from a data-driven or an anatomically-driven approach. The term atlas and parcellation are often used interchangeably and even together (e.g. the atlas X, the Y parcellation, the atlas parcellation Z). Please note that WM can also be split into group of fibers called white matter bundles (for more details please see lesson on diffusion MRI).
 
 Aging and disease can cause tissue modifications. Common changes include a reduction in GM, as in the  case of ageing and neurodegenerative diseases such as Alzheimer's. A tumor can cause an important localized change of signal in the area most impacted by the tumor. Another example is visibly higher WM signal intensities on MRI images, so called WM hyper-intensities, which can be related to vascular pathology (common in aging), or to myelin lesions characteristic of the multiple sclerosis disease.
 
 ![Brain atrophy due to Alzheimer's or severe multiple sclerosis disease](../fig/episode_4/brain_atrophy_460px.jpg)
+*This image is Copyright © My-MS.org and falls under Image License D defined under the Image License section of the My-MS.org Disclaimer page.*
 
 
 The analysis of structural images then often consists in first identifying tissue classes -- including pathological tissue -- and their sub-components, and second quantifying morphological differences. The first step is done by segmenting the MRI images, and the second one by measuring differences in signal intensity across subjects (with techniques such as voxel based morphometry (VBM)) or in morphological properties such as volume or thickness. GM loss for example can be assessed by:
@@ -132,7 +132,11 @@ for label in labels:
 
 ![Tissue classes overlayed on the T1 data](../fig/episode_4/intensity_distribution_per_tissue_class.png)
 
-The segmentation of surface data provide 3D meshes separating WM from GM. Such meshes are typically obtained with `Freesurfer` and can also be plotted with `nilearn`.
+The segmentation into GM and WM voxels allows to identify surfaces surrounding these tissues. Some software such as Freesurfer can use this information to identify the most external surface of the brain, the GM pial surface, and the WM surface below. The images below show the delineation of GM (in read) and WM (in blue) before (left) and after (right) discarding deep GM structures such as the basal ganglia.
+
+![Delineation of GM and WM](../fig/episode_4/GM_WM_surfaces_delineation.png)
+
+The segmentation of surface data provides 3D meshes separating WM from GM. Such meshes are typically obtained with `Freesurfer` and can also be plotted with `nilearn`.
 
 ~~~
 # The pial surface is the most external surface of the GM
@@ -156,28 +160,72 @@ plotting.plot_surf((wm_verts, wm_faces))
 
 #### Disease such as Alzheimer's and multiple sclerosis
 
-The brain GM volume tends to shrink with age, with the GM loss typically replaced with CSF. This process is called atrophy. In Alzheimer's disease and other neuro-degenerative disease, atrophy is amplified (the "degeneration" is the loss of GM). Therefore special care is required when assessing the resulting of the segmentation as the tissue template may lead to errors.
+The brain GM volume tends to shrink with age, with the GM loss typically replaced with CSF. This process is called atrophy. In Alzheimer's disease and other neuro-degenerative disease, atrophy is amplified (the "degeneration" is the loss of GM). Therefore special care is required when processing data of patients whose disease can cause in the brain morphology.
 
-Ex: load and visualize the Alzheimer dataset: what can you say of this patient ?
+Below is a T1 image of an Alzheimer's disease patient. An enlargement of the CSV containing cavities, the ventricles, can be seen.
 
+![WM mesh from surface segmentation](../fig/episode_4/NC_vs_AD.png)
+
+Below is a T1 and FLAIR image of an MS patient. The lesion enhancing FLAIR modality clearly show lesions. These lesions can sometimes be seen on the T1 image. In this case they appear as dark spots called "black holes".
+
+![WM mesh from surface segmentation](../fig/episode_4/MS_T1_FLAIR_width640.png)
+
+> ## Segmentation problems in disease
+>
+> What problems do you expect in the segmentation pipeline when analyzing Alzheimer's or multiple sclerosis data ?
+>
+> > ## Solution
+> >
+> > The registration to a template can be problematic in Alzheimer's disease when the morphology of the brain significantly changed due to atrophy. While registration can be successful without additional step, a custom template could also be used to mitigate any potential issues.
+> >
+> > Registration can also be a problem with multiple sclerosis. Filling the lesions with intensity corresponding to WM is a solution sometimes used to avoid these issues. Some software such as ANTS directly accepts a binary lesion mask as an input to deal this kind of data.
+> {: .solution}
+{: .challenge}
 
 ### Segmenting tissue classes into sub-components (atlasing, parcellation) and visualizing the results
 
-#### Atlasing
+#### Atlas and parcellation
 
-#### Parcellation
+An atlas is often considered as a set of labelled regions defined on a template. A brain parcellation is a set of regions making up the brain volumes. Typically each voxel corresponds to a unique region, i.e. the regions of a parcellation do not overlap, and these regions cover the whole brain. As such the term "parcellation" and "atlas" often overlap. However probabilistic atlases are associated with probabilistic maps for each region of interest (ROI). Since a voxel has now a different probability to belong to each atlas ROI, it is common for probability maps to overlap. A "true" parcellation can then be obtained by associating to each voxel the label with the maximum probability (since the union of the probability maps typically cover the whole brain). Fixing a probability threshold however (e.g. 50%) does not guarantee each voxel to get a label.
+
+Atlases can be created as a consensus between manually, semi-automatically or fully automatically segmented ROIs. These ROIs can correspond to anatomically defined ROIs (such as the Broadmann atlas). However the ROI creation can also be purely data driven, with an arbitrary set of regions to find, and in this case no anatomical correspondence with known neuroanatomy is guaranteed. 
+
+Atlases often refer to a given tissue type, and can be considered as further segmentation of the set of voxels corresponding to that tissue. It is often implied that an atlas corresponds to parcellation of GM, and while atlas of WM also exist, we will focus in this lesson on GM atlases. 
+
+
+#### Visualizing atlases
+
+Example of "true parcellation" motivated by neuroanatomy (e.g. AAL atlas).
+
+Example of probabilistic atlas (e.g. Harvard Oxford atlas).
+
+Example of purely data driven atlas.
 
 ### Measuring region volumes
 
-#### Revisiting image properties: voxel size and affine transform
+#### Revisiting image properties: voxel size
+
+A given MRI sequence is often acquired as a stack of slices. As such the in-plane voxel size (e.g. 0.9 mm x 0.9 mm) is not always equal to the slice thickness (e.g. 1 mm). This is important to keep in mind when measuring region volume. Another reason why one should extract the voxel size is that even if the voxels are isotropic (i.e. they have the same size in any dimension), one acquisition can be made with a given size (e.g. 1mm isotropic) and another acquisition with another size (e.g. 0.9 mm isotropic). 
+
+The voxel size of an image can be obtained from the metadata (i.e. the data annotation). This can be accomplished with `nibabel` as follows:
 
 #### Measuring volume in standard units
 
-### Extracting surface measurements from pre-computed Freesurfer data
+We examine here an example on how to measure each region of a brain atlas in terms of number of voxels, and how to convert this number into mm3.
+
+### Extracting measurements from pre-computed Freesurfer data
+
+Freesurfer is one of the most commonly used software to carry out segmentation. By default Freesurfer compute a certain number of metrics. These metrics are often used directly rather than computing them from the segmentation data.
 
 #### Type of information available from Freesurfer
 
+Freesurfer segments the brain in terms of both volumes and surfaces. It also relies on two atlases to further segment the GM tissue: the Destrieux and the Desikan-Killiany atlas. To add confusion to the distinction between atlas, segmentation and parcellation, Freesurfer called the division of volumetric data into sub-regions "segmentation", and the division of surface data into sub-regions "parcellation". The associated data are named with the keyword `seg` and `parc` respectively.
+
+*Some more information on the type of data output by Freesurfer*
+
 #### Extracting Freesurfer information with Python
+
+*An example of extracting quantitative information from the Freesurfer stat file*
 
 {% include links.md %}
 

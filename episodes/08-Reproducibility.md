@@ -14,30 +14,33 @@ keypoints:
 
 ## MR image processing pipeline selection choices
 - Compute environment 
-    - OS
-    - math-libs
+    - OS / system math libararies 
+    - Programming libraries Python / R versions
 
 - Software (algorithms and their versions)
-    - image clean-up
-    - image preproc
-    - image quantification
+    - Image clean-up
+    - Image preproc
+    - Image quantification
 
 - Quality control
-    - manual
-    - automatic
+    - Manual protocol specifics
+    - Automatic outlier criteria
 
 - Biological priors
-    - templates
-    - atlases
+    - Templates 
+    - Atlases/parcellations: ROI definitions
 
 ## Example software analysis
 
-- Task: compare cortical thickness between two FreeSurfer and CIVET
+- Task: compare cortical thickness between FreeSurfer and CIVET
 ![reproducibility](../fig/episode_8/Reproducibility.png)
 
 _Note: See [this]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) for details on brain plots]_
 
-- Correlation between thickness measurements from FreeSurfer and CIVET pipelines aggregated with DKT parcellation 
+- Correlation between thickness measurements:
+  - Software: FreeSurfer (v5.1, v5.3, v6.0), CIVET (2.1) and ANTs
+  - Parcellation: DKT
+    
 ![software_compare](../fig/episode_8/CT_compare_software.png)
 
 {% include links.md %}

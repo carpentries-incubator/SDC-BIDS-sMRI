@@ -1,6 +1,6 @@
 ---
-title: "Image quantification"
-teaching: 20
+title: "Image segmentation and quantification"
+teaching: 30
 exercises: 10
 questions:
 - "How do we delineate brain anatomy and quantify phenotypes?"
@@ -20,8 +20,6 @@ Course flow image edited for this episode to be placed here.
 * the source of contrast in T1, T2, PD has been explained in another episode in terms of GM, WM , CSF. If possible, also include FLAIR.
 **Data:**
 
-
-## Tissue and region segmentation
 Brain anatomy is different for every individual. Brain tissues are typically divided into grey matter (GM), white matter (WM) and cerebro-spinal fluid (CSF) classes. Each class can inform on a different aspect of the brain studied. Therefore it is often useful to segment the brain in these tissue components for further processing. GM contains neuron cell bodies, WM includes neuron connection fibers wrapped in a special signal-accelerating substance called myelin, and CSF is a protecting fluid present mostly around the brain but also within brain cavities called ventricles.
 
 ![Brain tissue types](../fig/episode_4/GM_WM_CSF.png)
@@ -48,7 +46,7 @@ In this episode we will look at:
 * how to measure region volumes
 * how to extract surface measures pre-computed from a third party software (Freesurfer)
 
-### Segmenting images into tissue classes in normal and pathological tissues, and visualizing the segmentation
+## Segmenting and visualizing brain tissues
 
 The tissues can be differentiated according to the MRI signal intensity, however as seen in episode X, the main magnetic field can introduce bias and create signal inhomogeneities. It is therefore important to implement bias field correction before carrying out segmentation according to tissue intensities.
 
@@ -57,7 +55,7 @@ Usually the T1 MRI modality is used for segmentation as it offers the best contr
 Tissue segmentation is presented first for normal controls. Then differences are shown for patients having Alzheimer's or the multiple sclerosis disease.
 
 
-#### Normal controls
+### In normal controls
 
 In normal controls, the number of tissue classes is usually fixed. A distribution of the intensity of the different tissue types can be obtained by loading T1 volumes with `nibabel` then plotting a slice with `matplotlib` and displaying an histogram with `seaborn` (a plotting library built on top of `matplotlib`).
 
@@ -158,7 +156,7 @@ plotting.plot_surf((wm_verts, wm_faces))
 {: .language-python}
 ![WM mesh from surface segmentation](../fig/episode_4/mesh_WM_NC.png)
 
-#### Disease such as Alzheimer's and multiple sclerosis
+### In disease such as Alzheimer's and multiple sclerosis
 
 The brain GM volume tends to shrink with age, with the GM loss typically replaced with CSF. This process is called atrophy. In Alzheimer's disease and other neuro-degenerative disease, atrophy is amplified (the "degeneration" is the loss of GM). Therefore special care is required when processing data of patients whose disease can cause in the brain morphology.
 
@@ -178,52 +176,228 @@ Below is a T1 and FLAIR image of an MS patient. The lesion enhancing FLAIR modal
 > >
 > > The registration to a template can be problematic in Alzheimer's disease when the morphology of the brain significantly changed due to atrophy. While registration can be successful without additional step, a custom template could also be used to mitigate any potential issues.
 > >
-> > Registration can also be a problem with multiple sclerosis. Filling the lesions with intensity corresponding to WM is a solution sometimes used to avoid these issues. Some software such as ANTS directly accepts a binary lesion mask as an input to deal this kind of data.
+> > Registration can also be a problem with multiple sclerosis. Filling the lesions with intensity corresponding to WM is a solution sometimes used to avoid these issues. Some software such as ANTS directly accepts a binary lesion mask as an input to deal with this kind of data.
 > {: .solution}
 {: .challenge}
 
-### Segmenting tissue classes into sub-components (atlasing, parcellation) and visualizing the results
+## Segmenting tissue classes into sub-components: atlasing, parcellation
 
-#### Atlas and parcellation
+### Atlas and parcellation
 
-An atlas is often considered as a set of labelled regions defined on a template. A brain parcellation is a set of regions making up the brain volumes. Typically each voxel corresponds to a unique region, i.e. the regions of a parcellation do not overlap, and these regions cover the whole brain. As such the term "parcellation" and "atlas" often overlap. However probabilistic atlases are associated with probabilistic maps for each region of interest (ROI). Since a voxel has now a different probability to belong to each atlas ROI, it is common for probability maps to overlap. A "true" parcellation can then be obtained by associating to each voxel the label with the maximum probability (since the union of the probability maps typically cover the whole brain). Fixing a probability threshold however (e.g. 50%) does not guarantee each voxel to get a label.
+A brain atlas is often considered as a set of labelled regions defined on a template. A parcellation can be defined as the splitting of an object into non-overlapping components. A brain parcellation is then a set of regions making up the whole brain, and is therefore synonymous with "atlas".
 
-Atlases can be created as a consensus between manually, semi-automatically or fully automatically segmented ROIs. These ROIs can correspond to anatomically defined ROIs (such as the Broadmann atlas). However the ROI creation can also be purely data driven, with an arbitrary set of regions to find, and in this case no anatomical correspondence with known neuroanatomy is guaranteed. 
+While an atlas is often expected to be correspond to an entire brain, this is not so for a parcellation. A parcellation can be limited to a specific region, e.g. the parcellation of the thalamus. It can be also applied to a larger area, such as the cortical GM parcellation for the cortex (the outer layer of the brain) or subcortical GM parcellation, for deep GM (GM structures below cortical GM).  
 
-Atlases often refer to a given tissue type, and can be considered as further segmentation of the set of voxels corresponding to that tissue. It is often implied that an atlas corresponds to parcellation of GM, and while atlas of WM also exist, we will focus in this lesson on GM atlases. 
+The picture can be muddled when considering probabilistic atlases. In this case each region is associated to a probabilistic map: each voxel has a given probability to belong to the region considered. Since a voxel has now a different probability to belong to each atlas ROI, ROI probability maps overlap. A "true" parcellation can then be obtained by associating to each voxel the label with the maximum probability.
+
+> ## Probability atlas threshold
+>
+> Given a probabilistic atlas, is there a single probability threshold which would guaranteed each brain voxel to have a unique label ?
+>
+> > ## Solution
+> >
+> > In virtually all cases no single threshold will result in each voxel to belong to a unique ROI. A high threshold will result in voxels not having a label, while a low threshold will cause voxels to belong to overlapping probability maps. It is very unlikely for a single threshold to provide a true parcellation. 
+> {: .solution}
+{: .challenge}
+
+While atlases were originally defined so that each region had a text label anatomically meaningful (e.g. "visual cortex"), it is now common to use purely data-driven atlases. While each region of these atlases are still considered homogeneous according to some neuroimaging properties, they do not have a text label associated to their ROIs.
+
+Note that atlases often refer to a given tissue type, such as WM, and can be considered as further segmentation of the set of voxels corresponding to that tissue. It is often implied that an atlas corresponds to GM parcellation, and while atlas of WM also exist, we will focus in this lesson on GM atlases. 
 
 
-#### Visualizing atlases
+### Visualizing atlases and parcellation
 
-Example of "true parcellation" motivated by neuroanatomy (e.g. AAL atlas).
+#### Non probabilistic volumetric atlas
 
-Example of probabilistic atlas (e.g. Harvard Oxford atlas).
+An example of "true" parcellation atlas, motivated by neuroanatomy, is the Automated Anatomical Labeling (AAL) atlas. Each voxel belongs to an ROI, and only one. Each ROI has an anatomically meaningful text label. The atlas is aligned with the MNI MRI single-subject brain .  It is represented as a 3D volume in which each voxel has for intensity the integer labelling the ROI it correspond to, e.g. 2401 for the the left hemisphere supplementary motor area.
 
-Example of purely data driven atlas.
+`Nilearn` offers a collection of atlases in its `datasets` module. The AAL atlas, text labels and integer indices can all be obtained through this module.
+~~~
+from nilearn.datasets import fetch_atlas_aal
+AAL_dataset = fetch_atlas_aal()
+AAL_maps = AAL_dataset.maps
+AAL_labels = AAL_dataset['labels']
+AAL_labels_ix = AAL_dataset['indices']
+~~~
+{: .language-python}
 
-### Measuring region volumes
+To get a given ROI integer label, there are two possibilities:
+1. The ROI integer label is simply the index of its text label in the list, e.g. if "visual cortex" is in position 3 in AAL_dataset['labels'] the corresponding integer label in the image is 3
+2. The ROI integer label does not correspond to the text label index. In this case `nilearn` provide a list of indices, e.g. if "visual cortex" is in position 3 in AAL_dataset['labels'], then the corresponding integer label is found at position 3 in AAL_dataset['indices']
 
-#### Revisiting image properties: voxel size
+We can check the atlas dimension by loading it with `nibabel`
+~~~
+AAL_img = nib.load(AAL_maps)
+AAL_img.shape
+~~~
+{: .language-python}
+
+~~~
+(91, 109, 91)
+~~~
+{: .output}
+
+We can use the same `plot_roi` function of the `nilearn` `plotting` module as before:
+~~~
+plotting.plot_roi(roi_img=AAL_maps, bg_img=t1_mni, alpha=0.4,
+                  title="AAL atlas");
+~~~
+{: .language-python}
+
+![AAL atlas](../fig/episode_4/AAL_atlas.png)
+
+We can extract a specific ROI in two steps:
+1. Identify the integer index corresponding to the ROI
+2. Get all the voxels corresponding to that index
+
+For the AAL atlas, the ROI integer labels are not in the order of the text labels so we implement the following code:
+
+~~~
+roi_label = "Supp_Motor_Area_L"
+roi_label_pos = AAL_labels.index(roi_label)
+roi_ix = int(AAL_labels_ix[roi_label_pos])
+print(roi_ix)
+~~~
+{: .language-python}
+~~~
+2401
+~~~
+{: .output}
+
+Now we extract the `numpy` array in which the atlas is encoded with the `get_fdata` method, and we create a boolean array with `True` if the voxel label is equal to our ROI index, and `False` if not.
+
+~~~
+roi_mask_arr = (AAL_img.get_fdata() == roi_ix)
+~~~
+{: .language-python}
+
+We then convert the boolean array to integer values, and create an Image object by indicating the original image properties (the affine transformation)
+~~~
+roi_mask_int = nib.Nifti1Image(roi_mask_arr.astype(int), 
+                               affine=AAL_img.affine)
+~~~
+{: .language-python}
+
+Here is the result when plotting it with `nilearn`
+~~~
+plotting.plot_roi(roi_img=roi_mask_int, bg_img=t1_mni, 
+                  alpha=0.4, title=roi_label);
+~~~
+{: .language-python}
+
+![ROI from the AAL atlas](../fig/episode_4/AAL_roi.png)
+
+#### Probabilistic volumetric atlas
+
+An example of probabilistic atlas is the Harvard Oxford atlas. Each ROI of the atlas is a probability map. As a result this atlas can be represented as a 4D volume with the fourth dimension indexing all atlas ROIs.
+
+The Harvard Oxford atlas is also available in `nilearn` in two sets, one for the cortical area and another one for the subcortical area. Since the ROI indices match the order of the text labels (0, 1, ...) no explicit indices are provided.
+
+~~~
+from nilearn.datasets import fetch_atlas_harvard_oxford
+harvard_oxford = fetch_atlas_harvard_oxford('cort-prob-2mm')
+harvard_oxford_maps = harvard_oxford['maps']
+harvard_oxford_labels = harvard_oxford['labels']
+~~~
+{: .language-python}
+
+We can again check the atlas dimension with `nibabel`
+~~~
+harvard_oxford_img = nib.load(harvard_oxford_maps)
+harvard_oxford_img.shape
+~~~
+{: .language-python}
+
+~~~
+(91, 109, 91, 48)
+~~~
+{: .output}
+
+The procedure to extract a specific ROI is similar:
+1. Identify the integer index corresponding to the ROI
+2. Get the volume in the 4D array corresponding to that index
+
+The second step is facilitated by the convenience function `index_img` of the `nilearn` `image` module:
+
+~~~
+from nilearn import image
+roi_label = "Frontal Medial Cortex"
+roi_ix = int(harvard_oxford_labels.index(roi_label))
+roi_prob_mask = image.index_img(harvard_oxford_maps, roi_ix)
+~~~
+
+We can display the probability mask with the `plot_stat_map` function of the `nilearn` `plotting` module:
+~~~
+plotting.plot_stat_map(roi_prob_mask, 
+                       title="ROIs in Havard Oxford atlas");
+~~~
+{: .language-python}
+
+![ROI from the Harvard Oxford probabilist atlas](../fig/episode_4/hox_roi.png)
+
+To create a binary mask, one could copy the underlying array storing the probability map and thresholding it according to some threshold.
+~~~
+roi_prob_mask_arr = roi_prob_mask.get_fdata()
+roi_mask_arr_thr = roi_prob_mask_arr.copy()
+thr = 25
+roi_mask_arr_thr[roi_mask_arr_thr<thr] = 0
+roi_mask_arr_thr[roi_mask_arr_thr>=thr] = 1
+~~~
+{: .language-python}
+
+To display it, we need to reattach the image geometrical properties into a `nibabel` `Nifti1Image` object.
+
+~~~
+roi_mask_thr = nib.Nifti1Image(roi_mask_arr_thr, 
+                               affine=roi_prob_mask.affine)
+plotting.plot_roi(roi_img=roi_mask_thr, bg_img=t1_mni, 
+                  alpha=0.4, title=roi_label);
+~~~
+{: .language-python}
+
+![Thresholded ROI of the Harvard Oxford probabilist atlas](../fig/episode_4/hox_roi_thresholded.png)
+
+Note that `nilearn` offers pre-thresholded atlases, for example with a threshold of `25`:
+
+~~~
+haox_thresholded = fetch_atlas_harvard_oxford('cort-maxprob-thr25-2mm')
+haox_thresholded_maps = haox_thresholded['maps']
+plotting.view_img(haox_thresholded_maps, title="Harvard Oxford atlas", 
+                  symmetric_cmap=False, opacity=0.4)
+~~~
+{: .language-python}
+
+![Harvard Oxford probabilistic atlas with all ROIs thresholded to 25](../fig/episode_4/hox_atlas_thresholded.png)
+
+As mentioned previously the Harvard Oxford atlas comes in two sets, with the second set for subcortical structures.
+
+~~~
+haox_subcortical = fetch_atlas_harvard_oxford('sub-maxprob-thr25-2mm')
+haox_subcortical_maps = haox_subcortical['maps']
+plotting.view_img(haox_subcortical_maps, title="Harvard Oxford atlas", 
+                  symmetric_cmap=False, opacity=0.4)
+~~~
+{: .language-python}
+
+![Harvard Oxford probabilistic atlas of subcortical regions with all ROIs thresholded to 25](../fig/episode_4/hox_sucortical_atlas_thresholded.png)
+
+## Quantifying tissue properties
+
+### Metric from volumetric data: region volumes 
 
 A given MRI sequence is often acquired as a stack of slices. As such the in-plane voxel size (e.g. 0.9 mm x 0.9 mm) is not always equal to the slice thickness (e.g. 1 mm). This is important to keep in mind when measuring region volume. Another reason why one should extract the voxel size is that even if the voxels are isotropic (i.e. they have the same size in any dimension), one acquisition can be made with a given size (e.g. 1mm isotropic) and another acquisition with another size (e.g. 0.9 mm isotropic). 
 
 The voxel size of an image can be obtained from the metadata (i.e. the data annotation). This can be accomplished with `nibabel` as follows:
 
-#### Measuring volume in standard units
-
 We examine here an example on how to measure each region of a brain atlas in terms of number of voxels, and how to convert this number into mm3.
 
-### Extracting measurements from pre-computed Freesurfer data
+### Metric from surface data: cortical thickness (using measurements pre-computed from Freesurfer)
 
 Freesurfer is one of the most commonly used software to carry out segmentation. By default Freesurfer compute a certain number of metrics. These metrics are often used directly rather than computing them from the segmentation data.
-
-#### Type of information available from Freesurfer
 
 Freesurfer segments the brain in terms of both volumes and surfaces. It also relies on two atlases to further segment the GM tissue: the Destrieux and the Desikan-Killiany atlas. To add confusion to the distinction between atlas, segmentation and parcellation, Freesurfer called the division of volumetric data into sub-regions "segmentation", and the division of surface data into sub-regions "parcellation". The associated data are named with the keyword `seg` and `parc` respectively.
 
 *Some more information on the type of data output by Freesurfer*
-
-#### Extracting Freesurfer information with Python
 
 *An example of extracting quantitative information from the Freesurfer stat file*
 

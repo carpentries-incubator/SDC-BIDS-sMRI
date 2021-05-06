@@ -186,7 +186,7 @@ Below is a T1 and FLAIR image of an MS patient. The lesion enhancing FLAIR modal
 
 A brain atlas is often considered as a set of labelled regions defined on a template. A parcellation can be defined as the splitting of an object into non-overlapping components. A brain parcellation is then a set of regions making up the whole brain, and is therefore synonymous with "atlas".
 
-While an atlas is often expected to be correspond to an entire brain, this is not so for a parcellation. A parcellation can be limited to a specific region, e.g. the parcellation of the thalamus. It can be also applied to a larger area, such as the cortical GM parcellation for the cortex (the outer layer of the brain) or subcortical GM parcellation, for deep GM (GM structures below cortical GM).  
+While an atlas is often expected to be defined on an entire brain, this is not so for a parcellation. A parcellation can be limited to a specific region, e.g. the parcellation of the thalamus. It can be also applied to a larger area, such as the cortical GM parcellation for the cortex (the outer layer of the brain) or subcortical GM parcellation, for deep GM (GM structures below cortical GM).  
 
 The picture can be muddled when considering probabilistic atlases. In this case each region is associated to a probabilistic map: each voxel has a given probability to belong to the region considered. Since a voxel has now a different probability to belong to each atlas ROI, ROI probability maps overlap. A "true" parcellation can then be obtained by associating to each voxel the label with the maximum probability.
 
@@ -202,7 +202,9 @@ The picture can be muddled when considering probabilistic atlases. In this case 
 
 While atlases were originally defined so that each region had a text label anatomically meaningful (e.g. "visual cortex"), it is now common to use purely data-driven atlases. While each region of these atlases are still considered homogeneous according to some neuroimaging properties, they do not have a text label associated to their ROIs.
 
-Note that atlases often refer to a given tissue type, such as WM, and can be considered as further segmentation of the set of voxels corresponding to that tissue. It is often implied that an atlas corresponds to GM parcellation, and while atlas of WM also exist, we will focus in this lesson on GM atlases. 
+Note that atlases often refer to a given tissue type, such as WM, and can be considered as further segmentation of the set of voxels corresponding to that tissue. It is often implied that an atlas corresponds to GM parcellation, and while atlas of WM also exist, we will focus in this lesson on GM atlases.
+
+Note that some advanced methods relies on multiple atlases so that to get multiple candidate labels, and then fusing the resulting labels to get a single one. This approach is called multi-atlas segmentation with joint label fusion. Examples are X, Y and Z (if MAGeTbrain is to be mentioned).
 
 
 ### Visualizing atlases and parcellation
@@ -286,6 +288,8 @@ plotting.plot_roi(roi_img=roi_mask_int, bg_img=t1_mni,
 {: .language-python}
 
 ![ROI from the AAL atlas](../fig/episode_4/AAL_roi.png)
+
+Note that the usefulness of an atlas come from the fact that each subject brain can be registered to the template on which that atlas is defined. This can be seen in the image above where the background image is a subject's brain which was registered to the SPM template on which is defined the AAL atlas.
 
 #### Probabilistic volumetric atlas
 
@@ -381,13 +385,26 @@ plotting.view_img(haox_subcortical_maps, title="Harvard Oxford atlas",
 
 ![Harvard Oxford probabilistic atlas of subcortical regions with all ROIs thresholded to 25](../fig/episode_4/hox_sucortical_atlas_thresholded.png)
 
+#### Surface atlas
+
+In the previous cases, the unit elements to receive a label were voxels. When considering the surface of the cortex, unit elements are the vertices of the surface mesh. Each such vertex can receive a label, and the result is a surface parcellation. Freesurfer relies on two surface atlases: the Desikan-Killiany Atlas with 68 ROIs and the Destrieux Atlas with 148 ROIs.
+
+*Example of Destrieux Atlas with*
+
+*Example of Destrieux ROI extraction and plotting*
+
 ## Quantifying tissue properties
+
+Because atlases can be overlaid on a subject brain registered to the atlas template, one can extract measurements specific to that subject within each atlas ROI. We will first look at how to compute ourselves a simple metric from a subject atlas, and then how to extract more advanced pre-computed metrics from the output of a very common segmentation software, Freesurfer.
 
 ### Metric from volumetric data: region volumes 
 
-A given MRI sequence is often acquired as a stack of slices. As such the in-plane voxel size (e.g. 0.9 mm x 0.9 mm) is not always equal to the slice thickness (e.g. 1 mm). This is important to keep in mind when measuring region volume. Another reason why one should extract the voxel size is that even if the voxels are isotropic (i.e. they have the same size in any dimension), one acquisition can be made with a given size (e.g. 1mm isotropic) and another acquisition with another size (e.g. 0.9 mm isotropic). 
+A given MRI sequence is often acquired as a stack of slices. As such the in-plane voxel size (e.g. 0.9 mm x 0.9 mm) is not always equal to the slice thickness (e.g. 1 mm). This is important to keep in mind when measuring region volume. Another reason why one should extract the voxel size is that even if the voxels are isotropic (i.e. they have the same size in any dimension), one acquisition can be made with a given size (e.g. 1mm isotropic) and another acquisition with another size (e.g. 0.9 mm isotropic). The number of voxels is therefore not a useful quantity to compare between studies and a standard unit such that mm3 or cm3 should be used instead.  
 
 The voxel size of an image can be obtained from the metadata (i.e. the data annotation). This can be accomplished with `nibabel` as follows:
+```
+```
+
 
 We examine here an example on how to measure each region of a brain atlas in terms of number of voxels, and how to convert this number into mm3.
 

@@ -389,9 +389,46 @@ plotting.view_img(haox_subcortical_maps, title="Harvard Oxford atlas",
 
 In the previous cases, the unit elements to receive a label were voxels. When considering the surface of the cortex, unit elements are the vertices of the surface mesh. Each such vertex can receive a label, and the result is a surface parcellation. Freesurfer relies on two surface atlases: the Desikan-Killiany Atlas with 68 ROIs and the Destrieux Atlas with 148 ROIs.
 
-*Example of Destrieux Atlas with*
+The Destrieux atlas is part of the nilearn datasets. Surface datasets are split in left and right hemisphere. Let's aim at plotting the left hemisphere. As we will see also how to plot a specific ROI, we will also extract the atlas labels.
 
-*Example of Destrieux ROI extraction and plotting*
+~~~
+from nilearn.datasets import fetch_atlas_surf_destrieux
+parcellation_L = destrieux['map_left']
+destrieux_labels = destrieux['labels']
+~~~
+{: .language-python}
+
+For plotting a 3D volume we needed a 3D image template. For a surface, we need a 3D surface (also called mesh) template. The Destrieux atlas we collected is defined on the fsaverage5 Freesurfer template, so we will need it to plot our atlas.
+
+~~~
+fsaverage = fetch_surf_fsaverage()
+mesh = fsaverage['pial_left']
+plotting.plot_surf_roi(mesh, roi_map=parcellation_L,
+                       hemi='left', view='lateral');
+~~~
+{: .language-python}
+
+![Left hemisphere of the Destrieux surface atlas](../fig/episode_4/destrieux_atlas_left.png)
+
+To extract a specific ROI, we can proceed as we did for the AAL atlas but using the Destrieux labels.
+
+~~~
+pcc_region = b'G_cingul-Post-dorsal'
+roi_ix = destrieux_labels.index(pcc_region)
+roi_mask_arr = (parcellation_L == roi_ix).astype(int)
+~~~
+{: .language-python}
+
+To plot that ROI, we can use the `plot_surf_roi` function of the `nilearn` `plotting` module. We will plot the medial view since this ROI is located towards the central part of the brain. We will also use the template as background image since most vertices do not have a label to be plotted.
+
+~~~
+plotting.plot_surf_roi(mesh, roi_map=roi_mask_arr,
+                       hemi='left', view='medial',
+                       bg_map=fsaverage['sulc_left']);
+~~~
+{: .language-python}
+
+![ROI of the Destrieux surface atlas](../fig/episode_4/roi_destrieux.png)
 
 ## Quantifying tissue properties
 
@@ -402,8 +439,20 @@ Because atlases can be overlaid on a subject brain registered to the atlas templ
 A given MRI sequence is often acquired as a stack of slices. As such the in-plane voxel size (e.g. 0.9 mm x 0.9 mm) is not always equal to the slice thickness (e.g. 1 mm). This is important to keep in mind when measuring region volume. Another reason why one should extract the voxel size is that even if the voxels are isotropic (i.e. they have the same size in any dimension), one acquisition can be made with a given size (e.g. 1mm isotropic) and another acquisition with another size (e.g. 0.9 mm isotropic). The number of voxels is therefore not a useful quantity to compare between studies and a standard unit such that mm3 or cm3 should be used instead.  
 
 The voxel size of an image can be obtained from the metadata (i.e. the data annotation). This can be accomplished with `nibabel` as follows:
-```
-```
+
+~~~
+t1 = nib.load(t1_file)
+t1.affine
+~~~
+{: .language-python}
+
+~~~
+array([[   1.20000005,    0.        ,    0.        ,  -73.80000305],
+       [   0.        ,    0.9375    ,    0.        , -119.53125   ],
+       [   0.        ,    0.        ,    0.9375    , -119.53125   ],
+       [   0.        ,    0.        ,    0.        ,    1.        ]])
+~~~
+{: .output}
 
 
 We examine here an example on how to measure each region of a brain atlas in terms of number of voxels, and how to convert this number into mm3.

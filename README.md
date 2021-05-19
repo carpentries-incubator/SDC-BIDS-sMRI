@@ -27,7 +27,7 @@ The primary goals of this workshop are:
 
 ## You Are Here!
 
-![course_flow](../fig/episode_0/Course_flow_0.png)
+![course_flow](fig/episode_0/Course_flow_0.png)
 
 ### Episodes
 

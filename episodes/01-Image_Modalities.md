@@ -25,6 +25,8 @@ keypoints:
 
 ### T1 and T2 relaxation
 Here we see signal from two different tissues as the nuclei are tilted and realigned. 
+The figure on the left shows a single nucleus (i.e. tiny magnet) being tilted away and then precessing back to the the initial alighment along B<sub>0</sub>. The figure on the right shows the corresponding registered T1 and T2 signal profiles for two different "tissues". The difference in their signal intensties results in the image contrast. 
+
 ![MR_relax](https://user-images.githubusercontent.com/7978607/112332334-08750c80-8c90-11eb-90fc-33956c037a1c.gif)
 
 ### T1w, T2w, and PD acquisition
@@ -36,6 +38,18 @@ Here we see signal from two different tissues as the nuclei are tilted and reali
 
 _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence has replaced the PD image. FLAIR images are T2-weighted with the CSF signal suppressed.
 
+> ## pulse sequence parameters and image contrast
+>
+> What are the two basic pulse sequence parameters that impact T1w and T2w image contrasts? Which one is larger? 
+>
+> > ## Solution
+> >
+> > Repetition time (TR) and echo time (TE) are the two pulse sequence parameters that dictate the T1w and T2w image contrasts. 
+> > TR > TE.
+> {: .solution}
+{: .challenge}
+
+
 ### T1 and T2 relaxation times for various tissues
 
 |                | T1 (ms)      | T2 (ms)     |
@@ -44,6 +58,18 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 |  CSF | 4000   | 500    |
 |  Grey Matter | 1300   | 110    |
 |  White Matter   | 800 | 80 |
+
+
+> ## Tissue type and image contrast
+>
+> What is the brightest tissue in the T1w image?
+>
+> > ## Solution
+> >
+> > White-matter (i.e. axonal tracts)
+> {: .solution}
+{: .challenge}
+
 
 ### T1w, T2w image contrasts
 
@@ -62,6 +88,41 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 |  FLAIR  | Similar to T2 with the CSF signal suppressed| Identify demyelination |
 
 **Note: In this lesson, we have only talked about image contrast which is most relevent to sMRI image pipelines. The details of spatial encoding and k-space transforms are out of the scope.**
+
+
+### Interacting with images (see [this notebook](../code/1_sMRI_modalities.ipynb) for detailed example.)
+
+~~~
+import nibabel as nib
+import nilearn
+from nilearn import plotting
+~~~
+{: .language-python}
+
+~~~
+local_data_dir = '../local_data/1_sMRI_modalities/'
+T1_filename = local_data_dir + 'craving_sub-SAXSISO01b_T1w.nii.gz'
+T2_filename = local_data_dir +'craving_sub-SAXSISO01b_T2w.nii.gz'
+T1_img = nib.load(T1_filename)
+T2_img = nib.load(T2_filename)
+
+# grab data array
+T1_data = T1_img.get_fdata()
+T2_data = T2_img.get_fdata()
+
+# plot
+plotting.plot_anat(T1_filename, title="T1", vmax=500)
+plotting.plot_anat(T2_filename, title="T2", vmax=300)
+
+~~~
+{: .language-python}
+
+
+|        T1w        | T2w |
+| :-------------: | :-----------: |
+| ![nilearn_T1](../fig/episode_1/nilearn_T1.png) | ![nilearn_T2](../fig/episode_1/nilearn_T2.png) |
+
+
 
 {% include links.md %}
 

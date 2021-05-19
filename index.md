@@ -17,7 +17,7 @@ Things to keep in mind:
 3. MR (pre)processing pipeline is a set of sequential image processing tasks performed on acquired MR scans prior to the statistical analyese. 
 
 Notes:
-1. These days (year 2021), several software packages (e.g. FreeSurfer, FSL, SPM, fMRIprep) provide ready-to-use pipelines which will comprising commonly used pre(processesing) tasks. Thus as a user, you need not know the details of each algorithm. Nevertheless it is useful to understand the methods and their impact on the downstream analyses. This will 1) help developers to improve the underlying algorithms  and 2) help users to customize the neuorimaging pipelines according to their dataset requirements. 
+1. These days (year 2021), several software packages (e.g. FreeSurfer, FSL, SPM, fMRIprep) provide ready-to-use pipelines which will comprise commonly used pre(processesing) tasks. Thus as a user, you need not know the details of each image processing algorithm. Nevertheless it is useful to understand the key objectives of these tasks, the corresponding computational methods, and their impact on the downstream analyses. This will 1) help developers to improve the underlying algorithms  and 2) help users to customize the neuorimaging pipelines according to specific dataset requirements. 
 
 _All of this may sound complicated, but we'll explain things step-by-step in depth with practical examples as the course goes along. We will begin our computational journey stating from how an MR image is acquired, followed by several pre-processing tasks, with the end goal of conducting a statistical analysis to investigate volumetric hippocampal differences between Alzheimer's patients and healthy controls._
  

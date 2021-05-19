@@ -20,20 +20,27 @@ The **sMRI Analysis in Python** is a workshop series started up via a collaborat
 
 This lesson covers a typrical sMRI imaging pipeline by introducing 1) image modalities, 2) image preprocessing, 3) phoenotype quantification, and 4) statistical analyses.  
 
+The primary goals of this workshop are:
+1. Understand the basics of strcutural MR image acquisition
+2. Familiarize with structural MR image (pre)processing pipeline
+3. Perform and visualize group-level neuroanatomical analyses
+
+## You Are Here!
+
+![course_flow](../fig/episode_0/Course_flow_0.png)
+
 ### Episodes
 
 | Time | Episode | Question(s) Answered |
 | ---  | ---     | ---                  |
 ||Setup|Download files required for the lesson|
-| 00:00 | 0. Course Overview and Prereqs | What is a structural MR imaging pipeline? |
-| 00:30 | 1. sMRI modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
-| 01:00 | 2. sMRI preprocessing (Part 1: image clean-up) | How do we clean-up MR images and extract brains? |
+| 00:00 | 1. sMRI modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
+| 00:45 | 2. sMRI preprocessing (Part 1: image clean-up) | How do we clean-up MR images and extract brains? |
 | 01:30 | 3. sMRI preprocessing (Part 2: image registration) | What are "templates", "spaces", "atlases"? What is spatial normalization? |
 | 02:00 | 4. sMRI quantification | How do we delineate brain anatomy and quantify phenotypes? |
 | 02:30 | 5. sMRI quality-control | How do we identify image preprocessing failures? |
 | 03:00 | 6. Statistical analysis (Part 1: ROIs) | How to look at group differences in regional anatomical features? |
-| 03:30 | 7. Statistical analysis (Part 2: voxels) | How to look at group differences at voxel-level features? |
-| 04:00 | 8. Reproducibility considerations | How sensitive are the findings to your MR pipeline parameters? |
+| 04:00 | 7. Reproducibility considerations | How sensitive are the findings to your MR pipeline parameters? |
 | 04:30 | Finish | |
  
 

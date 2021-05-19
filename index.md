@@ -3,7 +3,6 @@ layout: lesson
 root: .  # Is the only page that doesn't follow the pattern /:path/index.html
 permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
 ---
-sMRI (pre)processing in neuroimaging
 
 Welcome to the **Structural Neuroimaging Analysis in Python** workshop! 
 
@@ -22,7 +21,7 @@ Notes:
 
 _All of this may sound complicated, but we'll explain things step-by-step in depth with practical examples as the course goes along. We will begin our computational journey stating from how an MR image is acquired, followed by several pre-processing tasks, with the end goal of conducting a statistical analysis to investigate volumetric hippocampal differences between Alzheimer's patients and healthy controls._
  
-![course_flow](../fig/index/Overview.png)
+![course_flow](fig/index/Overview.png)
 
 <!-- this is an html comment -->
 

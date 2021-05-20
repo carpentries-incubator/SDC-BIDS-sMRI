@@ -33,10 +33,10 @@ The primary goals of this workshop are:
 ||Setup|Download files required for the lesson|
 | 00:00 | 1. sMRI modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
 | 00:45 | 2. sMRI preprocessing (Part 1: image clean-up) | How do we clean-up MR images and extract brains? |
-| 01:30 | 3. sMRI preprocessing (Part 2: image registration) | What are "templates", "spaces", "atlases"? What is spatial normalization? |
+| 01:30 | 3. sMRI preprocessing (Part 2: spatial normalization) | What are "coordinate spaces", "templates", "atlases"? What is image registration? |
 | 02:00 | 4. sMRI quantification | How do we delineate brain anatomy and quantify phenotypes? |
 | 02:30 | 5. sMRI quality-control | How do we identify image preprocessing failures? |
-| 03:00 | 6. Statistical analysis (Part 1: ROIs) | How to look at group differences in regional anatomical features? |
+| 03:00 | 6. Statistical analysis | How to compare regional anatomical differences in case-control groups? |
 | 04:00 | 7. Reproducibility considerations | How sensitive are the findings to your MR pipeline parameters? |
 | 04:30 | Finish | |
  

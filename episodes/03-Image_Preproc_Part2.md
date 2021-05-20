@@ -206,7 +206,8 @@ print("Subject space to refernce space mapping:\n {} --> {}".format(cut_coords,c
 {: .language-python}
 
 ~~~
-Text(0.5, 1.0, 'fsaverage reference space')
+Subject space to refernce space mapping:
+ (-40, 10, 0) --> (47,-2,11)
 ~~~
 {: .output}
 

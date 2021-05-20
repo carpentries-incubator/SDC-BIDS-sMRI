@@ -14,8 +14,10 @@ keypoints:
 ## You Are Here!
 ![course_flow](../fig/episode_2/Course_flow_2.png)
 
-## Image Clean-ups
-In this episode we will look at two common image clean-up tasks 1) Intensity normalization 2) Brain extraction. Performing these tasks is cruical for the successful processing of subsequent image normalization tasks as well as the downstream statistical analyses. Some version (i.e. custom algorithm) of these two tasks is implemented in all commonly deployed processing pipelines such as FreeSurfer, FSL etc. 
+## Why do we need image clean-ups?
+Correcting or cleaning-up certain artifacts from the raw (i.e. acquired) MR scans is cruical for the successful processing of subsequent image normalization tasks as well as the downstream statistical analyses. Some version (i.e. custom algorithm) of these two tasks is implemented in all commonly deployed processing pipelines such as FreeSurfer, FSL etc. 
+
+In this episode we will look at two common image clean-up tasks 1) Intensity normalization 2) Brain extraction. 
 
 ### Intensity normalization (a.k.a bias field correction; a.k.a. intensity inhomogeneity correction)
 
@@ -71,11 +73,12 @@ n4.cmdline
 
 
 ### Impact of correction (_source: [Despotović et al.](https://www.hindawi.com/journals/cmmm/2015/450341/)_)
+The top figure panel shows original and bias field corrected MR image slices. The middle figure panel shows the difference in intensty histograms for the two image slices. And the bottom figure panel shows the impact on subsequent image processing task of bias correction. 
 
 ![bias_correction](../fig/episode_2/Despotovic_bias_correction.png)
 
 
-### Visualizing "before" and "after" see [this notebook](../code/2_sMRI_image_cleanup.ipynb) for detailed example.)
+### Visualizing "before" and "after" (see [this notebook](../code/2_sMRI_image_cleanup.ipynb) for detailed example.)
 ~~~
 from nipype.interfaces.ants.segmentation import BrainExtraction
 ~~~
@@ -156,7 +159,7 @@ brainextraction.cmdline
 ![FSL_brain_extract](../fig/episode_2/bet2_eg_small.png)
 
 
-### Visualizing "before" and "after" see [this notebook](../code/2_sMRI_image_cleanup.ipynb) for detailed example.)
+### Visualizing "before" and "after" (see [this notebook](../code/2_sMRI_image_cleanup.ipynb) for detailed example.)
 ~~~
 from nipype.interfaces.ants.segmentation import BrainExtraction
 ~~~

@@ -138,11 +138,13 @@ For examples:
 - Transfomrations
     - Image similarity metrics: correlation ratio (CR), cross-correlation (CC), mutual information (MI)
     - Linear: global feature aligment
-        - Rigid (6 parameters): rotation, translation
+        - Rigid (6 parameters): rotation, translation 
         - Affine (12 parameters): rotation, translation, scaling, skewing  
     - Nonlinear (a.k.a elastic): local feature aligment via warping
         - Computationally intensive deformation models with large number of parameters
         - Employ diffeomorphic models that preserve toplogy and source-target symmetry
+
+_Note: Linear registrations are often used as a initialization step for non-linear registration._ 
 
 ![registration_cartoon](../fig/episode_3/Registration.png)
 
@@ -150,7 +152,7 @@ For examples:
 
 |        Algorithm        | Deformation      | ~ parameters     |
 | :-------------: | :----------: | :-----------: |
-|  FLIRT | Linear   | 9    |
+|  FSL FLIRT | Linear   | 9    |
 |  ANIMAL | Non-linear (Local translation)   | 69K    |
 |  DARTEL Toolbox |  Non-linear (diffeomorphic)  | 6.4M    |
 |  ANTs (SyN)   | Non-linear (bi-directional diffeomorphic) | 28M |
@@ -168,7 +170,7 @@ For examples:
 ![nonlinear_deform_process](../fig/episode_3/Silcer_DeformOnly.gif)
 
 
-> ## Image registration
+> ## Image registration quiz
 >
 > What would the information from non-linear deformation would tell you about the subject? 
 >

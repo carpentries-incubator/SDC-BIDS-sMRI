@@ -30,7 +30,7 @@ variations in the sensitivity of the reception coil, and the interaction between
     - [FSL FAST](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FAST) (_Note:FSL FAST is a multi-purpose segmentation tool that includes the bias field correction._)
 
 
-> ## Bias field correction
+> ### Bias field correction quiz
 >
 > What is the difference between bias field and image noise?
 >
@@ -43,7 +43,7 @@ variations in the sensitivity of the reception coil, and the interaction between
 
 
 ### ANTs N4 correction
-
+(a) Acquired T1w image (b) Estimated the bias field which can then be used to “correct” the image. (c) Bias field viewed as a surface to show the low frequency modulation.
 ![N4_bias](../fig/episode_2/N4_bias.jpeg)
 
 #### Side-note: [ANTs](http://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nypype](https://nipype.readthedocs.io/en/latest/) library. 
@@ -73,14 +73,15 @@ n4.cmdline
 
 
 ### Impact of correction (_source: [Despotović et al.](https://www.hindawi.com/journals/cmmm/2015/450341/)_)
-The top figure panel shows original and bias field corrected MR image slices. The middle figure panel shows the difference in intensty histograms for the two image slices. And the bottom figure panel shows the impact on subsequent image processing task of bias correction. 
+The top figure panel shows original and bias field corrected MR image slices. The middle figure panel shows the difference in the intensty histograms for the two image slices. And the bottom figure panel shows the impact of bias correction on a subsequent image segmentation task. 
 
 ![bias_correction](../fig/episode_2/Despotovic_bias_correction.png)
 
 
 ### Visualizing "before" and "after" (see [this notebook](../code/2_sMRI_image_cleanup.ipynb) for detailed example.)
 ~~~
-from nipype.interfaces.ants.segmentation import BrainExtraction
+import nibabel as nib
+from nilearn import plotting
 ~~~
 {: .language-python}
 import nibabel as nib
@@ -113,13 +114,22 @@ the cerebral cortex and subcortical structures, including the brain stem and cer
     - [FSL brain extraction tool (BET)](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET)
 
 
+- Note 1: At this point we are NOT trying to extract the brain sulci and gyri (i.e. cortical folds). We are just creating a simple brain mask for computational purposes, which need not capture the precise brain anatomy. Thus you may see some marrow and membrain included in the extracted brain. 
+- Note 2: Brainstem and spinal cord are continuous so a rather arbitrarily cut-off point is selected. 
 
-> ## Bias field correction
+#### Example brain extractions pass / fail 
+|        Pass        | Fail |
+| :-------------: | :-----------: |
+| ![nilearn_brain_orig](../fig/episode_2/BET_Brain_mask_QC_pass.png) | ![nilearn_brain_extract](../fig/episode_2/BET_Brain_mask_QC_fail.png) |
+
+_Source: FSL Introduction to Brain Extraction_ 
+
+> ## Brain extraction quiz
 >
 > Apart from stripping off non-brain tissue, what can brain-mask be used for?
 >
 > > ## Solution
-> > Brain mask offers information about total brain volume - which can be used for quality control (i.e. identifying algorithm failures) as well as for brain-specific correction (normalization) for downstream statistical models. Althugh intracranial volume is more commonly used for the latter purpose. 
+> > Brain mask offers information about total brain volume - which can be used for quality control (i.e. identifying algorithm failures) as well as for brain-specific correction (normalization) for downstream statistical models. Althugh intracranial volume is better and more commonly used measure for the latter purpose. 
 > > 
 > > 
 > {: .solution}

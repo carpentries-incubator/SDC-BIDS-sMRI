@@ -1,0 +1,95 @@
+/Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri
+/Applications/freesurfer//bin/mri_nu_correct.mni
+--no-rescale --i orig.mgz --o orig_nu.mgz --n 1 --proto-iters 1000 --distance 50
+nIters 1
+$Id: FreeSurferEnv.csh,v 1.89 2016/06/09 14:54:31 zkaufman Exp $
+Darwin MacBook-Pro.local 20.3.0 Darwin Kernel Version 20.3.0: Thu Jan 21 00:06:51 PST 2021; root:xnu-7195.81.3~1/RELEASE_ARM64_T8101 x86_64
+Fri May 21 16:39:26 EDT 2021
+Program nu_correct, built from:
+Package MNI N3, version 1.12.0, compiled by nicks@gust.nmr.mgh.harvard.edu (x86_64-apple-darwin11.4.2) on 2015-06-19 at 15:37:08
+tmpdir is ./tmp.mri_nu_correct.mni.35512
+/Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri
+mri_convert orig.mgz ./tmp.mri_nu_correct.mni.35512/nu0.mnc -odt float
+mri_convert.bin orig.mgz ./tmp.mri_nu_correct.mni.35512/nu0.mnc -odt float 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from orig.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, 0, 0)
+j_ras = (0, 0, -1)
+k_ras = (0, 1, 0)
+changing data type from uchar to float (noscale = 0)...
+writing to ./tmp.mri_nu_correct.mni.35512/nu0.mnc...
+ 
+--------------------------------------------------------
+Iteration 1 Fri May 21 16:39:28 EDT 2021
+nu_correct -clobber ./tmp.mri_nu_correct.mni.35512/nu0.mnc ./tmp.mri_nu_correct.mni.35512/nu1.mnc -tmpdir ./tmp.mri_nu_correct.mni.35512/0/ -iterations 1000 -distance 50
+[swapna@MacBook-Pro.local:/Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri/] [2021-05-21 16:39:28] running:
+  /Applications/freesurfer//mni/bin/nu_estimate_np_and_em -parzen -log -sharpen 0.15 0.01 -iterations 1000 -stop 0.001 -shrink 4 -auto_mask -nonotify -b_spline 1.0e-7 -distance 50 -quiet -execute -clobber -nokeeptmp -tmpdir ./tmp.mri_nu_correct.mni.35512/0/ ./tmp.mri_nu_correct.mni.35512/nu0.mnc ./tmp.mri_nu_correct.mni.35512/nu1.imp
+
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Number of iterations: 46 
+CV of field change: 0.000977332
+ 
+ 
+ 
+mri_convert ./tmp.mri_nu_correct.mni.35512/nu1.mnc orig_nu.mgz --like orig.mgz --conform
+mri_convert.bin ./tmp.mri_nu_correct.mni.35512/nu1.mnc orig_nu.mgz --like orig.mgz --conform 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from ./tmp.mri_nu_correct.mni.35512/nu1.mnc...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, 0, 0)
+j_ras = (0, 0, -1)
+k_ras = (0, 1, 0)
+INFO: transform src into the like-volume: orig.mgz
+changing data type from float to uchar (noscale = 0)...
+MRIchangeType: Building histogram 
+writing to orig_nu.mgz...
+ 
+ 
+Fri May 21 16:40:12 EDT 2021
+mri_nu_correct.mni done

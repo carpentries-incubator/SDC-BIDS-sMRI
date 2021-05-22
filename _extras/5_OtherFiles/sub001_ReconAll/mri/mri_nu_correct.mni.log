@@ -1,0 +1,201 @@
+/Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri
+/Applications/freesurfer//bin/mri_nu_correct.mni
+--i orig.mgz --o nu.mgz --uchar transforms/talairach.xfm --n 2
+nIters 2
+$Id: FreeSurferEnv.csh,v 1.89 2016/06/09 14:54:31 zkaufman Exp $
+Darwin MacBook-Pro.local 20.3.0 Darwin Kernel Version 20.3.0: Thu Jan 21 00:06:51 PST 2021; root:xnu-7195.81.3~1/RELEASE_ARM64_T8101 x86_64
+Fri May 21 16:40:35 EDT 2021
+Program nu_correct, built from:
+Package MNI N3, version 1.12.0, compiled by nicks@gust.nmr.mgh.harvard.edu (x86_64-apple-darwin11.4.2) on 2015-06-19 at 15:37:08
+tmpdir is ./tmp.mri_nu_correct.mni.36356
+/Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri
+mri_convert orig.mgz ./tmp.mri_nu_correct.mni.36356/nu0.mnc -odt float
+mri_convert.bin orig.mgz ./tmp.mri_nu_correct.mni.36356/nu0.mnc -odt float 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from orig.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, 0, 0)
+j_ras = (0, 0, -1)
+k_ras = (0, 1, 0)
+changing data type from uchar to float (noscale = 0)...
+writing to ./tmp.mri_nu_correct.mni.36356/nu0.mnc...
+ 
+--------------------------------------------------------
+Iteration 1 Fri May 21 16:40:36 EDT 2021
+nu_correct -clobber ./tmp.mri_nu_correct.mni.36356/nu0.mnc ./tmp.mri_nu_correct.mni.36356/nu1.mnc -tmpdir ./tmp.mri_nu_correct.mni.36356/0/
+[swapna@MacBook-Pro.local:/Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri/] [2021-05-21 16:40:37] running:
+  /Applications/freesurfer//mni/bin/nu_estimate_np_and_em -parzen -log -sharpen 0.15 0.01 -iterations 50 -stop 0.001 -shrink 4 -auto_mask -nonotify -b_spline 1.0e-7 -distance 200 -quiet -execute -clobber -nokeeptmp -tmpdir ./tmp.mri_nu_correct.mni.36356/0/ ./tmp.mri_nu_correct.mni.36356/nu0.mnc ./tmp.mri_nu_correct.mni.36356/nu1.imp
+
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Number of iterations: 46 
+CV of field change: 0.000986815
+ 
+ 
+--------------------------------------------------------
+Iteration 2 Fri May 21 16:41:08 EDT 2021
+nu_correct -clobber ./tmp.mri_nu_correct.mni.36356/nu1.mnc ./tmp.mri_nu_correct.mni.36356/nu2.mnc -tmpdir ./tmp.mri_nu_correct.mni.36356/1/
+[swapna@MacBook-Pro.local:/Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri/] [2021-05-21 16:41:08] running:
+  /Applications/freesurfer//mni/bin/nu_estimate_np_and_em -parzen -log -sharpen 0.15 0.01 -iterations 50 -stop 0.001 -shrink 4 -auto_mask -nonotify -b_spline 1.0e-7 -distance 200 -quiet -execute -clobber -nokeeptmp -tmpdir ./tmp.mri_nu_correct.mni.36356/1/ ./tmp.mri_nu_correct.mni.36356/nu1.mnc ./tmp.mri_nu_correct.mni.36356/nu2.imp
+
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Number of iterations: 22 
+CV of field change: 0.000964883
+ 
+ 
+ 
+mri_binarize --i ./tmp.mri_nu_correct.mni.36356/nu2.mnc --min -1 --o ./tmp.mri_nu_correct.mni.36356/ones.mgz
+
+$Id: mri_binarize.c,v 1.43 2016/06/09 20:46:21 greve Exp $
+cwd /Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri
+cmdline mri_binarize.bin --i ./tmp.mri_nu_correct.mni.36356/nu2.mnc --min -1 --o ./tmp.mri_nu_correct.mni.36356/ones.mgz 
+sysname  Darwin
+hostname MacBook-Pro.local
+machine  x86_64
+user     swapna
+
+input      ./tmp.mri_nu_correct.mni.36356/nu2.mnc
+frame      0
+nErode3d   0
+nErode2d   0
+output     ./tmp.mri_nu_correct.mni.36356/ones.mgz
+Binarizing based on threshold
+min        -1
+max        +infinity
+binval        1
+binvalnot     0
+fstart = 0, fend = 0, nframes = 1
+Found 16777216 values in range
+Counting number of voxels in first frame
+Found 16777216 voxels in final mask
+Count: 16777216 16777216.000000 16777216 100.000000
+mri_binarize done
+mri_segstats --id 1 --seg ./tmp.mri_nu_correct.mni.36356/ones.mgz --i orig.mgz --sum ./tmp.mri_nu_correct.mni.36356/sum.junk --avgwf ./tmp.mri_nu_correct.mni.36356/input.mean.dat
+
+$Id: mri_segstats.c,v 1.121 2016/05/31 17:27:11 greve Exp $
+cwd 
+cmdline mri_segstats --id 1 --seg ./tmp.mri_nu_correct.mni.36356/ones.mgz --i orig.mgz --sum ./tmp.mri_nu_correct.mni.36356/sum.junk --avgwf ./tmp.mri_nu_correct.mni.36356/input.mean.dat 
+sysname  Darwin
+hostname MacBook-Pro.local
+machine  x86_64
+user     swapna
+UseRobust  0
+Loading ./tmp.mri_nu_correct.mni.36356/ones.mgz
+Loading orig.mgz
+Voxel Volume is 1 mm^3
+Generating list of segmentation ids
+Found   1 segmentations
+Computing statistics for each segmentation
+
+Reporting on   1 segmentations
+Using PrintSegStat
+Computing spatial average of each frame
+  0
+Writing to ./tmp.mri_nu_correct.mni.36356/input.mean.dat
+mri_segstats done
+mri_segstats --id 1 --seg ./tmp.mri_nu_correct.mni.36356/ones.mgz --i ./tmp.mri_nu_correct.mni.36356/nu2.mnc --sum ./tmp.mri_nu_correct.mni.36356/sum.junk --avgwf ./tmp.mri_nu_correct.mni.36356/output.mean.dat
+
+$Id: mri_segstats.c,v 1.121 2016/05/31 17:27:11 greve Exp $
+cwd 
+cmdline mri_segstats --id 1 --seg ./tmp.mri_nu_correct.mni.36356/ones.mgz --i ./tmp.mri_nu_correct.mni.36356/nu2.mnc --sum ./tmp.mri_nu_correct.mni.36356/sum.junk --avgwf ./tmp.mri_nu_correct.mni.36356/output.mean.dat 
+sysname  Darwin
+hostname MacBook-Pro.local
+machine  x86_64
+user     swapna
+UseRobust  0
+Loading ./tmp.mri_nu_correct.mni.36356/ones.mgz
+Loading ./tmp.mri_nu_correct.mni.36356/nu2.mnc
+Voxel Volume is 1 mm^3
+Generating list of segmentation ids
+Found   1 segmentations
+Computing statistics for each segmentation
+
+Reporting on   1 segmentations
+Using PrintSegStat
+Computing spatial average of each frame
+  0
+Writing to ./tmp.mri_nu_correct.mni.36356/output.mean.dat
+mri_segstats done
+mris_calc -o ./tmp.mri_nu_correct.mni.36356/nu2.mnc ./tmp.mri_nu_correct.mni.36356/nu2.mnc mul .91213678486498479949
+mri_convert ./tmp.mri_nu_correct.mni.36356/nu2.mnc nu.mgz --like orig.mgz
+mri_convert.bin ./tmp.mri_nu_correct.mni.36356/nu2.mnc nu.mgz --like orig.mgz 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from ./tmp.mri_nu_correct.mni.36356/nu2.mnc...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, 0, 0)
+j_ras = (0, 0, -1)
+k_ras = (0, 1, 0)
+INFO: transform src into the like-volume: orig.mgz
+writing to nu.mgz...
+mri_make_uchar nu.mgz transforms/talairach.xfm nu.mgz
+type change took 0 minutes and 6 seconds.
+mapping (11, 178) to ( 3, 110)
+ 
+ 
+Fri May 21 16:41:56 EDT 2021
+mri_nu_correct.mni done

@@ -1,0 +1,1 @@
+mris_sphere -rusage /Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/touch/rusage.mris_sphere.lh.dat -seed 1234 ../surf/lh.inflated ../surf/lh.sphere

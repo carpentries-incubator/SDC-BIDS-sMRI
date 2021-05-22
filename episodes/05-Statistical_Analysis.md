@@ -22,8 +22,6 @@ Subcortical atlas parcellations
 * Chakravarty 2006 Atlas
 * THOMAS Atlas (Saranathan 2019)
 
-Examples on visualizing a selected few of these atlases are listed in the following section (section 5.1.1.1)
-
 #### 5.1.1.1. Visualizing anatomical atlases
 ##### Cortical Parcellations
 ###### Automated Anatomical Labeling (Tzourio-Mazoyer 2002)
@@ -65,65 +63,191 @@ plotting.plot_prob_atlas(atlas_filename, title="Pauli 2017")
 <img src="/fig/episode_5/5_Fig5_subAtlas_Pauli.png" width="400" height="170" />
 
 
-#### 5.1.1.2. Regional volumetric differences in case-control cohorts
+#### 5.1.1.2. Regional volumetric analysis
+Software such as FSL and FreeSurfer can be used for segmentation of regions of interest. For us to conveniently use such pipelines on this platform, we use [NiPype](https://nipype.readthedocs.io/en/0.12.0/index.html) which is an open-source Python project that provides a uniform interface to existing neuroimaging software.
 
-In this section, we will discuss two cases.
-1) Volumetric alterations in the whole hippocampus 
-3) Volumetric alterations in hippocampal subfields 
+Several interfaces available through NiPype maybe used for this task. We will be looking at one example for the sake of simplicity.
 
-This two examples are focused on the hippocampus and its subfields, as it is studied with respect to many neuropsychiatric and neurodegenerative disorders due to its central role in memory, emotion and learning, that have been linked to many noticeable symptoms. 
-Demarcation of subfield boundries may vary amongst researchers. However, in these examples we refer to subfields as in the [Winterburn Atlas](https://www.sciencedirect.com/science/article/pii/S1053811913001237?via%3Dihub). A figure of the hippocampal formation with labelled subfields are included below for reference.
-<img src="/fig/episode_5/5_HippocampalSubfields.png" width="230" height="170" />
+##### Using FSL to segment a region of interest
+We use a single sMRI from the haxby dataset and make a copy of it in our current working directory to make processing easier.
+```
+haxby_dataset = datasets.fetch_haxby()
+anat_file = haxby_dataset.anat[0]
+```
+```
+import shutil
+shutil.copyfile(anat_file,os.path.join(os.getcwd(),'structural.nii.gz'))
+```
+FSL First can be used for segmentation of the required structures. For this example, we focus on the left hippocampus (a subcortical structure). 
+```
+first = fsl.FIRST()
+first.inputs.in_file  = 'structural.nii.gz'
+first.inputs.out_file = 'segmented.nii.gz'
+first.inputs.list_of_specific_structures=['L_Hipp']
+res = first.run()
+```
+If you need to segment for all the structures provided, simply comment ```first.inputs.list_of_specific_structures=['L_Hipp']```.
+Once the process is complete, the segmented output can be viewed as follows:
+```
+T1w_img   =nib.load('structural.nii.gz')
+seg_labels=nib.load('segmented-L_Hipp_first.nii.gz')
+from nilearn import plotting
+plotting.plot_roi(roi_img=seg_labels, bg_img=T1w_img, alpha=0.9, cmap="cool",dim=-.5);
+```
+Within your working directory, there will be several output files created by FSL. Here, the _first.nii.gz_ is the original output, while the _corr.nii.gz_ files may have had boundary correction applied to them (depending on the structure).
+(Fun fact: the value assigned to _dim_ in _plotting_roi_ controls the visibility of the background image). 
 
-Segmentations in the examples discussed in this section was performed using MAGeTBrain, another commonly used segmentation software.
+<img src="/fig/episode_5/5_HippL_FSL.png" width="470" height="200" />
+The volume of the segemented region can be found using _imagestats_. 
 
-#### **MAGeTbrain**
-Multiple Automatically Generated Templates Brain Segmentation Algorithm (MAGeTBrain), is a software developed by [CoBrA Lab](http://cobralab.ca/). 
-Given a set of labelled MR images (atlases) and unlabelled images (subjects), MAGeT produces a segmentation for each subject using a multi-atlas voting procedure based on a template library made up of images from the subject set. An overview of this method is shown in the figure below.
+(You will also be able to notice a considerable difference in volume estimations in _first.nii.gz_ and _corr.nii.gz_.) 
 
-<img src="/fig/episode_5/5_MAGeTOverview.png" width="480" height="400" />
+```
+import nibabel.imagestats as imagestats
+imagestats.mask_volume(nib.Nifti1Image(seg_labels.get_fdata(), np.eye(4)))
+```
 
-In MAGeT brain, segmentations from each atlas (typically manually delineated) are propogated via image registration to a subset of the subject images (known as the ‘template library’) before being propogated to each subject image and fused. By propogating labels to a template library, we are able to make use of the neuroanatomical variability of the subjects in order to ‘fine tune’ each individual subject’s segmentation. The github repository for MAGeTbrain can be found [here](https://github.com/CobraLab/MAGeTbrain).
+```
+OUT[]: 4189.0
+```
+💡 **Exercise 5.1**: Can you follow the same steps above to segment a different structure of interest? 
 
-Note: volume is measured in voxels.
+##### Using FreeSurfer to segment regions of interest
+Similar to FSL, FreeSurfer can be used through the NiPype interface as well. The ```recon-all``` process on freesurfer allows us to obtain all or any part of the cortical reconstruction process. This process is fairly time consuming. The code below, adapted from the [NiPype beginners guide](https://miykael.github.io/nipype-beginner-s-guide/prepareData.html), can be used to achieve this.  
 
-Related citations:
+```
+# Import modules
+import os
+from os.path import join as opj
+from nipype.interfaces.freesurfer import ReconAll
+from nipype.interfaces.utility import IdentityInterface
+from nipype.pipeline.engine import Workflow, Node
 
-_M Mallar Chakravarty, Patrick Steadman, Matthijs C van Eede, Rebecca D Calcott, Victoria Gu, Philip Shaw, Armin Raznahan, D Louis Collins, and Jason P Lerch. Performing label-fusion-based segmentation using multiple automatically generated templates. Hum Brain Mapp, 34(10):2635–54, October 2013. [(doi:10.1002/hbm.22092)](https://onlinelibrary.wiley.com/doi/epdf/10.1002/hbm.22092)_
+# Specify important variables
+experiment_dir = '~/nipype_tutorial'           # location of experiment folder
+data_dir = opj(experiment_dir, 'data')         # location of data folder
+fs_folder = opj(experiment_dir, 'freesurfer')  # location of freesurfer folder
 
-_Jon Pipitone, Min Tae M Park, Julie Winterburn, Tristram A Lett, Jason P Lerch, Jens C Pruessner, Martin Lepage, Aristotle N Voineskos, and M Mallar Chakravarty. Multi-atlas segmentation of the whole hippocampus and subfields using multiple automatically generated templates. Neuroimage, 101:494–512, November 2014.
-[(doi:10.1016/j.neuroimage.2014.04.054)](https://www.sciencedirect.com/science/article/pii/S1053811914003346?via%3Dihub)_
+subject_list = ['sub001', 'sub002', 'sub003', 'sub004', 'sub005', 'sub006',
+                'sub007', 'sub008', 'sub009','sub010']   # subject identifier
 
-##### 1) Volumetric alterations in the whole hippocampus 
+T1_identifier = 'struct.nii.gz'                  # Name of T1-weighted image
 
-##### Example 1.1: Comparison of hippocampal volumes across groups with normal cognition, mild cognitive impairment and Alzheimer's disease 
+# Create the output folder - FreeSurfer can only run if this folder exists
+os.system('mkdir -p %s'%fs_folder)
 
-Sixty 1.5T images baseline scans were selected arbitrarily from the ADNI1: Complete 1Yr 1.5T standardized dataset. Twenty subjects were chosen from each disease category: cognitively normal (CN),mild cognitive impairment (MCI) and Alzheimer's disease (AD).
+# Create the pipeline that runs the recon-all command
+reconflow = Workflow(name="reconflow")
+reconflow.base_dir = opj(experiment_dir, 'workingdir_reconflow')
 
-MAGeT-Brain was applied to this dataset and the resulting segmentations werecompared to segmentations produced by FreeSurfer, FSLFIRST, MAPER, as well as semi-automated whole hippocampal segmentations (SNT) provided by ADNI. Examples for hippocampal segmentations and hippocampal volume measures obtained by different are shown in the Figures below.
+# Some magical stuff happens here (not important for now)
+infosource = Node(IdentityInterface(fields=['subject_id']),
+                  name="infosource")
+infosource.iterables = ('subject_id', subject_list)
 
-<img src="/fig/episode_5/5_VolAnalysis_Eg1.png" width="600" height="560" />
+# This node represents the actual recon-all command
+reconall = Node(ReconAll(directive='all', subjects_dir=fs_folder), name="reconall")
 
-The boxplot showed that the total bilateral hippocampal volume between commonly used methods are well correlated. Within disease categories (i.e. CN, LMCI and AD), MAGeTbrain is consistently well correlated to SNT volumes, but appears to slightly over-estimate the volume of the AD hippocampus compared to the SNT segmentations.
+# This function returns for each subject the path to struct.nii.gz
+def pathfinder(subject, foldername, filename):
+    from os.path import join as opj
+    struct_path = opj(foldername, subject, filename)
+    return struct_path
 
-Related citations:
-_Jon Pipitone, Min Tae M Park, Julie Winterburn, Tristram A Lett, Jason P Lerch, Jens C Pruessner, Martin Lepage, Aristotle N Voineskos, and M Mallar Chakravarty. Multi-atlas segmentation of the whole hippocampus and subfields using multiple automatically generated templates. Neuroimage, 101:494–512, November 2014.
-[(doi:10.1016/j.neuroimage.2014.04.054)](https://www.sciencedirect.com/science/article/pii/S1053811914003346?via%3Dihub)_
+# This section connects all the nodes of the pipeline to each other
+reconflow.connect([(infosource, reconall, [('subject_id', 'subject_id')]),
+                   (infosource, reconall, [(('subject_id', pathfinder,
+                                             data_dir, T1_identifier),
+                                            'T1_files')]),
+                   ])
 
-##### 2) Volumetric alterations in hippocampal sufields
+# This command runs the recon-all pipeline in parallel (using 8 cores)
+reconflow.run('MultiProc', plugin_args={'n_procs': 8})
 
-##### Example 2.1: Whole hippocampal segmentation comparison across cohorts _[(Voineskos et al, 2015)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6869683/pdf/HBM-36-3020.pdf)_)
+```
+If you want to use the same dataset made available by nipype, you can download and arrange the data by running [this script](/5_OtherFiles/5_Download_NiPypeTutorial_Data.sh). 
+Also, make sure that your ```$FREESURFER_HOME``` (```path/to/freesufer/location```) and ```$SUBJECTS_DIR``` (```/path/to/subjects/outputs``` e.g. ```SUBJECTS_DIR=~/nipype_tutorial/freesurfer```) paths are set properly.
 
-A total of 137 healthy volunteers (18–86 years, µ:45.4|SD:19) recruited by CAMH-Toronto, were used in this study. 
+Once the process in complete, your folder structure containing original data and output files will be available in your working directory/SUBJECTS_DIR.
+<details> <summary markdown="span">Click here to take a look at the overview of the folder structure.</summary>
 
-A general linear model (GLM) was used to assess all relationships, and all tests were corrected for multiple comparisons using FDR [Benjamini and Hochberg, 1995]. Comparisons surviving 5% FDR were deemed to be significant. The relationship between hippocampal volumes and age was assessed, with sex, years of education, APOEe4 carrier status, and TBV included in the model. The results obtained were as shown in the figure below.
+```
+nipype_tutorial
+|_data
+    |_sub001
+    |_sub002
+    ...
+    |_sub010
+|_freesurfer
+    |_sub001
+      |_label
+      |_mri
+      |_scripts 
+      |_stats   
+      |_surf    
+      |_tmp    
+      |_touch   
+      |_trash
+    ...
+    |_sub010
+```
+</details>
 
-<img src="/fig/episode_5/5_VolAnalysis_Eg2.png" width="760" height="360" />
+Considering a single subject: The required stats could be found within the respective folders. Segmentation statistics of subcortical structures can be found in _aseg.stats_ . When using FreeSurfer, the segmented left hippocampal volume is: ``` 4287 mm^3 ```
 
-It was observed that all right and left whole hippocampal and subfield volumes were inversely related to age after correction for multiple comparisons except for the right and left CA1 (R²=0.018,_q_=0.069 for both).
+##### Volumetric Analysis: ROI differences in Young, Middle Aged, Nondemented and Demented Older Adults
+Once a dataset is processed, the volumes of each ROI can be collected and included in a .csv file (or other formats you prefer). 
 
-Related citations:
-_Hippocampal (subfield) volume and shape in relation to cognitive performance across the adult lifespan. Aristotle N. Voineskos, Julie L. Winterburn, Daniel Felsky, Jon Pipitone, Tarek K. Rajji, Benoit H. Mulsant, M. Mallar Chakravarty. Hum Brain Mapp. 2015 Aug; 36(8): 3020–3037. May 2015 [(doi: 10.1002/hbm.22825)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6869683/pdf/HBM-36-3020.pdf)_
+As processing takes time, for this example we use processed freesurfer outputs for ROI that is available on the OASIS website. The summarized freesurfer outputs from the OASIS1 dataset can be downloaded [here](/5_OtherFiles/OASIS_FS_ASEG.csv).
+Older adults who are demented at the time of scanning and those who are progressing have been given a Clinical Dementia Rating (CDR).
+
+We can observe the ROI volumetric differences in adults and how these volumes vary based on their CDR. For this example, we consider 6 regions of interest: Left/Right Amygdala, Hippocampus and Lateral ventricle.
+
+```
+import pandas     as pd
+import seaborn    as sns
+import matplotlib
+import matplotlib.pyplot as plt
+oasis_aseg = pd.read_csv("/Users/swapna/DataCarpentry_sMRI/OASIS_FS_ASEG.CSV")
+fig, axes = plt.subplots(2, 3, figsize=(18, 10))
+
+sns.boxplot(ax=axes[0, 0], data=oasis_aseg, x='CDR', y='Right-Amygdala VOLUME',hue='CDR',palette='pastel')
+sns.boxplot(ax=axes[0, 1], data=oasis_aseg, x='CDR', y='Right-Hippocampus VOLUME',hue='CDR',palette='pastel')
+sns.boxplot(ax=axes[0, 2], data=oasis_aseg, x='CDR', y='Right-Lateral-Ventricle VOLUME',hue='CDR',palette='pastel')
+
+sns.boxplot(ax=axes[1, 0], data=oasis_aseg, x='CDR', y='Left-Amygdala VOLUME',hue='CDR',palette='pastel')
+sns.boxplot(ax=axes[1, 1], data=oasis_aseg, x='CDR', y='Left-Hippocampus VOLUME',hue='CDR',palette='pastel')
+sns.boxplot(ax=axes[1, 2], data=oasis_aseg, x='CDR', y='Left-Lateral-Ventricle VOLUME',hue='CDR',palette='pastel')
+```
+We can observe that the ROI volumes are smaller when subject is likely to have a higher CDR.
+<img src="/fig/episode_5/5_SubVolumes.png" width="760" height="390" />
+
+💡 **Exercise 5.2**: Can you find the effect size for the ROIs in adults over 60? (Download the .csv [here](/5_OtherFiles/OASIS_FS_ASEG_OVER60.csv))
+
+<details>
+  <summary markdown="span">Hint: You need to look cohen's D effect size between demented and non-demented adults. Click for more help</summary>
+
+```
+import numpy as np
+def calc_effect_size(group1,group2):
+    mean1 = np.mean(group1)
+    mean2 = np.mean(group2)
+    std1  = np.std(group1)
+    std2  = np.std(group2)
+    
+    numerator   = (mean1-mean2)
+    denominator = np.sqrt(np.square(std1)+np.square(std2))/2
+    effect_size= numerator/denominator
+    return effect_size
+```
+</details>
+
+
+The output we got looks like:
+
+<img src="/fig/episode_5/5_EffectSize.png" width="400" height="230" />
+
+Click [here](/5_OtherFiles/5_RelatedStudies_statAnalysis.md) to look at releated analysis from studies! 
 
 ### 5.1.2. Cortical surface parcellations 
 Cortical surfaces can be parcellated into anatomically and functionally meaningful regions. This fascilitates identification and characterization of morphometric and connectivity alterations in the brain that may occur as a result of a disease or aging. 
@@ -146,6 +270,3 @@ plotting.plot_surf_roi(fsaverage['pial_left'], roi_map=parcellation,hemi='left',
                        view='lateral',bg_map=fsaverage['sulc_left'], bg_on_data=True,darkness=.5)
 ```
 <img src="/fig/episode_5/5_Fig4_corAtlas_Destrieux.png" width="230" height="170" />
-
-
-#### 5.1.2.2. Regional cortical thickness variation in developmental cohorts

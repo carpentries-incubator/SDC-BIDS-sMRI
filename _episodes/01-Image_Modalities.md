@@ -23,13 +23,17 @@ keypoints:
 7. The tissue specific differences in T1 and T2 relaxation times is what enables us to _see_ anatomy from image contrast. The final image contrast depends on when you _listen_ to the signal (design parameter: echo time (TE)) and how fast you repeat the _tilt-relax_ process i.e. RF pulse freuqency (design parameter: repetition time (TR)). 
 
 
-### T1 and T2 relaxation
+## T1 and T2 relaxation
 Here we see signal from two different tissues as the nuclei are tilted and realigned. 
 The figure on the left shows a single nucleus (i.e. tiny magnet) being tilted away and then precessing back to the the initial alighment along B<sub>0</sub>. The figure on the right shows the corresponding registered T1 and T2 signal profiles for two different "tissues". The difference in their signal intensties results in the image contrast. 
 
 ![MR_relax](https://user-images.githubusercontent.com/7978607/112332334-08750c80-8c90-11eb-90fc-33956c037a1c.gif)
 
-### T1w, T2w, and PD acquisition
+## Brain tissue comparison
+
+![relax_tissue_contrast](../fig/episode_1/relax_tissue_contrast.png))
+
+## T1w, T2w, and PD acquisition
 
 |                | TE short      | TE ~ T2 of tissue of interest|
 | :-------------: | :----------: | :-----------: |

@@ -3,18 +3,19 @@ title: "Image preprocessing with smriprep (Part 2: spatial normalization)"
 teaching: 20
 exercises: 10
 questions:
+- "What are reference coordinate systems"
+- "What are 'templates', 'atlases'?"
 - "What is spatial normalization?"
-- "What are 'templates', 'spaces', 'atlases'?"
 objectives:
 - "Understand reference spaces and registration process"
 keypoints:
-- "spatial normalization offer a way to map and compare brain anatomy across individuals, modalities, and timepoints"
+- "Reference coordinate spaces and spatial normalization offer a way to map and compare brain anatomy across modalities, individuals, and studies"
 ---
 ## You Are Here!
 ![course_flow](../fig/episode_3/Course_flow_3.png)
 
 ## Why do we need spatial normalization
-- Compare and combine brain images across subjects and studies
+- Compare and combine brain images across modalities, individuals, and studies
 
 ## What do we need for spatial normalization
 - A reference frame: A 3D space that assigns x,y,z coordinates to anatomical regions (independent of voxel dimensions!). 
@@ -68,10 +69,9 @@ For examples:
 - image coordinate: (0,0,0) ~  anatomical location: (100mm, 50mm, -25mm)
 - The spacing between voxels along each axis: (1.5mm, 0.5mm, 0.5mm)
 
-![slicer_coordinate_systems](../fig/episode_3/Slicer_Wiki_Voxel_Spacing.png)
+<img src="../fig/episode_3/Slicer_Wiki_Voxel_Spacing.png" alt="Drawing" align="middle" width="500px"/>
 
 #### _Image [source](https://www.slicer.org/wiki/Coordinate_systems)_ 
-
 
 
 > ## Coordinate systems
@@ -80,7 +80,7 @@ For examples:
 >
 > > ## Solution
 > > Downsampling reduces the number of total voxels in the image. Consequently the voxel-spacing is increased as more anatomical space is "sampled" by any given voxel. 
-> > Note that the new intensity values of the resampled voxels are determined by type of interpolation used. 
+> > Note that the new intensity values of the resampled voxels are determined based on the type of interpolation used. 
 > > 
 > {: .solution}
 {: .challenge}
@@ -138,11 +138,13 @@ For examples:
 - Transfomrations
     - Image similarity metrics: correlation ratio (CR), cross-correlation (CC), mutual information (MI)
     - Linear: global feature aligment
-        - Rigid (6 parameters): rotation, translation
+        - Rigid (6 parameters): rotation, translation 
         - Affine (12 parameters): rotation, translation, scaling, skewing  
     - Nonlinear (a.k.a elastic): local feature aligment via warping
         - Computationally intensive deformation models with large number of parameters
         - Employ diffeomorphic models that preserve toplogy and source-target symmetry
+
+_Note: Linear registrations are often used as a initialization step for non-linear registration._ 
 
 ![registration_cartoon](../fig/episode_3/Registration.png)
 
@@ -150,7 +152,7 @@ For examples:
 
 |        Algorithm        | Deformation      | ~ parameters     |
 | :-------------: | :----------: | :-----------: |
-|  FLIRT | Linear   | 9    |
+|  FSL FLIRT | Linear   | 9    |
 |  ANIMAL | Non-linear (Local translation)   | 69K    |
 |  DARTEL Toolbox |  Non-linear (diffeomorphic)  | 6.4M    |
 |  ANTs (SyN)   | Non-linear (bi-directional diffeomorphic) | 28M |
@@ -168,7 +170,8 @@ For examples:
 ![nonlinear_deform_process](../fig/episode_3/Silcer_DeformOnly.gif)
 
 
-> ## Image registration
+
+> ## Image registration quiz
 >
 > What would the information from non-linear deformation would tell you about the subject? 
 >
@@ -212,5 +215,9 @@ Subject space to refernce space mapping:
 {: .output}
 
 ![nilearn_reg](../fig/episode_3/nilearn_registration.png)
+
+
+### Subject space vs refernce space: use cases
+![subject_vs_ref_space](../fig/episode_3/Subject_vs_common_space.png)
 
 {% include links.md %}

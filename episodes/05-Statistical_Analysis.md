@@ -486,6 +486,9 @@ nm.inputs.apply_to_files  = ['c1structural_1.nii', 'c1structural_1.nii']
 nm.inputs.modulate        = True
 nm.run()
 ```
+Example of the expected output:
+
+<img src="/fig/episode_5/5_VBM_PP_norm2mni_OP.png" width="400" height="170" />
 
 
 A simple example for a VBM application is detailed below.

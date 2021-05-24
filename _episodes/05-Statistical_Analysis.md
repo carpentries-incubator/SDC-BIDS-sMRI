@@ -494,11 +494,102 @@ Example of the expected output:
 
 A simple example for a VBM application is detailed below.
 
-#### • Voxel-based morphometry to study the relationship between aging and gray matter density
-The data used in this application is from the OASIS project. If you use it, you need to agree with the data usage agreement available on the website.
+#### • Voxel-based morphometry to study the relationship between aging and gray matter density (adapted from [Nilearn examples](https://nilearn.github.io/auto_examples/02_decoding/plot_oasis_vbm.html)
 
-It has been run through a standard VBM pipeline (using SPM8 and NewSegment) to create VBM maps, which we study here.
+The OASIS dataset is used in this example and it has been preprocessed using standard VBM pipeline (as described above) to create VBM maps, which will be used here.
 
+**Predictive modeling analysis: VBM bio-markers of aging?**
+
+A SVM-ANOVA nilearn pipeline is used to predict age from the VBM data, based on 100 subjects from the OASIS dataset.
+
+Note that for an actual predictive modeling study of aging, the study should be run on the full set of subjects. (Note: the number of subjects may not be ideal for a prediction model that performs well. The number of subjects is limited in this case for simplicity and because of memory and time limitations.)
+
+To load data and initialize: 
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+from nilearn import datasets
+from nilearn.input_data import NiftiMasker
+from nilearn.image import get_data
+
+n_subjects = 100 
+
+oasis_dataset             = datasets.fetch_oasis_vbm(n_subjects=n_subjects)
+gray_matter_map_filenames = oasis_dataset.gray_matter_maps
+
+age = oasis_dataset.ext_vars['age'].astype(float)
+
+# Split data into training set and test set
+from sklearn.model_selection import train_test_split
+gm_imgs_train, gm_imgs_test, age_train, age_test = train_test_split(gray_matter_map_filenames, age, train_size=.6, random_state=0)
+
+# print basic information on the dataset
+print('First gray-matter anatomy image (3D) is located at: %s' % oasis_dataset.gray_matter_maps[0])  # 3D data
+print('First white-matter anatomy image (3D) is located at: %s'% oasis_dataset.white_matter_maps[0]) # 3D data
+```
+
+Then, the loaded data are preprocessed:
+
+```
+nifti_masker   = NiftiMasker(standardize=False, smoothing_fwhm=2, memory='nilearn_cache')  # cache options
+gm_maps_masked = nifti_masker.fit_transform(gm_imgs_train)
+
+# The features with too low between-subject variance are removed using:class:sklearn.feature_selection.VarianceThreshold.
+
+from sklearn.feature_selection import VarianceThreshold
+variance_threshold = VarianceThreshold(threshold=.01)
+
+gm_maps_thresholded = variance_threshold.fit_transform(gm_maps_masked)
+gm_maps_masked      = variance_threshold.inverse_transform(gm_maps_thresholded)
+
+# The data is then converted back to the mask image in order to use it for decoding process
+mask = nifti_masker.inverse_transform(variance_threshold.get_support())
+
+```
+
+We then implement a **prediction pipeline with ANOVA and SVR** using nilearn.decoding.DecoderRegressor Object, as shown in the code below.
+
+For this, the built-in DecoderRegressor object is used to do ANOVA with SVR, where its estimator uses Cross Validation to select best models. In order to save time in this example, we only use 1-percent voxels that are most correlated with the age variable to fit. 
+
+```
+from nilearn.decoding import DecoderRegressor
+
+decoder = DecoderRegressor(estimator='svr', mask=mask, scoring='neg_mean_absolute_error',
+                           screening_percentile=1, n_jobs=1)
+
+# Fit and predict with the decoder
+decoder.fit(gm_imgs_train, age_train)
+
+
+# Sort test data for better visualization (trend, etc.)
+perm         = np.argsort(age_test)[::-1]
+age_test     = age_test[perm]
+gm_imgs_test = np.array(gm_imgs_test)[perm]
+age_pred     = decoder.predict(gm_imgs_test)
+
+prediction_score = -np.mean(decoder.cv_scores_['beta'])
+
+print("=== DECODER ===")
+print("explained variance for the cross-validation: %f" % prediction_score)
+print("")
+```
+
+To visualize the resulting outputs:
+
+```
+weight_img = decoder.coef_img_['beta']
+
+from nilearn.plotting import plot_stat_map, show
+
+bg_filename = gray_matter_map_filenames[0]
+
+z_slice = 0
+display = plot_stat_map(weight_img, bg_img=bg_filename, display_mode='z', cut_coords=[z_slice])
+display.title("SVM weights")
+show()
+```
+<img src="/fig/episode_5/5_VBM_OASIS_Eg.png" width="230" height="200" />
 
 <sub> Related citations: </sub>\
 <sub> "[Voxel-Based Morphometry—The Methods](https://www.fil.ion.ucl.ac.uk/~karl/Voxel-Based%20Morphometry.pdf)", John Ashburner and Karl J. Friston, NeuroImage(2000). </sub>\

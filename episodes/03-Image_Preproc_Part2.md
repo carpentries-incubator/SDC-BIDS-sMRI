@@ -3,23 +3,88 @@ title: "Image preprocessing with smriprep (Part 2: spatial normalization)"
 teaching: 20
 exercises: 10
 questions:
+- "What are reference coordinate systems"
+- "What are 'templates', 'atlases'?"
 - "What is spatial normalization?"
-- "What are 'templates', 'spaces', 'atlases'?"
 objectives:
 - "Understand reference spaces and registration process"
 keypoints:
-- "spatial normalization offer a way to map and compare brain anatomy across individuals, modalities, and timepoints"
+- "Reference coordinate spaces and spatial normalization offer a way to map and compare brain anatomy across modalities, individuals, and studies"
 ---
 ## You Are Here!
 ![course_flow](../fig/episode_3/Course_flow_3.png)
 
 ## Why do we need spatial normalization
-- Compare and combine brain images across subjects and studies
+- Compare and combine brain images across modalities, individuals, and studies
 
 ## What do we need for spatial normalization
-- A common template: a single or an average image volume as an alignment target 
 - A reference frame: A 3D space that assigns x,y,z coordinates to anatomical regions (independent of voxel dimensions!). 
-- An atlas: voxel-wise labels associated with a template in a given space
+- A common template: a single or an average image volume as an alignment target 
+- An image registration algorithm
+
+## Coordinate systems and spaces
+- World coordinates
+- Anatomical coordinates
+- Image coordinates 
+
+![slicer_coordinate_systems](../fig/episode_3/Slicer_Wiki_Coordinate_Sytems.png)
+#### _Image [source](https://www.slicer.org/wiki/Coordinate_systems)_ 
+
+### World coordinates
+The world coordinates refer to a Cartesian coordinate system in which a MRI (or other modality) scanner is positioned. 
+
+### Anatomical coordinates
+The anatomical space is coordinate system (X,Y,Z) that consists of three planes to describe the standard anatomical position of a human
+- *Axial* plane is parallel to the ground and separates the head (Superior) from the feet (Inferior)
+- *Coronal* plane is perpendicular to the ground and separates the front from (Anterior) the back (Posterior)
+- *Sagittal* plane separates the Left from the Right
+
+The origin and directions of anatomical coordinate system are defined by conventions. In neuroimaging the most commonly used definition is the stereotaxic space. 
+
+#### Stereotaxic space 
+- A 3-dimensional coordinate reference frame based on anatomical landmarks - originally used to guide neurosurgical procedures. 
+    - A/P means anterior/posterior
+    - L/R means left/right
+    - S/I means superior/inferior
+    - Example: RAS
+        - First dimension (X) points towards the right hand side of the head 
+        - Second dimension (Y) points towards the Anterior aspect of the head
+        - Third dimension (Z) points towards the top of the head 
+        - Directions are from the subject's perspective. In the RAS coordinate system, a point to the subject's left will have a negative x value.
+- Talairach space
+    - Derived from an unrepresentative single 60-yr old female cadaver brain 
+    - Ignores left-right hemispheric differences    
+- MNI space(s)
+    - Similar to the original Talairach space with the Z-coordinate is approximately +3.5 mm offset relative to the Talairach coordinate.
+
+<img src="../fig/episode_3/MNI_space_offset.png" alt="Drawing" align="middle" width="500px"/>
+
+
+### Image coordinates
+The image coordinate system (i,j,k) describes the acquired image (voxels) with respect to the anatomy. The MR images are 3D voxel arrays (i.e. grids) whose origin is assigned at the upper left corner. The i axis increases to the right, the j axis to the bottom and the k axis backwards.
+
+The MR image metadata stores the _anatomical location_ of the image origin and the spacing between two voxels (typically in mm). 
+
+For examples: 
+- image coordinate: (0,0,0) ~  anatomical location: (100mm, 50mm, -25mm)
+- The spacing between voxels along each axis: (1.5mm, 0.5mm, 0.5mm)
+
+<img src="../fig/episode_3/Slicer_Wiki_Voxel_Spacing.png" alt="Drawing" align="middle" width="500px"/>
+
+#### _Image [source](https://www.slicer.org/wiki/Coordinate_systems)_ 
+
+
+> ## Coordinate systems
+>
+> What happens when you downsample a MR image? 
+>
+> > ## Solution
+> > Downsampling reduces the number of total voxels in the image. Consequently the voxel-spacing is increased as more anatomical space is "sampled" by any given voxel. 
+> > Note that the new intensity values of the resampled voxels are determined based on the type of interpolation used. 
+> > 
+> {: .solution}
+{: .challenge}
+
 
 ## MR image templates 
 - An antomical template is an average MR volume whose voxels encode the average probability of different tissue classes (e.g. WM, GM, and CSF) at particular spatial location. The template creation is an iterative process comprising normalization, alignment, and averaging of a set of MR images from several different subjects. 
@@ -62,23 +127,6 @@ keypoints:
 ![mni_icbm152](../fig/episode_3/mni_icbm152_sym_09c_small.jpeg)
 
 
-## Stereotaxic space 
-- A 3-dimensional coordinate reference frame based on anatomical landmarks - originally used to guide neurosurgical procedures. 
-    - A/P means anterior/posterior
-    - L/R means left/right
-    - S/I means superior/inferior
-    - Example: RAS
-        - First dimension (X) points towards the right hand side of the head 
-        - Second dimension (Y) points towards the Anterior aspect of the head
-        - Third dimension (Z) points towards the top of the head 
-        - Directions are from the subject's perspective. In the RAS coordinate system, a point to the subject's left will have a negative x value.
-- Talairach space
-    - Derived from an unrepresentative single 60-yr old female cadaver brain 
-    - Ignores left-right hemispheric differences    
-- MNI space(s)
-    - Similar to the original Talairach space with the Z-coordinate is approximately +3.5 mm offset relative to the Talairach coordinate.
-
-<img src="../fig/episode_3/MNI_space_offset.png" alt="Drawing" align="middle" width="500px"/>
 
 ## Image registration
 - An process that aligns an image from one coordinate space to another. 
@@ -90,11 +138,13 @@ keypoints:
 - Transfomrations
     - Image similarity metrics: correlation ratio (CR), cross-correlation (CC), mutual information (MI)
     - Linear: global feature aligment
-        - Rigid (6 parameters): rotation, translation
+        - Rigid (6 parameters): rotation, translation 
         - Affine (12 parameters): rotation, translation, scaling, skewing  
     - Nonlinear (a.k.a elastic): local feature aligment via warping
         - Computationally intensive deformation models with large number of parameters
         - Employ diffeomorphic models that preserve toplogy and source-target symmetry
+
+_Note: Linear registrations are often used as a initialization step for non-linear registration._ 
 
 ![registration_cartoon](../fig/episode_3/Registration.png)
 
@@ -102,7 +152,7 @@ keypoints:
 
 |        Algorithm        | Deformation      | ~ parameters     |
 | :-------------: | :----------: | :-----------: |
-|  FLIRT | Linear   | 9    |
+|  FSL FLIRT | Linear   | 9    |
 |  ANIMAL | Non-linear (Local translation)   | 69K    |
 |  DARTEL Toolbox |  Non-linear (diffeomorphic)  | 6.4M    |
 |  ANTs (SyN)   | Non-linear (bi-directional diffeomorphic) | 28M |
@@ -119,5 +169,55 @@ keypoints:
 
 ![nonlinear_deform_process](../fig/episode_3/Silcer_DeformOnly.gif)
 
+
+
+> ## Image registration quiz
+>
+> What would the information from non-linear deformation would tell you about the subject? 
+>
+> > ## Solution
+> > The deformation fields encode information regarding local morphometric brain changes. 
+> > These can be quantified using "Jacobians" of the deformation field, and can be used to assess subtle morphoetric differences in case-control studies.
+> > 
+> {: .solution}
+{: .challenge}
+
+
+### Python snippet (see [this notebook](../code/3_sMRI_spatial_norm.ipynb) for detailed example.)
+~~~
+from nilearn import plotting
+from nilearn import image
+from nibabel.affines import apply_affine
+~~~
+{: .language-python}
+
+~~~
+cut_coords = (-40,10,0)
+
+A = np.array([[1.053177, -0.061204, -0.060685, 90.310684],
+             [0.070210, 1.009246, 0.117766, -9.806847],
+             [0.023069, -0.117785, 1.186777, 13.209366],
+             [0. ,0. , 0., 1.]])
+
+cut_coords_affine_transformed = apply_affine(A, cut_coords)
+x,y,z = cut_coords_affine_transformed
+cut_coords_affine_transformed_str = "({},{},{})".format(int(x),int(y),int(z))
+
+print("Subject space to refernce space mapping:\n {} --> {}".format(cut_coords,cut_coords_affine_transformed_str))
+
+~~~
+{: .language-python}
+
+~~~
+Subject space to refernce space mapping:
+ (-40, 10, 0) --> (47,-2,11)
+~~~
+{: .output}
+
+![nilearn_reg](../fig/episode_3/nilearn_registration.png)
+
+
+### Subject space vs refernce space: use cases
+![subject_vs_ref_space](../fig/episode_3/Subject_vs_common_space.png)
 
 {% include links.md %}

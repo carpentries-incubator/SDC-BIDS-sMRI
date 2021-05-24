@@ -1,0 +1,9 @@
+Logfile for pctsurfcon
+Fri May 21 21:22:49 EDT 2021
+setenv SUBJECTS_DIR /Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer
+cd /Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/scripts
+/Applications/freesurfer//bin/pctsurfcon
+$Id: FreeSurferEnv.csh,v 1.89 2016/06/09 14:54:31 zkaufman Exp $
+Darwin MacBook-Pro.local 20.3.0 Darwin Kernel Version 20.3.0: Thu Jan 21 00:06:51 PST 2021; root:xnu-7195.81.3~1/RELEASE_ARM64_T8101 x86_64
+FREESURFER_HOME /Applications/freesurfer/
+Cleaning up

@@ -1,0 +1,1 @@
+mri_convert /Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri/rawavg.mgz /Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/mri/orig.mgz --conform

@@ -1,0 +1,1 @@
+mri_ca_register -rusage /Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/touch/rusage.mri_ca_register.dat -nobigventricles -T transforms/talairach.lta -align-after -mask brainmask.mgz norm.mgz /Applications/freesurfer//average/RB_all_2016-05-10.vc700.gca transforms/talairach.m3z

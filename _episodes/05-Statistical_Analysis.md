@@ -398,14 +398,15 @@ The [tutorial](https://www.fil.ion.ucl.ac.uk/~john/misc/VBMclass10.pdf) by Ashbu
 
 ```spm.SPMCommand.set_mlab_paths(paths='/path/to/spm12/', matlab_cmd='/path/to/MATLAB_R20xxa.app/bin/matlab -nodesktop -nosplash')```
 
-The process using SPM mainly involves three steps:
+The process using **SPM** mainly involves three steps:
 1. Using NewSegment
 2. Using DARTEL
 3. Normlizing to MNI space
 
-To observe the outputs over these tasks, we have used a single T1w image ```structural.nii```.
 
-1. Using NewSegment
+**1. Using NewSegment**
+
+To observe the outputs over these tasks, we have used a single T1w image ```structural.nii```.
 
 This lets us separate structural images into different tissue classes. Tissues types identified by this process are grey matter (c1), white matter (c2) and CSF (c3), where an output image with the filename format _cXstructural.nii_ will be generated for each tissue type. 
 
@@ -438,7 +439,7 @@ Outputs from this step will be as follows:
 
 <img src="/fig/episode_5/5_VBM_PP_NewSeg.png" width="700" height="310" />
 
-2. Run DARTEL (create Templates)
+**2. Run DARTEL (create Templates)**
 
 This step is performed to increase the accuracy of inter-subject alignment by modelling the shape of each brain using numerous parameters (specifically, 3 parameters per voxel). During this process, gray matter between images are aligned, while simultaneously aligning white matter. Average template data are generated as a result, and data are iteratively assigned to this. The inputs to this stage are the “rc1” and “rc2” images, that are generated in the previous step. The outputs generated during this stage include the “u_rc1” file, as well as a series of template images.
 
@@ -463,7 +464,7 @@ The inputs to this step (rc1 and rc2 for ```structural_1.nii``` and ```structura
 The ```u_rc1``` outputs generated in this stage (```u_rc1structural_1_Template.nii``` and ```u_rc1structural_2_Template.nii```) and the final template (i.e. ```Template_6.nii```), will be inputs to the next stage in VBM preprocessing. 
 
 
-3. Normalise to MNI Space
+**3. Normalise to MNI Space**
 
 This step is to generate smoothed, spatially normalised and Jacobian scaled grey matter images in MNI space, using the u_rc1 files from the previous step.
 

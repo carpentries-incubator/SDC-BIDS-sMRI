@@ -1,0 +1,13 @@
+------------------------------
+SUBJECT sub001
+START_TIME Fri May 21 16:39:14 EDT 2021
+END_TIME Fri May 21 21:45:43 EDT 2021
+RUNTIME_HOURS 5.108
+USER swapna
+HOST MacBook-Pro.local
+PROCESSOR x86_64
+OS Darwin
+UNAME Darwin MacBook-Pro.local 20.3.0 Darwin Kernel Version 20.3.0: Thu Jan 21 00:06:51 PST 2021; root:xnu-7195.81.3~1/RELEASE_ARM64_T8101 x86_64
+VERSION $Id: FreeSurferEnv.csh,v 1.89 2016/06/09 14:54:31 zkaufman Exp $
+CMDPATH /Applications/freesurfer//bin/recon-all
+CMDARGS -s sub001 -i sub001/struct.nii.gz -all

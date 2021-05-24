@@ -1,7 +1,7 @@
 # 5. Statistical Analysis
 Structural resonance images (sMRIs) provide information about various tissues type in the brain (e.g. gray matter, white matter, cerbrospinal fluid). sMRI (like fMRI), help study underlying causes of neuropsychiatric illnesses and their mechanisms by studying regional brain activities or atrophies. Statistical analysis of MRIs in individuals over time or cohorts provide region specific neuroanatomical information related to clinical questions in studies related to neuropsychiatric.
 
-## 5.1. ROI driven analyses with Nilearn
+## 5.1. ROI driven analysis with Nilearn
 Nilearn is a Python module that provides statistical and machine learning tools for anayses of NeuroImaging. This module supports general linear model (GLM) and leverages the scikit-learn Python toolbox for multivariate statistics with applications such as predictive modelling, classification, decoding, or connectivity analysis.
 
 Regions of interests (ROIs) in sMRI can be defined in terms of structural features, usually defined based on anatomy. Manual labeling done by experts are considered the gold standard, yet recently developed automated anatomical labeling offer the promise of highly reliable labeling. Brain atlases are commonly used for automatic labeling of regions, allowing further analysis specific to the ROIs. Atlas-based methods used to label ROIs will need to take in to account inter-subject variations across the population used to construct the atlas. 
@@ -176,7 +176,7 @@ reconflow.run('MultiProc', plugin_args={'n_procs': 8})
 If you want to use the same dataset made available by nipype, you can download and arrange the data by running [this script](/_extras/5_OtherFiles/5_Download_NiPypeTutorial_Data.sh). 
 Also, make sure that your ```$FREESURFER_HOME``` (```path/to/freesufer/location```) and ```$SUBJECTS_DIR``` (```/path/to/subjects/outputs``` e.g. ```SUBJECTS_DIR=~/nipype_tutorial/freesurfer```) paths are set properly.
 
-Once the process in complete, your folder structure containing original data and output files will be available in your working directory/SUBJECTS_DIR.
+Once the process is complete, your folder structure containing original data and output files will be available in your working directory/SUBJECTS_DIR.
 <details> <summary markdown="span">Click here to take a look at the overview of the folder structure.</summary>
 
 ```

@@ -284,6 +284,9 @@ plotting.plot_surf_roi(fsaverage['pial_left'], roi_map=parcellation,hemi='left',
 ```
 <img src="/fig/episode_5/5_Fig4_corAtlas_Destrieux.png" width="230" height="170" />
 
+
+#### 5.1.2.2. Regional cortical thickness analysis
+
 #### • Using FreeSurfer to find Cortical thicknesses
 Regional cortical thickness values are also provided by the FreeSurfer ```recon-all``` process. 
 An easy way to view this requires the ```freesurfer-stats``` package (which you can get using ```pip install freesurfer-stats```). 

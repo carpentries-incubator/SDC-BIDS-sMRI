@@ -316,7 +316,7 @@ reconflow.run('MultiProc', plugin_args={'n_procs': 8})
 If you want to use the same dataset made available by nipype, you can download and arrange the data by running [this script](/5_OtherFiles/5_Download_NiPypeTutorial_Data.sh). 
 Also, make sure that your ```$FREESURFER_HOME``` (```path/to/freesufer/location```) and ```$SUBJECTS_DIR``` (```/path/to/subjects/outputs``` e.g. ```SUBJECTS_DIR=~/nipype_tutorial/freesurfer```) paths are set properly.
 
-Once the process in complete, your folder structure containing original data and output files will be available in your working directory/SUBJECTS_DIR.
+Once the process is complete, your folder structure containing original data and output files will be available in your working directory/SUBJECTS_DIR.
 <details> <summary markdown="span">Click here to take a look at the overview of the folder structure.</summary>
 
 ```

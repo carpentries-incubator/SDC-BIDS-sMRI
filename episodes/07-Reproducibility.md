@@ -19,7 +19,7 @@ keypoints:
 
 - Software (algorithms and their versions)
     - Image clean-up
-    - Image preproc
+    - Image normalization 
     - Image quantification
 
 - Quality control
@@ -42,6 +42,14 @@ _Note: See [this]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) f
   - Parcellation: DKT
     
 ![software_compare](../fig/episode_8/CT_compare_software.png)
+
+
+## Possible choices for FreeSurfer parcellations
+- Different parcellation different results? 
+- Inference pertaining to neuroantomical differences and/or prediction models based on individual neuroanatomical feature sets can be sensitive to parcellation choice. 
+
+![software_compare](../fig/episode_8/FreeSurfer_parcels.jpg)
+_Note: Image adopted from [Madan 2021](https://link.springer.com/article/10.1007/s12021-021-09519-6)
 
 {% include links.md %}
 

@@ -203,7 +203,7 @@ nipype_tutorial
 
 Considering a single subject: The required stats could be found within the respective folders. Segmentation statistics of subcortical structures can be found in _aseg.stats_ . 
 
-A _.zip_ file containing FreeSurfer ```recon-all``` outputs for a single subject ```sub001``` can be downloaded [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/devdinie/sMRI_StatisticalAnalysis/tree/main/5_OtherFiles/sub001_ReconAll).
+A _.zip_ file containing FreeSurfer ```recon-all``` outputs for a single subject ```sub001``` can be downloaded [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/devdinie/SDC-BIDS-sMRI/tree/gh-pages/_extras/5_OtherFiles/sub001_ReconAll).
 
 For this subject, the segmented left hippocampal volume is: ``` 4287 mm^3 ```
 

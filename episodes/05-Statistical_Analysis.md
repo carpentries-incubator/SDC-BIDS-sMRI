@@ -117,7 +117,7 @@ OUT[]: 4189.0
   
 <img src="/fig/episode_5/5_All_FSL.png" width="1000" height="300" />
   
-The volume of the segemented region can be found using _imagestats_.
+The volume of the segemented regions can be found using _imagestats_.
   </details>
 
 #### • Using FreeSurfer to segment regions of interest
@@ -173,7 +173,7 @@ reconflow.connect([(infosource, reconall, [('subject_id', 'subject_id')]),
 reconflow.run('MultiProc', plugin_args={'n_procs': 8})
 
 ```
-If you want to use the same dataset made available by nipype, you can download and arrange the data by running [this script](/5_OtherFiles/5_Download_NiPypeTutorial_Data.sh). 
+If you want to use the same dataset made available by nipype, you can download and arrange the data by running [this script](/_extras/5_OtherFiles/5_Download_NiPypeTutorial_Data.sh). 
 Also, make sure that your ```$FREESURFER_HOME``` (```path/to/freesufer/location```) and ```$SUBJECTS_DIR``` (```/path/to/subjects/outputs``` e.g. ```SUBJECTS_DIR=~/nipype_tutorial/freesurfer```) paths are set properly.
 
 Once the process in complete, your folder structure containing original data and output files will be available in your working directory/SUBJECTS_DIR.
@@ -211,7 +211,7 @@ For this subject, the segmented left hippocampal volume is: ``` 4287 mm^3 ```
 
 Once a dataset is processed, the volumes of each ROI can be collected and included in a .csv file (or other formats you prefer). 
 
-As processing takes time, for this example we use processed freesurfer outputs for ROI that is available on the OASIS website. The summarized freesurfer outputs from the OASIS1 dataset can be downloaded [here](/5_OtherFiles/OASIS_FS_ASEG.csv).
+As processing takes time, for this example we use processed freesurfer outputs for ROI that is available on the OASIS website. The summarized freesurfer outputs from the OASIS1 dataset can be downloaded [here](/_extras/5_OtherFiles/OASIS_FS_ASEG.csv).
 Older adults who are demented at the time of scanning and those who are progressing have been given a Clinical Dementia Rating (CDR).
 
 We can observe the ROI volumetric differences in adults and how these volumes vary based on their CDR. For this example, we consider 6 regions of interest: Left/Right Amygdala, Hippocampus and Lateral ventricle.
@@ -235,7 +235,7 @@ sns.boxplot(ax=axes[1, 2], data=oasis_aseg, x='CDR', y='Left-Lateral-Ventricle V
 We can observe that the ROI volumes are smaller when subject is likely to have a higher CDR.
 <img src="/fig/episode_5/5_SubVolumes.png" width="760" height="390" />
 
-💡 **Exercise 5.2**: Can you find the effect size for the ROIs in adults over 60? (Download the .csv [here](/5_OtherFiles/OASIS_FS_ASEG_OVER60.csv)).
+💡 **Exercise 5.2**: Can you find the effect size for the ROIs in adults over 60? (Download the .csv [here](/_extras/5_OtherFiles/OASIS_FS_ASEG_OVER60.csv)).
 
 <details>
   <summary markdown="span">Hint: You need to look cohen's D effect size between demented and non-demented adults. Click for more help</summary>
@@ -260,7 +260,7 @@ The output we got looks like:
 
 <img src="/fig/episode_5/5_EffectSize.png" width="400" height="230" />
 
-Click [here](/5_OtherFiles/5_RelatedStudies_statAnalysis.md) to look at releated analysis from studies! 
+Click [here](/_extras/5_OtherFiles/5_RelatedStudies_statAnalysis.md) to look at releated analysis from studies! 
 
 ### 5.1.2. Cortical surface parcellations 
 Cortical surfaces can be parcellated into anatomically and functionally meaningful regions. This fascilitates identification and characterization of morphometric and connectivity alterations in the brain that may occur as a result of a disease or aging. 
@@ -283,7 +283,6 @@ plotting.plot_surf_roi(fsaverage['pial_left'], roi_map=parcellation,hemi='left',
                        view='lateral',bg_map=fsaverage['sulc_left'], bg_on_data=True,darkness=.5)
 ```
 <img src="/fig/episode_5/5_Fig4_corAtlas_Destrieux.png" width="230" height="170" />
-
 
 #### 5.1.2.2. Regional cortical thickness analysis
 
@@ -322,7 +321,7 @@ OUT[] mean_thickness_mm
 #### • Cortical thickness analysis: Effects of aerobic exercise on regional cortical thicknesses of patients with schizophrenia
 
 Data and Processed Data used in this example are adapted from [https://osf.io/sfgxk/](https://osf.io/sfgxk/), with reference to the paper by [Takahashi et al (2020)](https://www.sciencedirect.com/science/article/pii/S092099641930502X).
-Download the adapted .csv file containing measures provided by Freesurfer recon-all for this dataset [here](/5_OtherFiles/cortical_thickness_results.csv). 
+Download the adapted .csv file containing measures provided by Freesurfer recon-all for this dataset [here](/_extras/5_OtherFiles/cortical_thickness_results.csv). 
 
 In this study the effect of aerobic exercise on cortical thickness was observed across 3 different groups at 4 time points over a period of 24 weeks (i.e. at 0, 6, 12 and 24 weeks). The given .csv file contains cortical thickness for 8 regions. 
 
@@ -338,21 +337,20 @@ The cortical thicknesses for the ROIs can be plotted as follows over the four ti
 
 ```
 fig, axes = plt.subplots(2, 4, figsize=(18, 10))
-row=0; colm=2
-for col in range(2,10): 
+row=0; colm=3
+for col in range(3,11): 
     colm=col-2
-    if col>5: row=1; colm=colm-4
-
-    sns.boxplot(ax=axes[row, colm-2],x='time point', y=df.columns.tolist()[col], 
-                width=0.5, data=df, hue='Experimental_group', 
-                palette='pastel').set(xlabel='Time point/weeks', ylabel='Cortical thickness/mm',title=df.columns.tolist()[col])
+    if col>6: row=1; colm=colm-4
     
-    sns.stripplot(ax=axes[row, colm-2],x='time point', y=df.columns.tolist()[col], data=df, 
+    sns.boxplot(ax=axes[row, colm-2],x='time point', y=SCZ_CT.columns.tolist()[col], 
+                width=0.5, data=SCZ_CT, hue='Experimental_group', 
+                palette='pastel').set(xlabel='Time point/weeks', ylabel='Cortical thickness/mm',title=SCZ_CT.columns.tolist()[col])
+    
+    sns.stripplot(ax=axes[row, colm-2],x='time point', y=SCZ_CT.columns.tolist()[col], data=SCZ_CT, 
                   hue='Experimental_group',jitter=0.5, dodge=True,alpha=0.7,palette='pastel')
 
     h, l = axes[row, colm-2].get_legend_handles_labels()
     axes[row, colm-2].legend(h, ['SCZ_EXERCISE', 'SCZ_EXERCISECONT','HC_EXERCISE'], title="EXPERIMENTAL GROUP:", loc='lower right',fontsize='small')
-
 ```
 
 <img src="/fig/episode_5/5_CorticalThickness_Img1.png" width="990" height="520" />
@@ -375,11 +373,129 @@ To clearly observe the effect of aerobic exercise on schizophrenia patients and 
   
   <img src="/fig/episode_5/5_MeanCT_forGroups_A.png" width="700" height="420" />
   
+  _Hint_ : Refer to the the _groupby_ attribute in pandas.Dataframe ( [click for example](https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.GroupBy.mean.html) ). Specifically, you would want to group by both experimental group and time point, to calculate the mean of the remaining column.
+  
   (b) CT for each subject over the 4 time points for SCZ_EXERCISE
   
   For example, for the left entorhinal cortex
   
   <img src="/fig/episode_5/5_CTchanges_SCZexercise_Bi.png" width="700" height="310" />
 
-  
 </details>
+
+
+## 5.2. Voxel-Based Morphometry (VBM)
+
+Voxel-based morphometry (VBM) involves a voxel-wise comparison of the local concentration of gray matter between two groups of subjects. This process involves spatially normalizing all the images in the dataset being used into the same stereotactic space. The gray matter (GM) regions are then segmented from the spatially normalized images and the gray matter segments are smoothed afterwards. Voxel-wise parametric statistical tests which compare the smoothed GM images from the two groups are performed. Corrections for multiple comparisons are
+made using the theory of Gaussian random fields. 
+
+#### • Preprocessing for VBM
+
+The statistical parametric mapping software (latest: SPM12) provided through the NiPype interface allows preprocessing required for VBM analysis.
+[SPM12](https://www.fil.ion.ucl.ac.uk/spm/software/spm12/) can be downloaded [here](https://www.fil.ion.ucl.ac.uk/spm/software/download/) and MATLAB (> ver 7) needs to have been installed.
+
+The [tutorial](https://www.fil.ion.ucl.ac.uk/~john/misc/VBMclass10.pdf) by Ashburner and [installation guide](https://en.wikibooks.org/wiki/SPM/Installation_on_64bit_Mac_OS_(Intel)#Installation_2) in the SPM wiki will be helpful during setting up. Make sure the following is included when running your code:
+
+```spm.SPMCommand.set_mlab_paths(paths='/path/to/spm12/', matlab_cmd='/path/to/MATLAB_R20xxa.app/bin/matlab -nodesktop -nosplash')```
+
+The process using SPM mainly involves three steps:
+1. Using NewSegment
+2. Using DARTEL
+3. Normlizing to MNI space
+
+To observe the outputs over these tasks, we have used a single T1w image ```structural.nii```.
+
+1. Using NewSegment
+
+This lets us separate structural images into different tissue classes. Tissues types identified by this process are grey matter (c1), white matter (c2) and CSF (c3), where an output image with the filename format _cXstructural.nii_ will be generated for each tissue type. 
+
+Two more images with the filname format _rcXstructural.nii_ will also be generated, which are the DARTEL imported versions of the tissue class images,
+which will be aligned together next.
+
+```
+import nipype
+import nipype.interfaces.spm    as spm
+import nipype.interfaces.matlab as matlab
+
+spm.SPMCommand.set_mlab_paths(paths=os.path.join(tutorial_root,'/VBM/spm12/'), matlab_cmd='/Applications/MATLAB_R2021a.app/bin/matlab -nodesktop -nosplash')
+```
+
+```
+seg = spm.NewSegment()
+seg.inputs.channel_files = 'structural.nii'
+
+tissue1 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 1), 2, (True,True)  , (False, False))
+tissue2 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 2), 2, (True,True)  , (False, False))
+tissue3 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 3), 2, (True,False) , (False, False))
+tissue4 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 4), 2, (False,False), (False, False))
+tissue5 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 5), 2, (False,False), (False, False))
+
+seg.inputs.tissues = [tissue1, tissue2, tissue3, tissue4, tissue5]
+seg.run()
+
+```
+Outputs from this step will be as follows:
+
+<img src="/fig/episode_5/5_VBM_PP_NewSeg.png" width="700" height="310" />
+
+2. Run DARTEL (create Templates)
+
+This step is performed to increase the accuracy of inter-subject alignment by modelling the shape of each brain using numerous parameters (specifically, 3 parameters per voxel). During this process, gray matter between images are aligned, while simultaneously aligning white matter. Average template data are generated as a result, and data are iteratively assigned to this. The inputs to this stage are the “rc1” and “rc2” images, that are generated in the previous step. The outputs generated during this stage include the “u_rc1” file, as well as a series of template images.
+
+This step can be processed using the following code.
+
+```
+rc1_NewSeg1 = nib.load('rc1structural_1.nii')
+rc2_NewSeg1 = nib.load('rc2structural_1.nii')
+
+rc1_NewSeg2 = nib.load('rc1structural_2.nii')
+rc2_NewSeg2 = nib.load('rc2structural_2.nii')
+
+dartel = spm.DARTEL()
+dartel.inputs.image_files = [['rc1structural_1.nii','rc1structural_2.nii'],['rc2structural_1.nii', 'rc2structural_2.nii']]
+dartel.run()
+```
+
+The inputs to this step (rc1 and rc2 for ```structural_1.nii``` and ```structural_2.nii```) are shown below:
+
+<img src="/fig/episode_5/5_VBM_PP_DARTELinput.png" width="700" height="310" />
+
+The ```u_rc1``` outputs generated in this stage (```u_rc1structural_1_Template.nii``` and ```u_rc1structural_2_Template.nii```) and the final template (i.e. ```Template_6.nii```), will be inputs to the next stage in VBM preprocessing. 
+
+
+3. Normalise to MNI Space
+
+This step is to generate smoothed, spatially normalised and Jacobian scaled grey matter images in MNI space, using the u_rc1 files from the previous step.
+
+The smoothed images represent the regional volume of tissue. Statistical analysis are performed on these data. Therefore, it is likely that significant differences among the preprocessed data will better reflect differences among the regional volumes of grey matter.
+
+To achieve this, the following code can be used:
+
+```
+urc1_dartel_1 = nib.load('u_rc1structural_1_Template.nii')
+urc1_dartel_2 = nib.load('u_rc1structural_2_Template.nii')
+
+c1_structural_1 = nib.load('c1structural_1.nii')
+c1_structural_2 = nib.load('c1structural_2.nii')
+
+nm = spm.DARTELNorm2MNI()
+
+nm.inputs.template_file   = 'Template_6.nii'
+nm.inputs.flowfield_files = ['u_rc1structural_1_Template.nii','u_rc1structural_2_Template.nii']
+nm.inputs.apply_to_files  = ['c1structural_1.nii', 'c1structural_1.nii']
+nm.inputs.modulate        = True
+nm.run()
+```
+
+
+A simple example for a VBM application is detailed below.
+
+#### • Voxel-based morphometry to study the relationship between aging and gray matter density
+The data used in this application is from the OASIS project. If you use it, you need to agree with the data usage agreement available on the website.
+
+It has been run through a standard VBM pipeline (using SPM8 and NewSegment) to create VBM maps, which we study here.
+
+
+<sub> Related citations: </sub>\
+<sub> "[Voxel-Based Morphometry—The Methods](https://www.fil.ion.ucl.ac.uk/~karl/Voxel-Based%20Morphometry.pdf)", John Ashburner and Karl J. Friston, NeuroImage(2000). </sub>\
+<sub> "[Voxel Based Morphometry of the Human Brain: Methods and Applications](https://www.fil.ion.ucl.ac.uk/spm/doc/papers/am_vbmreview.pdf)", Andrea Machelli, Cathy Price, Karl Friston, John Ashburner, Curr. Med. Imaging Reviews (2005). </sub>

@@ -69,7 +69,7 @@ Software such as FSL and FreeSurfer can be used for segmentation of regions of i
 Several interfaces available through NiPype maybe used for this task. We will be looking at one example for the sake of simplicity.
 
 #### • Using FSL to segment a region of interest
-We use a single sMRI from the haxby dataset and make a copy of it in our current working directory to make processing easier.
+We use a single sMRI ([```structural.nii.gz```](/_extras/5_OtherFiles/structural.nii.gz)) from the haxby dataset and make a copy of it in our current working directory to make processing easier.
 ```
 haxby_dataset = datasets.fetch_haxby()
 anat_file = haxby_dataset.anat[0]
@@ -406,7 +406,7 @@ The process using **SPM** mainly involves three steps:
 
 **1. Using NewSegment**
 
-To observe the outputs over these tasks, we have used a single T1w image ```structural.nii```.
+To observe the outputs over these tasks, we have used a single T1w image [```structural.nii```](/_extras/5_OtherFiles/structural.nii).
 
 This lets us separate structural images into different tissue classes. Tissues types identified by this process are grey matter (c1), white matter (c2) and CSF (c3), where an output image with the filename format _cXstructural.nii_ will be generated for each tissue type. 
 
@@ -443,7 +443,8 @@ Outputs from this step will be as follows:
 
 This step is performed to increase the accuracy of inter-subject alignment by modelling the shape of each brain using numerous parameters (specifically, 3 parameters per voxel). During this process, gray matter between images are aligned, while simultaneously aligning white matter. Average template data are generated as a result, and data are iteratively assigned to this. The inputs to this stage are the “rc1” and “rc2” images, that are generated in the previous step. The outputs generated during this stage include the “u_rc1” file, as well as a series of template images.
 
-This step can be processed using the following code.
+Repeat step one for two structural images [```structural_1.nii```](/_extras/5_OtherFiles/structural_2.nii) and [```structural_2.nii```].(/_extras/5_OtherFiles/structural_2.nii).
+Then process the generated output rcX files using the following code.
 
 ```
 rc1_NewSeg1 = nib.load('rc1structural_1.nii')

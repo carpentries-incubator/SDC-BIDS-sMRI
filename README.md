@@ -9,7 +9,6 @@ This is one sub-module within the [Neuroimaging cirriculum][neuro_cirriculum]. V
 
 **sMRI Analysis in Python** is a programme developed to facilitate reproducibility in structural neuroimaging analyses. Python is emerging as a standard language of data analysis, visualization, and workflow building. More recently, it has rapidly been adopted by the neuroimaging community as a means of developing powerful open-source tools in favour of historically used opaque software such as AFNI, FSL and SPM. In addition, the barrier to entry to Python is low - meaning that you as the user can easily develop your own packages and contribute to the open-source codebase of neuroimaging!
 
-
 ***
 
 The **sMRI Analysis in Python** is a workshop series started up via a collaboration between researchers and staff at the Centre for Addiction and Mental Health (Toronto, ON), the University of Western Ontario (London, Ontario), and McGill University (Montreal, Quebec).
@@ -31,13 +30,13 @@ The primary goals of this workshop are:
 | Time | Episode | Question(s) Answered |
 | ---  | ---     | ---                  |
 ||Setup|Download files required for the lesson|
-| 00:00 | 1. sMRI modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
-| 00:45 | 2. sMRI preprocessing (Part 1: image clean-up) | How do we clean-up MR images and extract brains? |
-| 01:30 | 3. sMRI preprocessing (Part 2: spatial normalization) | What are "coordinate spaces", "templates", "atlases"? What is image registration? |
-| 02:00 | 4. sMRI quantification | How do we delineate brain anatomy and quantify phenotypes? |
-| 02:30 | 5. sMRI quality-control | How do we identify image preprocessing failures? |
-| 03:00 | 6. Statistical analysis | How to compare regional anatomical differences in case-control groups? |
-| 04:00 | 7. Reproducibility considerations | How sensitive are the findings to your MR pipeline parameters? |
+| 00:00 | 1. sMRI Modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
+| 00:30 | 2. sMRI Image Clean-up | How do we remove intensity artifacts and extract brains? |
+| 01:15 | 3. sMRI Spatial Normalization | What are "coordinate spaces", "templates", "atlases"? What is image registration? |
+| 02:00 | 4. sMRI Quantification | How do we delineate brain anatomy and quantify phenotypes? |
+| 02:45 | 5. sMRI Quality-control | How do we identify image preprocessing failures? |
+| 03:15 | 6. Statistical Analysis | How to compare regional anatomical differences in case-control groups? |
+| 04:00 | 7. Reproducibility Considerations | How sensitive are the findings to your MR pipeline parameters? |
 | 04:30 | Finish | |
  
 

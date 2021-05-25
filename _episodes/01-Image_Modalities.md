@@ -1,5 +1,5 @@
 ---
-title: "Introduction to structural MR image modalities"
+title: "sMRI modalities"
 teaching: 20
 exercises: 10
 questions:

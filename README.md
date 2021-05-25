@@ -31,7 +31,7 @@ The primary goals of this workshop are:
 | ---  | ---     | ---                  |
 ||Setup|Download files required for the lesson|
 | 00:00 | 1. sMRI Modalities | How is MR image acquired? What anatomical features do different modalities capture?  |
-| 00:30 | 2. sMRI Image Clean-up | How do we remove intensity artifacts and extract brains? |
+| 00:30 | 2. sMRI Clean-up | How do we remove intensity artifacts and extract brains? |
 | 01:15 | 3. sMRI Spatial Normalization | What are "coordinate spaces", "templates", "atlases"? What is image registration? |
 | 02:00 | 4. sMRI Quantification | How do we delineate brain anatomy and quantify phenotypes? |
 | 02:45 | 5. sMRI Quality-control | How do we identify image preprocessing failures? |

@@ -41,6 +41,10 @@ The primary goals of this workshop are:
 | 04:30 | Finish | |
  
 
+## You Are Here!
+![course_flow](fig/index/Course_flow_0.png)
+
+
 ## Contributing
 
 We welcome all contributions to improve the lesson! Maintainers will do their best to help you if you have any

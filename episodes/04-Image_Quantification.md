@@ -14,7 +14,8 @@ keypoints:
 - "sMRI pathology measures can have significant impact in diagnosis, treatment planning, and surgery"
 ---
 ## You Are Here!
-Course flow image edited for this episode to be placed here.
+![course_flow](../fig/episode_4/Course_flow_4.png)
+
 
 **Assumptions:**
 * the source of contrast in T1, T2, PD has been explained in another episode in terms of GM, WM , CSF. If possible, also include FLAIR.

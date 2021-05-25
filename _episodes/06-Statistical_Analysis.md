@@ -12,7 +12,7 @@ keypoints:
 ---
 
 ## You Are Here!
-![course_flow](../fig/episode_6/Course_flow_6.png)
+![course_flow](..../fig/episode_6/Course_flow_6.png)
 
 # 5. Statistical Analysis
 Structural resonance images (sMRIs) provide information about various tissues type in the brain (e.g. gray matter, white matter, cerbrospinal fluid). sMRI (like fMRI), help study underlying causes of neuropsychiatric illnesses and their mechanisms by studying regional brain activities or atrophies. Statistical analysis of MRIs in individuals over time or cohorts provide region specific neuroanatomical information related to clinical questions in studies related to neuropsychiatric.
@@ -46,7 +46,7 @@ dataset = datasets.fetch_atlas_aal('SPM12')
 atlas_filename = dataset.maps
 plotting.plot_roi(atlas_filename, title="AAL")
 ```
-<img src="/fig/episode_5/5_Fig1_corAtlas_AAL.png" width="400" height="170" />
+<img src="../fig/episode_6/5_Fig1_corAtlas_AAL.png" width="400" height="170" />
 
 ###### Local-Global Parcellation of the Human Cerebral Cortex (Schaefer 2018)
 ```
@@ -58,7 +58,7 @@ plotting.plot_roi(atlas_filename, title="Schaefer 2018")
 # This may be changed by changing the inputs to the function as below.
 # nilearn.datasets.fetch_atlas_schaefer_2018(n_rois=400, yeo_networks=7)
 ```
-<img src="/fig/episode_5/5_Fig2_corAtlas_Schaefer.png" width="400" height="170" />
+<img src="../fig/episode_6/5_Fig2_corAtlas_Schaefer.png" width="400" height="170" />
 
 ###### Harvard-Oxford cortical/subcortical atlases (Makris 2006)
 ```
@@ -66,7 +66,7 @@ dataset = datasets.fetch_atlas_harvard_oxford('cort-maxprob-thr25-2mm')
 atlas_filename = dataset.maps
 plotting.plot_roi(atlas_filename, title="Harvard Oxford atlas")
 ```
-<img src="/fig/episode_5/5_Fig3_corAtlas_Harvard-Oxford.png" width="400" height="170" />
+<img src="../fig/episode_6/5_Fig3_corAtlas_Harvard-Oxford.png" width="400" height="170" />
 
 
 #### • Subcortical Parcellations
@@ -76,7 +76,7 @@ dataset = datasets.fetch_atlas_pauli_2017()
 atlas_filename = dataset.maps 
 plotting.plot_prob_atlas(atlas_filename, title="Pauli 2017")
 ```
-<img src="/fig/episode_5/5_Fig5_subAtlas_Pauli.png" width="400" height="170" />
+<img src="../fig/episode_6/5_Fig5_subAtlas_Pauli.png" width="400" height="170" />
 
 
 #### 5.1.1.2. Regional volumetric analysis
@@ -85,7 +85,7 @@ Software such as FSL and FreeSurfer can be used for segmentation of regions of i
 Several interfaces available through NiPype maybe used for this task. We will be looking at one example for the sake of simplicity.
 
 #### • Using FSL to segment a region of interest
-We use a single sMRI ([```structural.nii.gz```](/_extras/5_OtherFiles/structural.nii.gz)) from the haxby dataset and make a copy of it in our current working directory to make processing easier.
+We use a single sMRI ([```structural.nii.gz```](local_data/6_Statistical_Analysis/structural.nii.gz)) from the haxby dataset and make a copy of it in our current working directory to make processing easier.
 ```
 haxby_dataset = datasets.fetch_haxby()
 anat_file = haxby_dataset.anat[0]
@@ -113,7 +113,7 @@ plotting.plot_roi(roi_img=seg_labels, bg_img=T1w_img, alpha=0.9, cmap="cool",dim
 Within your working directory, there will be several output files created by FSL. Here, the _first.nii.gz_ is the original output, while the _corr.nii.gz_ files may have had boundary correction applied to them (depending on the structure).
 (Fun fact: the value assigned to _dim_ in _plotting_roi_ controls the visibility of the background image). 
 
-<img src="/fig/episode_5/5_HippL_FSL.png" width="470" height="200" />
+<img src="../fig/episode_6/5_HippL_FSL.png" width="470" height="200" />
 The volume of the segemented region can be found using _imagestats_. 
 
 (You will also be able to notice a considerable difference in volume estimations in _first.nii.gz_ and _corr.nii.gz_.) 
@@ -131,7 +131,7 @@ OUT[]: 4189.0
                      (b) Can you edit the code above (using the suggestions in the comments) to segment all ROIs using FSL FIRST? 
 <details> <summary markdown="span"> Click here to see what the overlayed segmented labels would look like.</summary>
   
-<img src="/fig/episode_5/5_All_FSL.png" width="1000" height="300" />
+<img src="../fig/episode_6/5_All_FSL.png" width="1000" height="300" />
   
 The volume of the segemented regions can be found using _imagestats_.
   </details>
@@ -189,7 +189,7 @@ reconflow.connect([(infosource, reconall, [('subject_id', 'subject_id')]),
 reconflow.run('MultiProc', plugin_args={'n_procs': 8})
 
 ```
-If you want to use the same dataset made available by nipype, you can download and arrange the data by running [this script](/_extras/5_OtherFiles/5_Download_NiPypeTutorial_Data.sh). 
+If you want to use the same dataset made available by nipype, you can download and arrange the data by running [this script](local_data/6_Statistical_Analysis/5_Download_NiPypeTutorial_Data.sh). 
 Also, make sure that your ```$FREESURFER_HOME``` (```path/to/freesufer/location```) and ```$SUBJECTS_DIR``` (```/path/to/subjects/outputs``` e.g. ```SUBJECTS_DIR=~/nipype_tutorial/freesurfer```) paths are set properly.
 
 Once the process is complete, your folder structure containing original data and output files will be available in your working directory/SUBJECTS_DIR.
@@ -219,7 +219,7 @@ nipype_tutorial
 
 Considering a single subject: The required stats could be found within the respective folders. Segmentation statistics of subcortical structures can be found in _aseg.stats_ . 
 
-A _.zip_ file containing FreeSurfer ```recon-all``` outputs for a single subject ```sub001``` can be downloaded [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/devdinie/SDC-BIDS-sMRI/tree/gh-pages/_extras/5_OtherFiles/sub001_ReconAll).
+A _.zip_ file containing FreeSurfer ```recon-all``` outputs for a single subject ```sub001``` can be downloaded [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/devdinie/SDC-BIDS-sMRI/tree/gh-pages/local_data/6_Statistical_Analysis/sub001_ReconAll).
 
 For this subject, the segmented left hippocampal volume is: ``` 4287 mm^3 ```
 
@@ -227,7 +227,7 @@ For this subject, the segmented left hippocampal volume is: ``` 4287 mm^3 ```
 
 Once a dataset is processed, the volumes of each ROI can be collected and included in a .csv file (or other formats you prefer). 
 
-As processing takes time, for this example we use processed freesurfer outputs for ROI that is available on the OASIS website. The summarized freesurfer outputs from the OASIS1 dataset can be downloaded [here](/_extras/5_OtherFiles/OASIS_FS_ASEG.csv).
+As processing takes time, for this example we use processed freesurfer outputs for ROI that is available on the OASIS website. The summarized freesurfer outputs from the OASIS1 dataset can be downloaded [here](local_data/6_Statistical_Analysis/OASIS_FS_ASEG.csv).
 Older adults who are demented at the time of scanning and those who are progressing have been given a Clinical Dementia Rating (CDR).
 
 We can observe the ROI volumetric differences in adults and how these volumes vary based on their CDR. For this example, we consider 6 regions of interest: Left/Right Amygdala, Hippocampus and Lateral ventricle.
@@ -238,7 +238,7 @@ import seaborn    as sns
 import matplotlib
 import matplotlib.pyplot as plt
 oasis_aseg = pd.read_csv("/Users/swapna/DataCarpentry_sMRI/OASIS_FS_ASEG.CSV")
-fig, axes = plt.subplots(2, 3, figsize=(18, 10))
+../fig, axes = plt.subplots(2, 3, ../figsize=(18, 10))
 
 sns.boxplot(ax=axes[0, 0], data=oasis_aseg, x='CDR', y='Right-Amygdala VOLUME',hue='CDR',palette='pastel')
 sns.boxplot(ax=axes[0, 1], data=oasis_aseg, x='CDR', y='Right-Hippocampus VOLUME',hue='CDR',palette='pastel')
@@ -249,9 +249,9 @@ sns.boxplot(ax=axes[1, 1], data=oasis_aseg, x='CDR', y='Left-Hippocampus VOLUME'
 sns.boxplot(ax=axes[1, 2], data=oasis_aseg, x='CDR', y='Left-Lateral-Ventricle VOLUME',hue='CDR',palette='pastel')
 ```
 We can observe that the ROI volumes are smaller when subject is likely to have a higher CDR.
-<img src="/fig/episode_5/5_SubVolumes.png" width="760" height="390" />
+<img src="../fig/episode_6/5_SubVolumes.png" width="760" height="390" />
 
-💡 **Exercise 5.2**: Can you find the effect size for the ROIs in adults over 60? (Download the .csv [here](/_extras/5_OtherFiles/OASIS_FS_ASEG_OVER60.csv)).
+💡 **Exercise 5.2**: Can you find the effect size for the ROIs in adults over 60? (Download the .csv [here](local_data/6_Statistical_Analysis/OASIS_FS_ASEG_OVER60.csv)).
 
 <details>
   <summary markdown="span">Hint: You need to look cohen's D effect size between demented and non-demented adults. Click for more help</summary>
@@ -274,9 +274,9 @@ def calc_effect_size(group1,group2):
 
 The output we got looks like:
 
-<img src="/fig/episode_5/5_EffectSize.png" width="400" height="230" />
+<img src="../fig/episode_6/5_EffectSize.png" width="400" height="230" />
 
-Click [here](/_extras/5_OtherFiles/5_RelatedStudies_statAnalysis.md) to look at releated analysis from studies! 
+Click [here](local_data/6_Statistical_Analysis/5_RelatedStudies_statAnalysis.md) to look at releated analysis from studies! 
 
 ### 5.1.2. Cortical surface parcellations 
 Cortical surfaces can be parcellated into anatomically and functionally meaningful regions. This fascilitates identification and characterization of morphometric and connectivity alterations in the brain that may occur as a result of a disease or aging. 
@@ -298,7 +298,7 @@ fsaverage = datasets.fetch_surf_fsaverage()
 plotting.plot_surf_roi(fsaverage['pial_left'], roi_map=parcellation,hemi='left', 
                        view='lateral',bg_map=fsaverage['sulc_left'], bg_on_data=True,darkness=.5)
 ```
-<img src="/fig/episode_5/5_Fig4_corAtlas_Destrieux.png" width="230" height="170" />
+<img src="../fig/episode_6/5_Fig4_corAtlas_Destrieux.png" width="230" height="170" />
 
 #### 5.1.2.2. Regional cortical thickness analysis
 
@@ -337,7 +337,7 @@ OUT[] mean_thickness_mm
 #### • Cortical thickness analysis: Effects of aerobic exercise on regional cortical thicknesses of patients with schizophrenia
 
 Data and Processed Data used in this example are adapted from [https://osf.io/sfgxk/](https://osf.io/sfgxk/), with reference to the paper by [Takahashi et al (2020)](https://www.sciencedirect.com/science/article/pii/S092099641930502X).
-Download the adapted .csv file containing measures provided by Freesurfer recon-all for this dataset [here](/_extras/5_OtherFiles/cortical_thickness_results.csv). 
+Download the adapted .csv file containing measures provided by Freesurfer recon-all for this dataset [here](local_data/6_Statistical_Analysis/cortical_thickness_results.csv). 
 
 In this study the effect of aerobic exercise on cortical thickness was observed across 3 different groups at 4 time points over a period of 24 weeks (i.e. at 0, 6, 12 and 24 weeks). The given .csv file contains cortical thickness for 8 regions. 
 
@@ -352,7 +352,7 @@ SCZ_CT = pd.read_csv("cortical_thickness_results.csv")
 The cortical thicknesses for the ROIs can be plotted as follows over the four time points.
 
 ```
-fig, axes = plt.subplots(2, 4, figsize=(18, 10))
+../fig, axes = plt.subplots(2, 4, ../figsize=(18, 10))
 row=0; colm=3
 for col in range(3,11): 
     colm=col-2
@@ -369,7 +369,7 @@ for col in range(3,11):
     axes[row, colm-2].legend(h, ['SCZ_EXERCISE', 'SCZ_EXERCISECONT','HC_EXERCISE'], title="EXPERIMENTAL GROUP:", loc='lower right',fontsize='small')
 ```
 
-<img src="/fig/episode_5/5_CorticalThickness_Img1.png" width="990" height="520" />
+<img src="../fig/episode_6/5_CorticalThickness_Img1.png" width="990" height="520" />
 
 
 To clearly observe the effect of aerobic exercise on schizophrenia patients and schizophrenia controls, the mean cortical thickness of across all ROIs for each subject can be observed over time.
@@ -387,7 +387,7 @@ To clearly observe the effect of aerobic exercise on schizophrenia patients and 
   
   (a) Mean cortical thickness across the subjects for each group at each time point
   
-  <img src="/fig/episode_5/5_MeanCT_forGroups_A.png" width="700" height="420" />
+  <img src="../fig/episode_6/5_MeanCT_forGroups_A.png" width="700" height="420" />
   
   _Hint_ : Refer to the the _groupby_ attribute in pandas.Dataframe ( [click for example](https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.GroupBy.mean.html) ). Specifically, you would want to group by both experimental group and time point, to calculate the mean of the remaining column.
   
@@ -395,7 +395,7 @@ To clearly observe the effect of aerobic exercise on schizophrenia patients and 
   
   For example, for the left entorhinal cortex
   
-  <img src="/fig/episode_5/5_CTchanges_SCZexercise_Bi.png" width="700" height="310" />
+  <img src="../fig/episode_6/5_CTchanges_SCZexercise_Bi.png" width="700" height="310" />
 
 </details>
 
@@ -422,7 +422,7 @@ The process using **SPM** mainly involves three steps:
 
 **1. Using NewSegment**
 
-To observe the outputs over these tasks, we have used a single T1w image [```structural.nii```](/_extras/5_OtherFiles/structural.nii).
+To observe the outputs over these tasks, we have used a single T1w image [```structural.nii```](local_data/6_Statistical_Analysis/structural.nii).
 
 This lets us separate structural images into different tissue classes. Tissues types identified by this process are grey matter (c1), white matter (c2) and CSF (c3), where an output image with the filename format _cXstructural.nii_ will be generated for each tissue type. 
 
@@ -453,13 +453,13 @@ seg.run()
 ```
 Outputs from this step will be as follows:
 
-<img src="/fig/episode_5/5_VBM_PP_NewSeg.png" width="700" height="310" />
+<img src="../fig/episode_6/5_VBM_PP_NewSeg.png" width="700" height="310" />
 
 **2. Run DARTEL (create Templates)**
 
 This step is performed to increase the accuracy of inter-subject alignment by modelling the shape of each brain using numerous parameters (specifically, 3 parameters per voxel). During this process, gray matter between images are aligned, while simultaneously aligning white matter. Average template data are generated as a result, and data are iteratively assigned to this. The inputs to this stage are the “rc1” and “rc2” images, that are generated in the previous step. The outputs generated during this stage include the “u_rc1” file, as well as a series of template images.
 
-Repeat step one for two structural images [```structural_1.nii```](/_extras/5_OtherFiles/structural_2.nii) and [```structural_2.nii```].(/_extras/5_OtherFiles/structural_2.nii).
+Repeat step one for two structural images [```structural_1.nii```](local_data/6_Statistical_Analysis/structural_2.nii) and [```structural_2.nii```].(local_data/6_Statistical_Analysis/structural_2.nii).
 Then process the generated output rcX files using the following code.
 
 ```
@@ -476,7 +476,7 @@ dartel.run()
 
 The inputs to this step (rc1 and rc2 for ```structural_1.nii``` and ```structural_2.nii```) are shown below:
 
-<img src="/fig/episode_5/5_VBM_PP_DARTELinput.png" width="700" height="310" />
+<img src="../fig/episode_6/5_VBM_PP_DARTELinput.png" width="700" height="310" />
 
 The ```u_rc1``` outputs generated in this stage (```u_rc1structural_1_Template.nii``` and ```u_rc1structural_2_Template.nii```) and the final template (i.e. ```Template_6.nii```), will be inputs to the next stage in VBM preprocessing. 
 
@@ -506,7 +506,7 @@ nm.run()
 ```
 Example of the expected output:
 
-<img src="/fig/episode_5/5_VBM_PP_norm2mni_OP.png" width="400" height="170" />
+<img src="../fig/episode_6/5_VBM_PP_norm2mni_OP.png" width="400" height="170" />
 
 
 A simple example for a VBM application is detailed below.
@@ -606,7 +606,7 @@ display = plot_stat_map(weight_img, bg_img=bg_filename, display_mode='z', cut_co
 display.title("SVM weights")
 show()
 ```
-<img src="/fig/episode_5/5_VBM_OASIS_Eg.png" width="230" height="200" />
+<img src="../fig/episode_6/5_VBM_OASIS_Eg.png" width="230" height="200" />
 
 <sub> Related citations: </sub>\
 <sub> "[Voxel-Based Morphometry—The Methods](https://www.fil.ion.ucl.ac.uk/~karl/Voxel-Based%20Morphometry.pdf)", John Ashburner and Karl J. Friston, NeuroImage(2000). </sub>\

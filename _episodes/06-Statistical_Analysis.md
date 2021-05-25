@@ -1,3 +1,16 @@
+---
+title: "Statistical analysis"
+teaching: 20
+exercises: 10
+questions:
+- "How to look at group differences in regional anatomical features?"
+objectives:
+- "Compare volumetric differences in a region-of-interest"
+- "Calculate cortical thickness differences in a case-control study"
+keypoints:
+- "Atlas driven analysis can be a powerful technique for biomarker development. Nevertheless it is important to be cognizant of confounding factors."
+---
+
 # 5. Statistical Analysis
 Structural resonance images (sMRIs) provide information about various tissues type in the brain (e.g. gray matter, white matter, cerbrospinal fluid). sMRI (like fMRI), help study underlying causes of neuropsychiatric illnesses and their mechanisms by studying regional brain activities or atrophies. Statistical analysis of MRIs in individuals over time or cohorts provide region specific neuroanatomical information related to clinical questions in studies related to neuropsychiatric.
 
@@ -207,7 +220,7 @@ A _.zip_ file containing FreeSurfer ```recon-all``` outputs for a single subject
 
 For this subject, the segmented left hippocampal volume is: ``` 4287 mm^3 ```
 
-#### • ROI differences in Young, Middle Aged, Nondemented and Demented Older Adults
+#### ROI differences in Young, Middle Aged, Nondemented and Demented Older Adults
 
 Once a dataset is processed, the volumes of each ROI can be collected and included in a .csv file (or other formats you prefer). 
 

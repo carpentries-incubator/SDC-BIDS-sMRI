@@ -3,13 +3,13 @@ title: Setup
 ---
 ## Setting up the tutorial environment
 
-### Getting workshop material
+## Getting workshop material
 
-#### Method 1: Downloading directly from the repository
+### Method 1: Downloading directly from the repository
 
 On the GitHub repo (this page), click the green button that says "Clone or download", then click **Download ZIP**. Once downloaded, extract the ZIP file.
 
-#### Method 2: Using Git
+### Method 2: Using Git
 
 Using this method requires a (very) useful piece of software called <code>git</code>. The process of installing git depends heavily on whether you're using MacOS, Windows or Linux. Follow the instructions in the link below to set up <code>git</code> on your PC:
 
@@ -26,10 +26,10 @@ This will download the repository directly into your current directory.
 ### Setting up Python environment
 We use python version 3.6.0, but any newer version should also work (Python 2 versions haven't been tested). There are many methods to setting up a python environment but we'd recommend using some sort of virtual environment as to not break your system python install. Two methods (of many) are listed below:
 
-#### Method 1: Setting up conda environment (easiest) [Windows, Linux, MacOS]
+### Method 1: Setting up conda environment (easiest) [Windows, Linux, MacOS]
 For easy set-up we recommend [Anaconda](https://www.anaconda.com/download/) to manage python packages for scientific computing. Once installed, setting up the python environment can be done quite easily:
 
-##### Windows
+#### Windows
 1. Install Anaconda Python version 3.7
 2. Open **Anaconda Navigator**
 3. Click on **Environments** on the left pane
@@ -46,7 +46,7 @@ pip install nilearn nibabel
 8. Navigate to <code>SDC-BIDS-sMRI</code> folder you downloaded earlier.
 9. Done!
 
-##### Linux and MacOS
+#### Linux and MacOS
 
 After installing Anaconda, open terminal and type:
 

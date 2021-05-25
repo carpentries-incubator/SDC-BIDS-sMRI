@@ -1,7 +1,7 @@
 ---
-title: "Image segmentation and quantification"
+title: "sMRI Segmentation and Quantification"
 teaching: 30
-exercises: 10
+exercises: 15
 questions:
 - "How do we delineate brain anatomy and quantify phenotypes?"
 - "How to segment pathologies such as white-matter hyper-intensities?"

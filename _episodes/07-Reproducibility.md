@@ -10,7 +10,7 @@ keypoints:
 - "It is crucial to assess biological vs methodological variation in your findings to avoid reproducibility crisis."
 ---
 ## You Are Here!
-![course_flow](../fig/episode_8/Course_flow_8.png)
+![course_flow](../fig/episode_7/Course_flow_7.png)
 
 ## MR image processing pipeline selection choices
 - Compute environment 
@@ -32,24 +32,26 @@ keypoints:
 
 ## Example software analysis
 
-- Task: compare cortical thickness between FreeSurfer and CIVET
-![reproducibility](../fig/episode_8/Reproducibility.png)
+### Task: compare cortical thickness between FreeSurfer and CIVET
 
-_Note: See [this]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) for details on brain plots]_
+<img src="../fig/episode_7/Reproducibility.png" alt="Drawing" align="middle" width="700px"/> 
 
-- Correlation between thickness measurements:
-  - Software: FreeSurfer (v5.1, v5.3, v6.0), CIVET (2.1) and ANTs
-  - Parcellation: DKT
+_Note: See [this]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) for details on brain plots_
+
+## Correlation between thickness measurements:
+### Software: FreeSurfer (v5.1, v5.3, v6.0), CIVET (2.1) and ANTs
+### Parcellation: DKT
     
-![software_compare](../fig/episode_8/CT_compare_software.png)
+<img src="../fig/episode_7/CT_compare_software.png" alt="Drawing" align="middle" width="700px"/> 
 
 
 ## Possible choices for FreeSurfer parcellations
-- Different parcellation different results? 
-- Inference pertaining to neuroantomical differences and/or prediction models based on individual neuroanatomical feature sets can be sensitive to parcellation choice. 
+### Different parcellation different results? 
+### Inference pertaining to neuroantomical differences and/or prediction models based on individual neuroanatomical feature sets can be sensitive to parcellation choice. 
 
-![software_compare](../fig/episode_8/FreeSurfer_parcels.jpg)
-_Note: Image adopted from [Madan 2021](https://link.springer.com/article/10.1007/s12021-021-09519-6)
+<img src="../fig/episode_7/FreeSurfer_parcels.jpg" alt="Drawing" align="middle" width="700px"/> 
+
+_Note: Image adopted from [Madan 2021](https://link.springer.com/article/10.1007/s12021-021-09519-6)_
 
 {% include links.md %}
 

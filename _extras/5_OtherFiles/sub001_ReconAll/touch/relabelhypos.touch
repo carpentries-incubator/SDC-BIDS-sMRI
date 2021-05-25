@@ -1,0 +1,1 @@
+mri_relabel_hypointensities aseg.presurf.mgz ../surf aseg.presurf.hypos.mgz

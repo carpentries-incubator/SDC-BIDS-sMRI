@@ -1,0 +1,1 @@
+mris_register -curv -rusage /Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/touch/rusage.mris_register.lh.dat ../surf/lh.sphere /Applications/freesurfer//average/lh.folding.atlas.acfb40.noaparc.i12.2016-08-02.tif ../surf/lh.sphere.reg

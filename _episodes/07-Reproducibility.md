@@ -1,5 +1,5 @@
 ---
-title: "Reproducibility considerations"
+title: "sMRI Analysis: Reproducibility Considerations"
 teaching: 20
 exercises: 10
 questions:

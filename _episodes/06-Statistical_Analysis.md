@@ -1,7 +1,7 @@
 ---
-title: "Statistical analysis"
-teaching: 20
-exercises: 10
+title: "sMRI Statistical Analysis"
+teaching: 30
+exercises: 15
 questions:
 - "How to look at group differences in regional anatomical features?"
 objectives:

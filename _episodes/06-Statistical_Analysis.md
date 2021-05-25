@@ -11,6 +11,9 @@ keypoints:
 - "Atlas driven analysis can be a powerful technique for biomarker development. Nevertheless it is important to be cognizant of confounding factors."
 ---
 
+## You Are Here!
+![course_flow](../fig/episode_6/Course_flow_6.png)
+
 # 5. Statistical Analysis
 Structural resonance images (sMRIs) provide information about various tissues type in the brain (e.g. gray matter, white matter, cerbrospinal fluid). sMRI (like fMRI), help study underlying causes of neuropsychiatric illnesses and their mechanisms by studying regional brain activities or atrophies. Statistical analysis of MRIs in individuals over time or cohorts provide region specific neuroanatomical information related to clinical questions in studies related to neuropsychiatric.
 

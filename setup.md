@@ -36,6 +36,7 @@ For easy set-up we recommend [Anaconda](https://www.anaconda.com/download/) to m
 4. Click **Create** then type in <code>SDC-BIDS-sMRI</code>
 5. In the <code>SDC-BIDS-sMRI</code> entry click the play button then click **Open Terminal**
 6. In terminal type:
+
 ```
 conda install -y numpy pandas scipy scikit-learn matplotlib jupyter ipykernel nb_conda
 conda install -y -c conda-forge awscli
@@ -56,10 +57,11 @@ source activate $(pwd)/SDC_sMRI_workshop_2021
 conda install numpy pandas scipy scikit-learn matplotlib jupyter ipykernel nb_conda
 conda install -c conda-forge awscli
 pip install nilearn nibabel
-
 ```
-#### Method 2: Using pyenv (my favourite) [Linux, MacOS]
+
+### Method 2: Using pyenv [Linux, MacOS]
 An alternative method uses [pyenv](https://github.com/pyenv/pyenv) with [pyenv virtualenv](https://github.com/pyenv/pyenv-virtualenv). This is a favourite because it seamlessly integrates multiple python versions and environments into your system while maintaining use of pip (instead of conda).
+
 ```
 cd SDC-BIDS-sMRI
 pyenv virtualenv 3.6.0 SDC_sMRI_workshop_2021
@@ -68,11 +70,10 @@ pip install --requirement requirements.txt
 ```
 
 ## Acquiring the data
-Most data (small files) are in the ./local_data dir 
-#TODO: Add download snippets for openneuro and aws
+Most data (small files) needed for notebook examples are in the ./local_data dir 
 
-```
 Finally open up the jupyter notebook to explore the tutorials:
+
 ```
 cd SDC-BIDS-sMRI
 
@@ -82,13 +83,5 @@ source activate $(pwd)/SDC_sMRI_workshop_2021
 jupyter notebook
 ```
 
-**Reference**
-
-[1] Gorgolewski KJ, Durnez J and Poldrack RA. Preprocessed Consortium for Neuropsychiatric Phenomics dataset [version 2; referees: 2 approved]. F1000Research 2017, 6:1262
-(https://doi.org/10.12688/f1000research.11964.2)
-
 {% include links.md %}
 
-
-
-{% include links.md %}

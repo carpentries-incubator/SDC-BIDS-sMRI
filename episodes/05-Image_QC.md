@@ -1,5 +1,5 @@
 ---
-title: "Image quality control"
+title: "sMRI Quality Control"
 teaching: 20
 exercises: 10
 questions:

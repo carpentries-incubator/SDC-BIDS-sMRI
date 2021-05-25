@@ -1,7 +1,7 @@
 ---
-title: "Image preprocessing with smriprep (Part 2: spatial normalization)"
-teaching: 20
-exercises: 10
+title: "sMRI Spatial Normalization"
+teaching: 30
+exercises: 15
 questions:
 - "What are reference coordinate systems"
 - "What are 'templates', 'atlases'?"

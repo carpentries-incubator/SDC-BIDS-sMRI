@@ -14,15 +14,15 @@ keypoints:
 ## You Are Here!
 ![course_flow](/fig/episode_6/Course_flow_6.png)
 
-# 5. Statistical Analysis
+# 6. Statistical Analysis
 Structural resonance images (sMRIs) provide information about various tissues type in the brain (e.g. gray matter, white matter, cerbrospinal fluid). sMRI (like fMRI), help study underlying causes of neuropsychiatric illnesses and their mechanisms by studying regional brain activities or atrophies. Statistical analysis of MRIs in individuals over time or cohorts provide region specific neuroanatomical information related to clinical questions in studies related to neuropsychiatric.
 
-## 5.1. ROI driven analysis with Nilearn
+## 6.1. ROI driven analysis with Nilearn
 Nilearn is a Python module that provides statistical and machine learning tools for anayses of NeuroImaging. This module supports general linear model (GLM) and leverages the scikit-learn Python toolbox for multivariate statistics with applications such as predictive modelling, classification, decoding, or connectivity analysis.
 
 Regions of interests (ROIs) in sMRI can be defined in terms of structural features, usually defined based on anatomy. Manual labeling done by experts are considered the gold standard, yet recently developed automated anatomical labeling offer the promise of highly reliable labeling. Brain atlases are commonly used for automatic labeling of regions, allowing further analysis specific to the ROIs. Atlas-based methods used to label ROIs will need to take in to account inter-subject variations across the population used to construct the atlas. 
 
-### 5.1.1. Volumetric Atlases
+### 6.1.1. Volumetric Atlases
 Brain atlases are used for identifying ROIs, often required to obtain statistical inferences in neuroimaging. For example, parcellation of ROIs in the cortex is achieved using cortical atlases and subcortical atlases are used for parcellation of subcortical structures of interest. Commonly used cortical and subcortical atlases are listed below. 
 
 Cortical atlas parcellations
@@ -38,7 +38,7 @@ Subcortical atlas parcellations
 * Chakravarty 2006 Atlas
 * THOMAS Atlas (Saranathan 2019)
 
-#### 5.1.1.1. Visualizing anatomical atlases
+#### 6.1.1.1. Visualizing anatomical atlases
 #### • Cortical Parcellations
 ###### Automated Anatomical Labeling (Tzourio-Mazoyer 2002)
 ```
@@ -79,7 +79,7 @@ plotting.plot_prob_atlas(atlas_filename, title="Pauli 2017")
 <img src="../fig/episode_6/5_Fig5_subAtlas_Pauli.png" width="400" height="170" />
 
 
-#### 5.1.1.2. Regional volumetric analysis
+#### 6.1.1.2. Regional volumetric analysis
 Software such as FSL and FreeSurfer can be used for segmentation of regions of interest. For us to conveniently use such pipelines on this platform, we use [NiPype](https://nipype.readthedocs.io/en/0.12.0/index.html) which is an open-source Python project that provides a uniform interface to existing neuroimaging software.
 
 Several interfaces available through NiPype maybe used for this task. We will be looking at one example for the sake of simplicity.
@@ -126,7 +126,7 @@ imagestats.mask_volume(nib.Nifti1Image(seg_labels.get_fdata(), np.eye(4)))
 ```
 OUT[]: 4189.0
 ```
-💡 **Exercise 5.1**: (a) Can you follow the same steps above to segment a different structure of interest? <br/>
+💡 **Exercise 6.1**: (a) Can you follow the same steps above to segment a different structure of interest? <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                      (b) Can you edit the code above (using the suggestions in the comments) to segment all ROIs using FSL FIRST? 
 <details> <summary markdown="span"> Click here to see what the overlayed segmented labels would look like.</summary>
@@ -258,7 +258,7 @@ sns.boxplot(ax=axes[1, 2], data=oasis_aseg, x='CDR', y='Left-Lateral-Ventricle V
 We can observe that the ROI volumes are smaller when subject is likely to have a higher CDR.
 <img src="../fig/episode_6/5_SubVolumes.png" width="760" height="390" />
 
-💡 **Exercise 5.2**: Can you find the effect size for the ROIs in adults over 60? (Download the .csv [here](local_data/6_Statistical_Analysis/OASIS_FS_ASEG_OVER60.csv)).
+💡 **Exercise 6.2**: Can you find the effect size for the ROIs in adults over 60? (Download the .csv [here](local_data/6_Statistical_Analysis/OASIS_FS_ASEG_OVER60.csv)).
 
 <details>
   <summary markdown="span">Hint: You need to look cohen's D effect size between demented and non-demented adults. Click for more help</summary>
@@ -285,12 +285,12 @@ The output we got looks like:
 
 Click [here](local_data/6_Statistical_Analysis/5_RelatedStudies_statAnalysis.md) to look at releated analysis from studies! 
 
-### 5.1.2. Cortical surface parcellations 
+### 6.1.2. Cortical surface parcellations 
 Cortical surfaces can be parcellated into anatomically and functionally meaningful regions. This fascilitates identification and characterization of morphometric and connectivity alterations in the brain that may occur as a result of a disease or aging. 
 For example utilities in the FreeSurfer software includes a technique for automatically assigning a neuroanatomical label to each location on a cortical surface model based on probabilistic information estimated from a manually labeled training set. As this procedure incorporates both geometric information derived from the cortical model, and neuroanatomical convention, the result is a complete labeling of cortical sulci and gyri.
 Some commonly used cortical surface parcellations are shown below. 
 
-#### 5.1.2.1. Visualizing cortical surface parcellations
+#### 6.1.2.1. Visualizing cortical surface parcellations
 ###### Destrieux Atlas (Destrieux 2010)
 ```
 destrieux_atlas = datasets.fetch_atlas_surf_destrieux()
@@ -307,7 +307,7 @@ plotting.plot_surf_roi(fsaverage['pial_left'], roi_map=parcellation,hemi='left',
 ```
 <img src="../fig/episode_6/5_Fig4_corAtlas_Destrieux.png" width="230" height="170" />
 
-#### 5.1.2.2. Regional cortical thickness analysis
+#### 6.1.2.2. Regional cortical thickness analysis
 
 #### • Using FreeSurfer to find Cortical thicknesses
 Regional cortical thickness values are also provided by the FreeSurfer ```recon-all``` process. 
@@ -381,7 +381,7 @@ for col in range(3,11):
 
 To clearly observe the effect of aerobic exercise on schizophrenia patients and schizophrenia controls, the mean cortical thickness of across all ROIs for each subject can be observed over time.
 
-💡 **Exercise 5.3**:
+💡 **Exercise 6.3**:
                      (a) For each ROI, can you calculate the mean cortical thickness across the subjects for each group at each time point?
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                      (b) What do you observe when the cortical thickness for each subject is plotted over the 4 time points for:                 
@@ -407,7 +407,7 @@ To clearly observe the effect of aerobic exercise on schizophrenia patients and 
 </details>
 
 
-## 5.2. Voxel-Based Morphometry (VBM)
+## 6.2. Voxel-Based Morphometry (VBM)
 
 Voxel-based morphometry (VBM) involves a voxel-wise comparison of the local concentration of gray matter between two groups of subjects. This process involves spatially normalizing all the images in the dataset being used into the same stereotactic space. The gray matter (GM) regions are then segmented from the spatially normalized images and the gray matter segments are smoothed afterwards. Voxel-wise parametric statistical tests which compare the smoothed GM images from the two groups are performed. Corrections for multiple comparisons are
 made using the theory of Gaussian random fields. 

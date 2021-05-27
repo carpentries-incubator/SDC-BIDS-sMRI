@@ -229,8 +229,13 @@ Once a dataset is processed, the volumes of each ROI can be collected and includ
 
 As processing takes time, for this example we use processed freesurfer outputs for ROI that is available on the OASIS website. The summarized freesurfer outputs from the OASIS1 dataset can be downloaded [here](local_data/6_Statistical_Analysis/OASIS_FS_ASEG.csv).
 Older adults who are demented at the time of scanning and those who are progressing have been given a Clinical Dementia Rating (CDR).\
-<sub> Related citations: "[Open Access Series of Imaging Studies (OASIS): Longitudinal MRI Data in Nondemented and Demented Older Adults](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2895005/pdf/nihms184026.pdf)", Daniel Marcus, Anthony Fotenos, John Csernansky, John Morris, and
-Randy Buckner (2010) </sub>
+<sub> Related citations: \
+  "[Open Access Series of Imaging Studies (OASIS): Longitudinal MRI Data in Nondemented and Demented Older Adults](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2895005/pdf/nihms184026.pdf)", Daniel Marcus, Anthony Fotenos, John Csernansky, John Morris, and
+Randy Buckner (2010) \
+  "[Open Access Series of Imaging Studies (OASIS): Cross-sectional MRI Data in Young, Middle Aged, Nondemented, and Demented Older Adults](https://direct.mit.edu/jocn/article/19/9/1498/4427/Open-Access-Series-of-Imaging-Studies-OASIS-Cross)",
+Daniel S. Marcus , Tracy Wang , Jamie Parker , John Csernansky , John Morris , Randy Buckner (2007)
+  
+</sub>
 
 We can observe the ROI volumetric differences in adults and how these volumes vary based on their CDR. For this example, we consider 6 regions of interest: Left/Right Amygdala, Hippocampus and Lateral ventricle.
 

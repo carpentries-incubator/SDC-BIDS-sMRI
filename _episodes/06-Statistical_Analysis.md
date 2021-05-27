@@ -12,7 +12,7 @@ keypoints:
 ---
 
 ## You Are Here!
-![course_flow](..../fig/episode_6/Course_flow_6.png)
+![course_flow](/fig/episode_6/Course_flow_6.png)
 
 # 5. Statistical Analysis
 Structural resonance images (sMRIs) provide information about various tissues type in the brain (e.g. gray matter, white matter, cerbrospinal fluid). sMRI (like fMRI), help study underlying causes of neuropsychiatric illnesses and their mechanisms by studying regional brain activities or atrophies. Statistical analysis of MRIs in individuals over time or cohorts provide region specific neuroanatomical information related to clinical questions in studies related to neuropsychiatric.
@@ -228,7 +228,9 @@ For this subject, the segmented left hippocampal volume is: ``` 4287 mm^3 ```
 Once a dataset is processed, the volumes of each ROI can be collected and included in a .csv file (or other formats you prefer). 
 
 As processing takes time, for this example we use processed freesurfer outputs for ROI that is available on the OASIS website. The summarized freesurfer outputs from the OASIS1 dataset can be downloaded [here](local_data/6_Statistical_Analysis/OASIS_FS_ASEG.csv).
-Older adults who are demented at the time of scanning and those who are progressing have been given a Clinical Dementia Rating (CDR).
+Older adults who are demented at the time of scanning and those who are progressing have been given a Clinical Dementia Rating (CDR).\
+<sub> Related citations: "[Open Access Series of Imaging Studies (OASIS): Longitudinal MRI Data in Nondemented and Demented Older Adults](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2895005/pdf/nihms184026.pdf)", Daniel Marcus, Anthony Fotenos, John Csernansky, John Morris, and
+Randy Buckner (2010) </sub>
 
 We can observe the ROI volumetric differences in adults and how these volumes vary based on their CDR. For this example, we consider 6 regions of interest: Left/Right Amygdala, Hippocampus and Lateral ventricle.
 

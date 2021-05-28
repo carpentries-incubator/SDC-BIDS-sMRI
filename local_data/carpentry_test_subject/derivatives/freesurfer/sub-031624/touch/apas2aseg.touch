@@ -1,0 +1,1 @@
+apas2aseg --i aparc+aseg.mgz --o aseg.mgz

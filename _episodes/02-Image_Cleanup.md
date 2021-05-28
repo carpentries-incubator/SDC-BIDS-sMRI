@@ -15,7 +15,7 @@ keypoints:
 ![course_flow](../fig/episode_2/Course_flow_2.png)
 
 ## Why do we need image clean-ups?
-Correcting or cleaning-up certain artifacts from the raw (i.e. acquired) MR scans is cruical for the successful processing of subsequent image normalization tasks as well as the downstream statistical analyses. Some version (i.e. custom algorithm) of these two tasks is implemented in all commonly deployed processing pipelines such as FreeSurfer, FSL etc. 
+Correcting or cleaning-up certain artifacts from the raw (i.e. acquired) MR scans is crucial for the successful processing of subsequent image normalization tasks as well as the downstream statistical analyses. Some version (i.e. custom algorithm) of these two tasks is implemented in all commonly deployed processing pipelines such as FreeSurfer, FSL etc. 
 
 In this episode we will look at two common image clean-up tasks 1) Intensity normalization 2) Brain extraction. 
 
@@ -24,7 +24,7 @@ In this episode we will look at two common image clean-up tasks 1) Intensity nor
 - The bias field is a low-frequency spatially varying MRI artifact resulting from spatial inhomogeneity of the magnetic field,
 variations in the sensitivity of the reception coil, and the interaction between the magnetic field and the human body. 
 - It causes a smooth signal intensity variation within tissue of the same physical properties. 
-- The bias field is dependent on the strength of the magnetic field. If it is not corrected for 1.5T or higher MR scanners, it can considerably affect downstram analyses. 
+- The bias field is dependent on the strength of the magnetic field. If it is not corrected for 1.5T or higher MR scanners, it can considerably affect downstram analyses. The higher the field strength, the higher the biais might be.
 - Commonly used tools
     - [ANTs N4 bias correction](https://pubmed.ncbi.nlm.nih.gov/20378467/) (See figure below)
     - [FSL FAST](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FAST) (_Note:FSL FAST is a multi-purpose segmentation tool that includes the bias field correction._)

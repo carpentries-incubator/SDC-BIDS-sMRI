@@ -1,0 +1,1 @@
+mris_sphere -rusage /out/freesurfer/sub-031624/touch/rusage.mris_sphere.rh.dat -seed 1234 ../surf/rh.inflated ../surf/rh.sphere

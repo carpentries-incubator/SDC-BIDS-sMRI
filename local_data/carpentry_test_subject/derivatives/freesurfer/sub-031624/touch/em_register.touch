@@ -1,0 +1,1 @@
+mri_em_register -rusage /out/freesurfer/sub-031624/touch/rusage.mri_em_register.dat -uns 3 -mask brainmask.mgz nu.mgz /opt/freesurfer/average/RB_all_2016-05-10.vc700.gca transforms/talairach.lta

@@ -1,0 +1,27 @@
+{
+    "Manufacturer": "Philips",
+    "PatientPosition": "HFS",
+    "SeriesDescription": "ImageMRSERIES",
+    "ProtocolName": "WIPT1anat_acq-6m_T1wSENSE",
+    "SeriesNumber": 2,
+    "AcquisitionNumber": 2,
+    "ImageComments": "PIOP2",
+    "PhilipsRescaleSlope": 9.25006,
+    "PhilipsRescaleIntercept": 0,
+    "PhilipsScaleSlope": 0.00677728,
+    "UsePhilipsFloatNotDisplayScaling": 1,
+    "EchoTime": 0.00372,
+    "RepetitionTime": 0.008133,
+    "ReconMatrixPE": 240,
+    "ImageOrientationPatientDICOM": [
+        0.999564,
+        -0.00908942,
+        -0.0281012,
+        0.0101188,
+        0.999275,
+        0.03671
+    ],
+    "ConversionSoftware": "dcm2niix",
+    "ConversionSoftwareVersion": "v1.0.20181125  GCC6.3.0",
+    "BidsifyVersion": "0.3.5"
+}

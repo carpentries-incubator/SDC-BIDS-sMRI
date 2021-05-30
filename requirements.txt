@@ -9,3 +9,4 @@ seaborn
 scipy 
 scikit-learn  
 jupyter
+lxml

@@ -1,0 +1,195 @@
+/out/freesurfer/sub-0001/mri
+/opt/freesurfer/bin/mri_nu_correct.mni
+--i orig.mgz --o nu.mgz --uchar transforms/talairach.xfm --n 2
+nIters 2
+$Id: mri_nu_correct.mni,v 1.27 2016/02/26 16:19:49 mreuter Exp $
+Linux d8c6a608d514 4.4.0-142-generic #168-Ubuntu SMP Wed Jan 16 21:00:45 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+Sat Mar  2 17:11:53 UTC 2019
+Program nu_correct, built from:
+Package MNI N3, version 1.12.0, compiled by nicks@terrier (x86_64-unknown-linux-gnu) on 2015-06-19 at 01:25:34
+tmpdir is ./tmp.mri_nu_correct.mni.71333
+/out/freesurfer/sub-0001/mri
+mri_convert orig.mgz ./tmp.mri_nu_correct.mni.71333/nu0.mnc -odt float
+mri_convert.bin orig.mgz ./tmp.mri_nu_correct.mni.71333/nu0.mnc -odt float 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from orig.mgz...
+TR=8.13, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, 1.5134e-09, 0)
+j_ras = (0, 0, -1)
+k_ras = (3.49246e-10, 1, -3.72529e-09)
+changing data type from uchar to float (noscale = 0)...
+writing to ./tmp.mri_nu_correct.mni.71333/nu0.mnc...
+ 
+--------------------------------------------------------
+Iteration 1 Sat Mar  2 17:11:55 UTC 2019
+nu_correct -clobber ./tmp.mri_nu_correct.mni.71333/nu0.mnc ./tmp.mri_nu_correct.mni.71333/nu1.mnc -tmpdir ./tmp.mri_nu_correct.mni.71333/0/
+[root@d8c6a608d514:/out/freesurfer/sub-0001/mri/] [2019-03-02 17:11:55] running:
+  /opt/freesurfer/mni/bin/nu_estimate_np_and_em -parzen -log -sharpen 0.15 0.01 -iterations 50 -stop 0.001 -shrink 4 -auto_mask -nonotify -b_spline 1.0e-7 -distance 200 -quiet -execute -clobber -nokeeptmp -tmpdir ./tmp.mri_nu_correct.mni.71333/0/ ./tmp.mri_nu_correct.mni.71333/nu0.mnc ./tmp.mri_nu_correct.mni.71333/nu1.imp
+
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Number of iterations: 43 
+CV of field change: 0.000970785
+ 
+ 
+--------------------------------------------------------
+Iteration 2 Sat Mar  2 17:12:32 UTC 2019
+nu_correct -clobber ./tmp.mri_nu_correct.mni.71333/nu1.mnc ./tmp.mri_nu_correct.mni.71333/nu2.mnc -tmpdir ./tmp.mri_nu_correct.mni.71333/1/
+[root@d8c6a608d514:/out/freesurfer/sub-0001/mri/] [2019-03-02 17:12:32] running:
+  /opt/freesurfer/mni/bin/nu_estimate_np_and_em -parzen -log -sharpen 0.15 0.01 -iterations 50 -stop 0.001 -shrink 4 -auto_mask -nonotify -b_spline 1.0e-7 -distance 200 -quiet -execute -clobber -nokeeptmp -tmpdir ./tmp.mri_nu_correct.mni.71333/1/ ./tmp.mri_nu_correct.mni.71333/nu1.mnc ./tmp.mri_nu_correct.mni.71333/nu2.imp
+
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Processing:.................................................................Done
+Number of iterations: 19 
+CV of field change: 0.000969271
+ 
+ 
+ 
+mri_binarize --i ./tmp.mri_nu_correct.mni.71333/nu2.mnc --min -1 --o ./tmp.mri_nu_correct.mni.71333/ones.mgz
+
+$Id: mri_binarize.c,v 1.43 2016/06/09 20:46:21 greve Exp $
+cwd /out/freesurfer/sub-0001/mri
+cmdline mri_binarize.bin --i ./tmp.mri_nu_correct.mni.71333/nu2.mnc --min -1 --o ./tmp.mri_nu_correct.mni.71333/ones.mgz 
+sysname  Linux
+hostname d8c6a608d514
+machine  x86_64
+user     root
+
+input      ./tmp.mri_nu_correct.mni.71333/nu2.mnc
+frame      0
+nErode3d   0
+nErode2d   0
+output     ./tmp.mri_nu_correct.mni.71333/ones.mgz
+Binarizing based on threshold
+min        -1
+max        +infinity
+binval        1
+binvalnot     0
+fstart = 0, fend = 0, nframes = 1
+Found 16777216 values in range
+Counting number of voxels in first frame
+Found 16777216 voxels in final mask
+Count: 16777216 16777216.000000 16777216 100.000000
+mri_binarize done
+mri_segstats --id 1 --seg ./tmp.mri_nu_correct.mni.71333/ones.mgz --i orig.mgz --sum ./tmp.mri_nu_correct.mni.71333/sum.junk --avgwf ./tmp.mri_nu_correct.mni.71333/input.mean.dat
+
+$Id: mri_segstats.c,v 1.121 2016/05/31 17:27:11 greve Exp $
+cwd 
+cmdline mri_segstats --id 1 --seg ./tmp.mri_nu_correct.mni.71333/ones.mgz --i orig.mgz --sum ./tmp.mri_nu_correct.mni.71333/sum.junk --avgwf ./tmp.mri_nu_correct.mni.71333/input.mean.dat 
+sysname  Linux
+hostname d8c6a608d514
+machine  x86_64
+user     root
+UseRobust  0
+Loading ./tmp.mri_nu_correct.mni.71333/ones.mgz
+Loading orig.mgz
+Voxel Volume is 1 mm^3
+Generating list of segmentation ids
+Found   1 segmentations
+Computing statistics for each segmentation
+
+Reporting on   1 segmentations
+Using PrintSegStat
+Computing spatial average of each frame
+  0
+Writing to ./tmp.mri_nu_correct.mni.71333/input.mean.dat
+mri_segstats done
+mri_segstats --id 1 --seg ./tmp.mri_nu_correct.mni.71333/ones.mgz --i ./tmp.mri_nu_correct.mni.71333/nu2.mnc --sum ./tmp.mri_nu_correct.mni.71333/sum.junk --avgwf ./tmp.mri_nu_correct.mni.71333/output.mean.dat
+
+$Id: mri_segstats.c,v 1.121 2016/05/31 17:27:11 greve Exp $
+cwd 
+cmdline mri_segstats --id 1 --seg ./tmp.mri_nu_correct.mni.71333/ones.mgz --i ./tmp.mri_nu_correct.mni.71333/nu2.mnc --sum ./tmp.mri_nu_correct.mni.71333/sum.junk --avgwf ./tmp.mri_nu_correct.mni.71333/output.mean.dat 
+sysname  Linux
+hostname d8c6a608d514
+machine  x86_64
+user     root
+UseRobust  0
+Loading ./tmp.mri_nu_correct.mni.71333/ones.mgz
+Loading ./tmp.mri_nu_correct.mni.71333/nu2.mnc
+Voxel Volume is 1 mm^3
+Generating list of segmentation ids
+Found   1 segmentations
+Computing statistics for each segmentation
+
+Reporting on   1 segmentations
+Using PrintSegStat
+Computing spatial average of each frame
+  0
+Writing to ./tmp.mri_nu_correct.mni.71333/output.mean.dat
+mri_segstats done
+mris_calc -o ./tmp.mri_nu_correct.mni.71333/nu2.mnc ./tmp.mri_nu_correct.mni.71333/nu2.mnc mul .92821141277023629964
+mri_convert ./tmp.mri_nu_correct.mni.71333/nu2.mnc nu.mgz --like orig.mgz
+mri_convert.bin ./tmp.mri_nu_correct.mni.71333/nu2.mnc nu.mgz --like orig.mgz 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from ./tmp.mri_nu_correct.mni.71333/nu2.mnc...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, 1.5134e-09, 0)
+j_ras = (0, 0, -1)
+k_ras = (3.49246e-10, 1, -3.72529e-09)
+INFO: transform src into the like-volume: orig.mgz
+writing to nu.mgz...
+mri_make_uchar nu.mgz transforms/talairach.xfm nu.mgz
+type change took 0 minutes and 7 seconds.
+mapping ( 5, 181) to ( 3, 110)
+ 
+ 
+Sat Mar  2 17:13:28 UTC 2019
+mri_nu_correct.mni done

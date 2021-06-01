@@ -56,9 +56,7 @@ cd SDC-BIDS-sMRI
 conda create -p ./SDC_sMRI_workshop_2021
 source activate $(pwd)/SDC_sMRI_workshop_2021
 conda install numpy pandas scipy scikit-learn matplotlib seaborn jupyter ipykernel nb_conda 
-conda install -c conda-forge awscli nibabel nilearn
-conda install -c anaconda lxml
-pip install nilearn nibabel
+conda install -c conda-forge awscli nibabel nilearn lxml
 ```
 
 ### Method 2: Using pyenv [Linux, MacOS]
@@ -79,8 +77,8 @@ Finally open up the jupyter notebook to explore the tutorials:
 ```
 cd SDC-BIDS-sMRI
 
-#Include below line if using anaconda environment
-source activate $(pwd)/SDC_sMRI_workshop_2021
+# Include the line below if you are using anaconda environment and it is not already active
+# source activate $(pwd)/SDC_sMRI_workshop_2021
 
 jupyter notebook
 ```

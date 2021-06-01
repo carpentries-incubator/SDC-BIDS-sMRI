@@ -7,7 +7,7 @@ title: Setup
 
 ### Method 1: Downloading directly from the repository
 
-On the GitHub repo (this page), click the green button that says "Clone or download", then click **Download ZIP**. Once downloaded, extract the ZIP file.
+On the [GitHub repo](https://github.com/carpentries-incubator/SDC-BIDS-sMRI), click the green button that says "Code", then click **Download ZIP**. Once downloaded, extract the ZIP file.
 
 ### Method 2: Using Git
 
@@ -38,8 +38,9 @@ For easy set-up we recommend [Anaconda](https://www.anaconda.com/download/) to m
 6. In terminal type:
 
 ```
-conda install -y numpy pandas scipy scikit-learn matplotlib jupyter ipykernel nb_conda
+conda install -y numpy pandas scipy scikit-learn matplotlib jupyter ipykernel nb_conda nilearn seaborn 
 conda install -y -c conda-forge awscli
+conda install -y -c anaconda lxml
 pip install nilearn nibabel
 ```
 7. Close the terminal, click on the play button again and open **Jupyter Notebook**
@@ -54,8 +55,9 @@ After installing Anaconda, open terminal and type:
 cd SDC-BIDS-sMRI
 conda create -p ./SDC_sMRI_workshop_2021
 source activate $(pwd)/SDC_sMRI_workshop_2021
-conda install numpy pandas scipy scikit-learn matplotlib jupyter ipykernel nb_conda
-conda install -c conda-forge awscli
+conda install numpy pandas scipy scikit-learn matplotlib seaborn jupyter ipykernel nb_conda 
+conda install -c conda-forge awscli nibabel nilearn
+conda install -c anaconda lxml
 pip install nilearn nibabel
 ```
 
@@ -70,7 +72,7 @@ pip install --requirement requirements.txt
 ```
 
 ## Acquiring the data
-Most data (small files) needed for notebook examples are in the ./local_data dir 
+All datasets needed for the notebook examples are in the ./SDC-BIDS-sMRI/local_data dir 
 
 Finally open up the jupyter notebook to explore the tutorials:
 

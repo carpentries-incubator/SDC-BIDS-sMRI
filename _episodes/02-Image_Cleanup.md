@@ -23,8 +23,11 @@ In this episode we will look at two common image clean-up tasks 1) Intensity nor
 
 - The bias field is a low-frequency spatially varying MRI artifact resulting from spatial inhomogeneity of the magnetic field,
 variations in the sensitivity of the reception coil, and the interaction between the magnetic field and the human body. 
+
 - It causes a smooth signal intensity variation within tissue of the same physical properties. 
+
 - The bias field is dependent on the strength of the magnetic field. If it is not corrected for 1.5T or higher MR scanners, it can considerably affect downstram analyses. 
+
 - Commonly used tools
     - [ANTs N4 bias correction](https://pubmed.ncbi.nlm.nih.gov/20378467/) (See figure below)
     - [FSL FAST](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FAST) (_Note:FSL FAST is a multi-purpose segmentation tool that includes the bias field correction._)
@@ -117,10 +120,13 @@ the cerebral cortex and subcortical structures, including the brain stem and cer
 - Note 1: At this point we are NOT trying to extract the brain sulci and gyri (i.e. cortical folds). We are just creating a simple brain mask for computational purposes, which need not capture the precise brain anatomy. Thus you may see some marrow and membrain included in the extracted brain. 
 - Note 2: Brainstem and spinal cord are continuous so a rather arbitrarily cut-off point is selected. 
 
-#### Example brain extractions pass / fail 
-|        Pass        | Fail |
+### Example brain extractions pass / fail 
+
+|        Pass     | Fail          |
 | :-------------: | :-----------: |
-| ![nilearn_brain_orig](../fig/episode_2/BET_Brain_mask_QC_pass.png) | ![nilearn_brain_extract](../fig/episode_2/BET_Brain_mask_QC_fail.png) |
+| <img src="../fig/episode_2/BET_Brain_mask_QC_pass.png" alt="Drawing" align="middle" width="400px"/>  | <img src="../fig/episode_2/BET_Brain_mask_QC_fail.png" alt="Drawing" align="middle" width="400px"/>  |
+
+
 
 _Source: FSL Introduction to Brain Extraction_ 
 

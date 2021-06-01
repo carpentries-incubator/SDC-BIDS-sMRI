@@ -15,12 +15,17 @@ keypoints:
 
 
 ## Image acquisition
-1. The acquition starts with application of strong magnetic field B<sub>0</sub> (e.g. 1.5 or 3.0 Tesla > 10000x earth's magnetic field) which forces the hydrogen nuclei of the abundant water molecules in soft tissues in the body to align with the field. You can think of hydrogen nuclei as tiny magnets of their own. 
+1. The acquition starts with application of strong magnetic field B<sub>0</sub> (e.g. 1.5 or 3.0 Tesla > 10000x earth's magnetic field) which forces the hydrogen nuclei of the abundant water molecules in soft tissues in the body to align with the field. You can think of hydrogen nuclei as tiny magnets of their own.
+
 2. Then the scanner applies a RF pulse which tilts these nuclei from their alighment along B<sub>0</sub> and then _precess_ back to the alignment. The _precessing_ nuclei emit a signal, which is registered by the receiver coils in the scanner. 
+
 3. This signal has two components: 1) _Longitudinal_ (z-axis along the scanner's magnetic field) 2) _Transverse_ (xy-plane orthogonal to the scanner's magnetic field). 
+
 4. Initially the longitudinal signal is weak as most nuclei are tilted away from the z-axis. However this signal grows as nuclei realign. The _time constant_ that dictates the speed of re-alignment is denoted by _T1_. 
+
 5. Initially the transverse signal is strong as most nuclei are in phase _coherence_. The signal decays as the nuclei dephase as they realign. This decay is denoted by the _T2 time constant_. 
-7. The tissue specific differences in T1 and T2 relaxation times is what enables us to _see_ anatomy from image contrast. The final image contrast depends on when you _listen_ to the signal (design parameter: echo time (TE)) and how fast you repeat the _tilt-relax_ process i.e. RF pulse freuqency (design parameter: repetition time (TR)). 
+
+6. The tissue specific differences in T1 and T2 relaxation times is what enables us to _see_ anatomy from image contrast. The final image contrast depends on when you _listen_ to the signal (design parameter: echo time (TE)) and how fast you repeat the _tilt-relax_ process i.e. RF pulse freuqency (design parameter: repetition time (TR)). 
 
 
 ## T1 and T2 relaxation
@@ -30,14 +35,15 @@ The figure on the left shows a single nucleus (i.e. tiny magnet) being tilted aw
 ![MR_relax](https://user-images.githubusercontent.com/7978607/112332334-08750c80-8c90-11eb-90fc-33956c037a1c.gif)
 
 ## Brain tissue comparison
+The dotted-black line represents the epoch when you "listen" to the signal (i.e. echo time or TE)
 
 ![relax_tissue_contrast](../fig/episode_1/relax_tissue_contrast.png))
 
 ## T1w, T2w, and PD acquisition
 
-|                | TE short      | TE ~ T2 of tissue of interest|
+|                | TE short      | TE long (~ T2 of tissue of interest)|
 | :-------------: | :----------: | :-----------: |
-| **TR ~ T1 of tissue of interest**  |   T1w | - |
+| **TR short (~ T1 of tissue of interest)**  |   T1w | - |
 | **TR long**  | Proton Density (PD) | T2w |
 
 _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence has replaced the PD image. FLAIR images are T2-weighted with the CSF signal suppressed.
@@ -91,10 +97,35 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 |  PD  | CSF is bright. Gray matter is brighter than white matter | Identify demyelination|
 |  FLAIR  | Similar to T2 with the CSF signal suppressed| Identify demyelination |
 
-**Note: In this lesson, we have only talked about image contrast which is most relevent to sMRI image pipelines. The details of spatial encoding and k-space transforms are out of the scope.**
+
+## Advanced topics of interest 
+
+### Magnetic strengths 1.5T vs 3T vs 7+T
+- Higher magnetic strength --> better spatial resolution, better SNR (S ∝ B0^2); but more susceptible to certain artifacts. 
+
+### MR sequences (i.e. timings of "excitory pulse", "gradients", and "echo acquisition" )
+- Spin echo: Slower but better contrast to noise ratio (CNR) 
+- Gradient echo: Quicker but more susceptible to noise
+
+e.g. MPRAGE: Magnetization Prepared - RApid Gradient Echo (Commonly used in neuroimaging)
+
+|        MP-RAGE        | MP2-RAGE |
+| :-------------: | :-----------: |
+| ![mprage](../fig/episode_1/mprage1.jpg) | <img src="../fig/episode_1/mp2rage.png" alt="Drawing" align="middle" width="425px"/> |
 
 
-### Interacting with images (see [this notebook](../code/1_sMRI_modalities.ipynb) for detailed example.)
+_MPRAGE images Courtesy of Allen D. Elster, MRIquestions.com_ 
+
+### Spatial encoding of the signal and k-space 
+- Spatial frequencies and Fourier transform
+- Field of View 
+- Image artifacts (e.g. Aliasing)
+
+![mprage](../fig/episode_1/kspace.jpg) 
+
+
+
+## Interacting with images (see [this notebook](../code/1_sMRI_modalities.ipynb) for detailed example.)
 
 ~~~
 import nibabel as nib
@@ -125,7 +156,6 @@ plotting.plot_anat(T2_filename, title="T2", vmax=300)
 |        T1w        | T2w |
 | :-------------: | :-----------: |
 | ![nilearn_T1](../fig/episode_1/nilearn_T1.png) | ![nilearn_T2](../fig/episode_1/nilearn_T2.png) |
-
 
 
 {% include links.md %}

@@ -1,5 +1,5 @@
 ---
-title: "sMRI modalities"
+title: "sMRI Acquisition and Modalities"
 teaching: 20
 exercises: 10
 questions:
@@ -98,12 +98,21 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 |  FLAIR  | Similar to T2 with the CSF signal suppressed| Identify demyelination |
 
 
-## Advanced topics of interest 
+## Image acquisition process and parameters
 
-### Magnetic strengths 1.5T vs 3T vs 7+T
+<img src="../fig/episode_1/Pulse_seq.png" alt="Drawing" align="middle" width="1000px"/> 
+
+## What do we want? 
+- High image contrast 
+- High spatial resolution
+- Low scan time! 
+
+## What can we control? 
+
+### Magnetic strengths 1.5T vs 3T vs 7T
 - Higher magnetic strength --> better spatial resolution, better SNR (S ∝ B0^2); but more susceptible to certain artifacts. 
 
-### MR sequences (i.e. timings of "excitory pulse", "gradients", and "echo acquisition" )
+### MR sequences (i.e. timings of "excitation pulse", "gradients", and "echo acquisition" )
 - Spin echo: Slower but better contrast to noise ratio (CNR) 
 - Gradient echo: Quicker but more susceptible to noise
 
@@ -114,14 +123,14 @@ e.g. MPRAGE: Magnetization Prepared - RApid Gradient Echo (Commonly used in neur
 | ![mprage](../fig/episode_1/mprage1.jpg) | <img src="../fig/episode_1/mp2rage.png" alt="Drawing" align="middle" width="425px"/> |
 
 
-_MPRAGE images Courtesy of Allen D. Elster, MRIquestions.com_ 
+### Spatial encoding of the signal 
+- Spatial frequencies (k-space)
+- Field of View --> susceptibility to image artifacts (e.g. Aliasing)
 
-### Spatial encoding of the signal and k-space 
-- Spatial frequencies and Fourier transform
-- Field of View 
-- Image artifacts (e.g. Aliasing)
+![kspace](../fig/episode_1/kspace.jpg) 
 
-![mprage](../fig/episode_1/kspace.jpg) 
+
+_MPRAGE and k-space images Courtesy of Allen D. Elster, MRIquestions.com_ 
 
 
 

@@ -65,10 +65,7 @@ cd SDC-BIDS-sMRI
 pyenv virtualenv 3.6.0 SDC_sMRI_workshop_2021
 echo SDC_sMRI_workshop_2021 > .python-version
 pip install --requirement requirements.txt
-```
-
-## Acquiring the data
-All datasets needed for the notebook examples are in the ./SDC-BIDS-sMRI/local_data dir 
+``` 
 
 Finally open up the jupyter notebook to explore the tutorials:
 
@@ -79,7 +76,11 @@ cd SDC-BIDS-sMRI
 # source activate $(pwd)/SDC_sMRI_workshop_2021
 
 jupyter notebook
+
 ```
+## Data used by the notebooks
+All datasets needed for the notebook examples are inside the ./SDC-BIDS-sMRI/local_data/ directory. 
+
 
 {% include links.md %}
 

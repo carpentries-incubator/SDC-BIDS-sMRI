@@ -1,0 +1,68 @@
+{
+  "age": {
+    "Description": "Age of participant in years",
+    "Units": "Years, with one quantile precision"
+  },
+  "sex": {
+    "Description": "(Self-reported) biological sex of participant",
+    "Levels": {
+      "M": "male",
+      "F": "female"
+    }
+  },
+  "BMI": {
+    "LongName": "Body mass index (rounded to nearest integer",
+    "Units": "kilograms per squared meters",
+    "TermURL": "http://purl.bioontology.org/ontology/SNOMEDCT/60621009"
+  },
+  "handedness": {
+    "Description": "Whether someone is left-handed, right-handed, or ambidextrous",
+    "Levels": {
+      "left": "Left-handed",
+      "right": "Right-handed",
+      "ambidextrous": "Ambidextrous"
+    }
+  },
+  "education_category": {
+    "Description": "University category",
+    "Levels": {
+      "academic": "Enrolled at an academic university",
+      "applied": "Enrolled at a university of applied sciences"
+    }
+  },
+  "religious": {
+    "Description": "Self-reported religious affiliation",
+    "Levels": {
+      "no": "No religious affiliation",
+      "yes": "Considers him/herself to be religous" 
+    }
+  },
+  "raven_score": {
+    "Description": "Score on Raven's Progressive Matrices test (duration: 30 min)",
+    "Units": "Sum of completed sets"
+  },
+  "NEO_A": {
+    "Description": "Score on the Agreeableness scale of the NEO-FFI",
+    "Units": "Sum of individual items"
+  },
+  "NEO_A": {
+    "Description": "Score on the Agreeableness scale of the NEO-FFI",
+    "Units": "Sum of individual items"
+  },
+  "NEO_C": {
+    "Description": "Score on the Conscientiousness scale of the NEO-FFI",
+    "Units": "Sum of individual items"
+  },
+  "NEO_E": {
+    "Description": "Score on the Extraversion scale of the NEO-FFI",
+    "Units": "Sum of individual items"
+  },
+  "NEO_N": {
+    "Description": "Score on the Neuroticism scale of the NEO-FFI",
+    "Units": "Sum of individual items"
+  },
+  "NEO_O": {
+    "Description": "Score on the Openness scale of the NEO-FFI",
+    "Units": "Sum of individual items"
+  }
+}

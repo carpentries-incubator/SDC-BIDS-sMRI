@@ -21,39 +21,46 @@ keypoints:
 * the source of contrast in T1, T2, PD has been explained in another episode in terms of GM, WM , CSF. If possible, also include FLAIR.
 **Data:**
 
-Brain anatomy is different for every individual. Brain tissues are typically divided into grey matter (GM), white matter (WM) and cerebro-spinal fluid (CSF) classes. Each class can inform on a different aspect of the brain studied. Therefore it is often useful to segment the brain in these tissue components for further processing. GM contains neuron cell bodies, WM includes neuron connection fibers wrapped in a special signal-accelerating substance called myelin, and CSF is a protecting fluid present mostly around the brain but also within brain cavities called ventricles.
+Brain anatomy is different for every individual. Brain tissues are typically divided into:
+* grey matter (GM)
+* white matter (WM)
+* cerebro-spinal fluid (CSF)
+
+Each class can inform on a different aspect of the brain studied. Therefore it is often useful to segment the brain in these tissue components for further processing. GM contains neuron cell bodies, WM includes neuron connection fibers wrapped in a special signal-accelerating substance called myelin, and CSF is a protecting fluid present mostly around the brain but also within brain cavities called ventricles.
 
 ![Brain tissue types](../fig/episode_4/GM_WM_CSF.png)
 
-In addition of identifying tissue classes, it is of interest to sub-divide these classes in sub-components. As such, GM is commonly split into non-overlapping regions of interests (ROIs) via a parcellation scheme either defined from a data-driven or an anatomically-driven approach. The term atlas and parcellation are often used interchangeably and even together (e.g. the atlas X, the Y parcellation, the atlas parcellation Z). Please note that WM can also be split into group of fibers called white matter bundles (for more details please see lesson on diffusion MRI).
+In addition of identifying tissue classes, it is of interest to sub-divide these classes in sub-components. As such, GM is commonly split into non-overlapping regions of interests (ROIs) via a parcellation scheme either defined from a data-driven and/or an anatomically-driven approach. Please note that WM can also be split into group of fibers called white matter bundles, but we will not examine it in this lession, please refer to the lesson on diffusion MRI for this purpose.
 
-Aging and disease can cause tissue modifications. Common changes include a reduction in GM, as in the  case of ageing and neurodegenerative diseases such as Alzheimer's. A tumor can cause an important localized change of signal in the area most impacted by the tumor. Another example is visibly higher WM signal intensities on MRI images, so called WM hyper-intensities, which can be related to vascular pathology (common in aging), or to myelin lesions characteristic of the multiple sclerosis disease.
+> ## Atlas vs Parcellation
+>
+> The term atlas and parcellation are often used interchangeably and even together (e.g. the atlas X, the parcellation Y, the atlas parcellation Z). We will talk later about a more formal definition of parcellation.
+{: .callout}
+
+An important aspect to keep in mind is that aging and disease can cause tissue modifications. Common changes include a reduction in GM, as in the  case of ageing and neurodegenerative diseases such as Alzheimer's. A tumor can cause an important localized change of signal in the area most impacted by the tumor. Another example is visibly higher WM signal intensities on T2 MRI images, so called WM hyper-intensities, which can be related to vascular pathology (common in aging), or to myelin lesions characteristic of the multiple sclerosis disease.
 
 ![Brain atrophy due to Alzheimer's or severe multiple sclerosis disease](../fig/episode_4/brain_atrophy_460px.jpg)
 *This image is Copyright © My-MS.org and falls under Image License D defined under the Image License section of the My-MS.org Disclaimer page.*
 
 
-The analysis of structural images then often consists in first identifying tissue classes -- including pathological tissue -- and their sub-components, and second quantifying morphological differences. The first step is done by segmenting the MRI images, and the second one by measuring differences in signal intensity across subjects (with techniques such as voxel based morphometry (VBM)) or in morphological properties such as volume or thickness. GM loss for example can be assessed by:
-* measuring GM volume when looking at volumetric data, i.e. voxels
-* measuring GM thickness when looking at surface data, i.e. meshes
-* comparing the intensity on MRI images with a group of normal control with patients suffering from GM
-The resulting measures can also be used as features for machine learning approaches.
+The analysis of preprocessed structural images then often consists in:
+1. Identifying tissue classes -- including pathological tissue when appropriate -- and their sub-components: this is done by segmenting the MRI images, and the topic of the current episode
+2. Quantifying morphological differences: this is typically done by measuring morphological properties such as GM volume or thickness in the whole brain or within specific ROIs, as detailed in the episode 6
 
-Common software to segment volumetric data include [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki), [SPM](http://www.fil.ion.ucl.ac.uk/spm) and [ANTS](http://stnava.github.io/ANTs). One of the mostly used software to segment surface data (in addition of volumetric data) is [Freesurfer](http://surfer.nmr.mgh.harvard.edu).
+Common software to segment volumetric data include [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki), [SPM](http://www.fil.ion.ucl.ac.uk/spm) and [ANTS](http://stnava.github.io/ANTs). One of the mostly used software to segment surface data (in addition of volumetric data) is [Freesurfer](http://surfer.nmr.mgh.harvard.edu). In this episode, we will use the outputs generated by [smriprep](https://github.com/nipreps/smriprep)/[fmriprep](https://github.com/nipreps/fmriprep), which are workflows relying on all these software.
 
 In this episode we will look at:
 * how to segment images into tissue classes, and also also sub-regions in the case of GM
 * how to visualize segmentation results both for volumetric and surface data
-* how to measure region volumes
-* how to extract surface measures pre-computed from a third party software (Freesurfer)
+
 
 ## Segmenting and visualizing brain tissues
 
-The tissues can be differentiated according to the MRI signal intensity, however as seen in episode X, the main magnetic field can introduce bias and create signal inhomogeneities. It is therefore important to implement bias field correction before carrying out segmentation according to tissue intensities.
+The tissues can be differentiated according to the MRI signal intensity, however as seen in episode 2, the main magnetic field can introduce bias and create signal inhomogeneities. It is therefore important to implement bias field correction before carrying out segmentation according to tissue intensities.
 
 Usually the T1 MRI modality is used for segmentation as it offers the best contrast between GM, WM and CSF. However combining multiple modalities (such as T2, PD and FLAIR) can help improving the segmentation, especially in the presence of lesions.
 
-Tissue segmentation is presented first for normal controls. Then differences are shown for patients having Alzheimer's or the multiple sclerosis disease.
+Tissue segmentation is presented first for normal controls. Then examples of changes that can happen in disease are shown for patients having Alzheimer's or the multiple sclerosis disease.
 
 
 ### In normal controls

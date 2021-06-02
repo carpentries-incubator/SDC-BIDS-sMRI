@@ -1,0 +1,15 @@
+{
+    "Name": "fMRIPrep - fMRI PREProcessing workflow",
+    "BIDSVersion": "1.1.1",
+    "PipelineDescription": {
+        "Name": "fMRIPrep",
+        "Version": "0+unknown",
+        "CodeURL": "https://github.com/poldracklab/fmriprep/archive/0+unknown.tar.gz"
+    },
+    "CodeURL": "https://github.com/poldracklab/fmriprep",
+    "HowToAcknowledge": "Please cite our paper (https://doi.org/10.1038/s41592-018-0235-4), and include the generated citation boilerplate within the Methods section of the text.",
+    "SourceDatasetsURLs": [
+        "https://doi.org/DOI of dataset (if there is one)"
+    ],
+    "License": "License under which your data is distributed"
+}

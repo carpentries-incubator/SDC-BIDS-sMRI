@@ -1,0 +1,21 @@
+{
+    "Name": "AOMIC-PIOP2",
+    "BIDSVersion": "1.0.2",
+    "License": "CC0",
+    "Authors": [
+        "Lukas Snoek",
+        "Maite van der Miesen",
+        "Andries van der Leij",
+        "Tinka Beemsterboer",
+        "Annemarie Eigenhuis",
+        "Steven Scholte"
+    ],
+    "Acknowledgements": "We thank all research assistants and students who helped collecting the data of the three projects, Jasper Wijnen and Marco Teunisse for advice and guidance with respect to anonymization and GDPR-related concerns, and Jos Bloemers, Sennay Ghebeab, Adriaan Tuiten, Joram van Driel, Christian Olivers, Ilja Sligte, Sara Jahfari, Guido van Wingen, and Suzanne Oosterwijk for help with designing the paradigms, Marcus Spaan for technical support, and Franklin Feingold and Joe Wexler for help with uploading the datasets to Openneuro.",
+    "HowToAcknowledge": "Snoek, L., van der Miesen, M.M., Beemsterboer, T., van der Leij, A., Eigenhuis, A., & Scholte, H.S. (in prep.). The Amsterdam Open MRI Collection, a set of multimodal MRI datasets for individual difference analyses.",
+    "Funding": [],
+    "ReferencesAndLinks": [
+        "https://nilab-uva.github.io/AOMIC.github.io/",
+        "https://github.com/NILAB-UvA/PIOP2"
+    ],
+    "DatasetDOI": "10.18112/openneuro.ds002790.v2.0.0"
+}

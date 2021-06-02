@@ -38,10 +38,8 @@ For easy set-up we recommend [Anaconda](https://www.anaconda.com/download/) to m
 6. In terminal type:
 
 ```
-conda install -y numpy pandas scipy scikit-learn matplotlib jupyter ipykernel nb_conda nilearn seaborn 
-conda install -y -c conda-forge awscli
-conda install -y -c anaconda lxml
-pip install nilearn nibabel
+conda install -y numpy pandas scipy scikit-learn matplotlib seaborn jupyter ipykernel nb_conda 
+conda install -y -c conda-forge awscli lxml nilearn nibabel
 ```
 7. Close the terminal, click on the play button again and open **Jupyter Notebook**
 8. Navigate to <code>SDC-BIDS-sMRI</code> folder you downloaded earlier.

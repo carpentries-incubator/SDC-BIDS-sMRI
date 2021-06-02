@@ -1,5 +1,5 @@
 ---
-title: "sMRI Segmentation and Quantification"
+title: "sMRI Segmentation and Parcellation"
 teaching: 30
 exercises: 15
 questions:
@@ -10,9 +10,9 @@ objectives:
 - "Visualize cortical surface meshes (vertex spaces)"
 - "Visualize and differentiate pathologies in MR images" 
 keypoints:
-- "Whole-brain quantification of brain anatomy is a first step towards more specific analysis"
-- "sMRI pathology measures can have significant impact in diagnosis, treatment planning, and surgery"
+- "Whole-brain quantification of brain anatomy is a first step towards biological analysis"
 ---
+
 ## You Are Here!
 ![course_flow](../fig/episode_4/Course_flow_4.png)
 

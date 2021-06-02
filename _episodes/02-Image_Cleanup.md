@@ -132,17 +132,17 @@ _Source: FSL Introduction to Brain Extraction_
 
 > ## Brain extraction quiz
 >
-> Apart from stripping off non-brain tissue, what can brain-mask be used for?
+> Can we use this brain-mask as an estimate for brain volume?
 >
 > > ## Solution
-> > Brain mask offers information about total brain volume - which can be used for quality control (i.e. identifying algorithm failures) as well as for brain-specific correction (normalization) for downstream statistical models. Althugh intracranial volume is better and more commonly used measure for the latter purpose. 
+> > Brain mask at this stage only offers a crude estimate about total brain volume. It can be used for quality control (e.g. detecting preprocessing algorithm failures). More accurate estimates of total brain and intracranial volumes are calculated in subsequent steps, which are used as covariates or normalzing factors in statistical analysis. 
 > > 
 > > 
 > {: .solution}
 {: .challenge}
 
 
-#### Side-note: [ANTs](http://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nypype](https://nipype.readthedocs.io/en/latest/) library. 
+#### Side-note: [ANTs](http://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nipype](https://nipype.readthedocs.io/en/latest/) library. 
 
 ~~~
 from nipype.interfaces.ants.segmentation import BrainExtraction

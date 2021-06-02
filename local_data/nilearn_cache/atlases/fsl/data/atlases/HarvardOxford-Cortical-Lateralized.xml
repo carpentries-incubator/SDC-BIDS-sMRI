@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<atlas version="1.0">
+  <header>
+    <name>Harvard-Oxford Cortical Structural Atlas (Lateralized)</name>
+    <shortname>HOCPAL</shortname>
+    <type>Probabilistic</type>
+    <images>
+      <imagefile>/HarvardOxford/HarvardOxford-cortl-prob-2mm</imagefile>
+      <summaryimagefile>/HarvardOxford/HarvardOxford-cortl-maxprob-thr0-2mm</summaryimagefile>
+      <summaryimagefile>/HarvardOxford/HarvardOxford-cortl-maxprob-thr25-2mm</summaryimagefile>
+      <summaryimagefile>/HarvardOxford/HarvardOxford-cortl-maxprob-thr50-2mm</summaryimagefile>
+    </images>
+    <images>
+      <imagefile>/HarvardOxford/HarvardOxford-cortl-prob-1mm</imagefile>
+      <summaryimagefile>/HarvardOxford/HarvardOxford-cortl-maxprob-thr0-1mm</summaryimagefile>
+      <summaryimagefile>/HarvardOxford/HarvardOxford-cortl-maxprob-thr25-1mm</summaryimagefile>
+      <summaryimagefile>/HarvardOxford/HarvardOxford-cortl-maxprob-thr50-1mm</summaryimagefile>
+    </images>
+  </header>
+  <data>
+    <label index="0" x="63" y="86" z="49">Left Frontal Pole</label>
+    <label index="1" x="21" y="86" z="33">Right Frontal Pole</label>
+    <label index="2" x="64" y="69" z="32">Left Insular Cortex</label>
+    <label index="3" x="26" y="70" z="32">Right Insular Cortex</label>
+    <label index="4" x="47" y="75" z="66">Left Superior Frontal Gyrus</label>
+    <label index="5" x="43" y="80" z="61">Right Superior Frontal Gyrus</label>
+    <label index="6" x="65" y="78" z="55">Left Middle Frontal Gyrus</label>
+    <label index="7" x="26" y="77" z="59">Right Middle Frontal Gyrus</label>
+    <label index="8" x="72" y="77" z="41">Left Inferior Frontal Gyrus, pars triangularis</label>
+    <label index="9" x="17" y="77" z="38">Right Inferior Frontal Gyrus, pars triangularis</label>
+    <label index="10" x="73" y="70" z="42">Left Inferior Frontal Gyrus, pars opercularis</label>
+    <label index="11" x="16" y="71" z="43">Right Inferior Frontal Gyrus, pars opercularis</label>
+    <label index="12" x="73" y="62" z="56">Left Precentral Gyrus</label>
+    <label index="13" x="14" y="65" z="50">Right Precentral Gyrus</label>
+    <label index="14" x="57" y="67" z="19">Left Temporal Pole</label>
+    <label index="15" x="33" y="68" z="19">Right Temporal Pole</label>
+    <label index="16" x="74" y="63" z="32">Left Superior Temporal Gyrus, anterior division</label>
+    <label index="17" x="15" y="64" z="32">Right Superior Temporal Gyrus, anterior division</label>
+    <label index="18" x="78" y="51" z="37">Left Superior Temporal Gyrus, posterior division</label>
+    <label index="19" x="11" y="52" z="38">Right Superior Temporal Gyrus, posterior division</label>
+    <label index="20" x="75" y="62" z="24">Left Middle Temporal Gyrus, anterior division</label>
+    <label index="21" x="15" y="63" z="22">Right Middle Temporal Gyrus, anterior division</label>
+    <label index="22" x="78" y="46" z="31">Left Middle Temporal Gyrus, posterior division</label>
+    <label index="23" x="11" y="54" z="29">Right Middle Temporal Gyrus, posterior division</label>
+    <label index="24" x="77" y="37" z="35">Left Middle Temporal Gyrus, temporooccipital part</label>
+    <label index="25" x="12" y="40" z="36">Right Middle Temporal Gyrus, temporooccipital part</label>
+    <label index="26" x="69" y="61" z="15">Left Inferior Temporal Gyrus, anterior division</label>
+    <label index="27" x="21" y="63" z="15">Right Inferior Temporal Gyrus, anterior division</label>
+    <label index="28" x="70" y="45" z="23">Left Inferior Temporal Gyrus, posterior division</label>
+    <label index="29" x="17" y="54" z="20">Right Inferior Temporal Gyrus, posterior division</label>
+    <label index="30" x="73" y="37" z="25">Left Inferior Temporal Gyrus, temporooccipital part</label>
+    <label index="31" x="16" y="37" z="26">Right Inferior Temporal Gyrus, temporooccipital part</label>
+    <label index="32" x="77" y="57" z="50">Left Postcentral Gyrus</label>
+    <label index="33" x="12" y="58" z="46">Right Postcentral Gyrus</label>
+    <label index="34" x="62" y="39" z="69">Left Superior Parietal Lobule</label>
+    <label index="35" x="28" y="40" z="69">Right Superior Parietal Lobule</label>
+    <label index="36" x="75" y="46" z="57">Left Supramarginal Gyrus, anterior division</label>
+    <label index="37" x="13" y="50" z="56">Right Supramarginal Gyrus, anterior division</label>
+    <label index="38" x="74" y="39" z="56">Left Supramarginal Gyrus, posterior division</label>
+    <label index="39" x="13" y="43" z="50">Right Supramarginal Gyrus, posterior division</label>
+    <label index="40" x="74" y="35" z="47">Left Angular Gyrus</label>
+    <label index="41" x="15" y="37" z="46">Right Angular Gyrus</label>
+    <label index="42" x="67" y="24" z="52">Left Lateral Occipital Cortex, superior division</label>
+    <label index="43" x="19" y="30" z="51">Right Lateral Occipital Cortex, superior division</label>
+    <label index="44" x="71" y="26" z="36">Left Lateral Occipital Cortex, inferior division</label>
+    <label index="45" x="18" y="29" z="36">Right Lateral Occipital Cortex, inferior division</label>
+    <label index="46" x="49" y="25" z="42">Left Intracalcarine Cortex</label>
+    <label index="47" x="39" y="27" z="41">Right Intracalcarine Cortex</label>
+    <label index="48" x="46" y="85" z="26">Left Frontal Medial Cortex</label>
+    <label index="49" x="44" y="84" z="27">Right Frontal Medial Cortex</label>
+    <label index="50" x="46" y="60" z="64">Left Juxtapositional Lobule Cortex (formerly Supplementary Motor Cortex)</label>
+    <label index="51" x="43" y="63" z="65">Right Juxtapositional Lobule Cortex (formerly Supplementary Motor Cortex)</label>
+    <label index="52" x="47" y="75" z="31">Left Subcallosal Cortex</label>
+    <label index="53" x="44" y="74" z="31">Right Subcallosal Cortex</label>
+    <label index="54" x="47" y="81" z="52">Left Paracingulate Gyrus</label>
+    <label index="55" x="43" y="84" z="49">Right Paracingulate Gyrus</label>
+    <label index="56" x="46" y="81" z="41">Left Cingulate Gyrus, anterior division</label>
+    <label index="57" x="43" y="81" z="42">Right Cingulate Gyrus, anterior division</label>
+    <label index="58" x="46" y="45" z="52">Left Cingulate Gyrus, posterior division</label>
+    <label index="59" x="43" y="46" z="54">Right Cingulate Gyrus, posterior division</label>
+    <label index="60" x="46" y="33" z="58">Left Precuneous Cortex</label>
+    <label index="61" x="43" y="36" z="60">Right Precuneous Cortex</label>
+    <label index="62" x="46" y="21" z="52">Left Cuneal Cortex</label>
+    <label index="63" x="43" y="22" z="49">Right Cuneal Cortex</label>
+    <label index="64" x="53" y="69" z="26">Left Frontal Orbital Cortex</label>
+    <label index="65" x="34" y="76" z="26">Right Frontal Orbital Cortex</label>
+    <label index="66" x="54" y="61" z="21">Left Parahippocampal Gyrus, anterior division</label>
+    <label index="67" x="35" y="62" z="20">Right Parahippocampal Gyrus, anterior division</label>
+    <label index="68" x="55" y="49" z="25">Left Parahippocampal Gyrus, posterior division</label>
+    <label index="69" x="35" y="47" z="28">Right Parahippocampal Gyrus, posterior division</label>
+    <label index="70" x="53" y="39" z="32">Left Lingual Gyrus</label>
+    <label index="71" x="36" y="41" z="31">Right Lingual Gyrus</label>
+    <label index="72" x="60" y="62" z="14">Left Temporal Fusiform Cortex, anterior division</label>
+    <label index="73" x="30" y="62" z="14">Right Temporal Fusiform Cortex, anterior division</label>
+    <label index="74" x="61" y="46" z="24">Left Temporal Fusiform Cortex, posterior division</label>
+    <label index="75" x="27" y="49" z="23">Right Temporal Fusiform Cortex, posterior division</label>
+    <label index="76" x="61" y="37" z="27">Left Temporal Occipital Fusiform Cortex</label>
+    <label index="77" x="27" y="39" z="26">Right Temporal Occipital Fusiform Cortex</label>
+    <label index="78" x="58" y="27" z="29">Left Occipital Fusiform Gyrus</label>
+    <label index="79" x="31" y="27" z="29">Right Occipital Fusiform Gyrus</label>
+    <label index="80" x="63" y="72" z="40">Left Frontal Operculum Cortex</label>
+    <label index="81" x="25" y="73" z="38">Right Frontal Operculum Cortex</label>
+    <label index="82" x="66" y="58" z="43">Left Central Opercular Cortex</label>
+    <label index="83" x="22" y="57" z="43">Right Central Opercular Cortex</label>
+    <label index="84" x="67" y="47" z="45">Left Parietal Operculum Cortex</label>
+    <label index="85" x="23" y="50" z="46">Right Parietal Operculum Cortex</label>
+    <label index="86" x="67" y="61" z="29">Left Planum Polare</label>
+    <label index="87" x="23" y="63" z="28">Right Planum Polare</label>
+    <label index="88" x="66" y="51" z="42">Left Heschl's Gyrus (includes H1 and H2)</label>
+    <label index="89" x="24" y="53" z="41">Right Heschl's Gyrus (includes H1 and H2)</label>
+    <label index="90" x="66" y="46" z="41">Left Planum Temporale</label>
+    <label index="91" x="22" y="48" z="43">Right Planum Temporale</label>
+    <label index="92" x="45" y="22" z="41">Left Supracalcarine Cortex</label>
+    <label index="93" x="43" y="24" z="44">Right Supracalcarine Cortex</label>
+    <label index="94" x="50" y="13" z="33">Left Occipital Pole</label>
+    <label index="95" x="37" y="12" z="38">Right Occipital Pole</label>
+  </data>
+</atlas>

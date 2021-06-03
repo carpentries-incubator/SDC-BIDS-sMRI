@@ -1,1 +1,0 @@
-mri_segstats --seg mri/wmparc.mgz --sum stats/wmparc.stats --pv mri/norm.mgz --excludeid 0 --brainmask mri/brainmask.mgz --in mri/norm.mgz --in-intensity-name norm --in-intensity-units MR --subject sub-031624 --surf-wm-vol --ctab /opt/freesurfer/WMParcStatsLUT.txt --etiv

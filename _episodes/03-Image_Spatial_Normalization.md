@@ -36,7 +36,7 @@ The world coordinates refer to a Cartesian coordinate system in which a MRI (or 
 ### Anatomical coordinates
 The anatomical space is coordinate system (X,Y,Z) that consists of three planes to describe the standard anatomical position of a human
 - *Axial* plane is parallel to the ground and separates the head (Superior) from the feet (Inferior)
-- *Coronal* plane is perpendicular to the ground and separates the front from (Anterior) the back (Posterior)
+- *Coronal* plane is perpendicular to the ground and separates the front (Anterior) from the back (Posterior)
 - *Sagittal* plane separates the Left from the Right
 
 The origin and directions of anatomical coordinate system are defined by conventions. In neuroimaging the most commonly used definition is the stereotaxic space. 
@@ -55,7 +55,7 @@ The origin and directions of anatomical coordinate system are defined by convent
     - Derived from an unrepresentative single 60-yr old female cadaver brain 
     - Ignores left-right hemispheric differences    
 - MNI space(s)
-    - Similar to the original Talairach space with the Z-coordinate is approximately +3.5 mm offset relative to the Talairach coordinate.
+    - Similar to the original Talairach space but the Z-coordinate has approximately +3.5 mm offset relative to the Talairach coordinate.
 
 <img src="../fig/episode_3/MNI_space_offset.png" alt="Drawing" align="middle" width="500px"/>
 
@@ -87,14 +87,18 @@ For examples:
 
 
 ## MR image templates 
-- An antomical template is an average MR volume whose voxels encode the average probability of different tissue classes (e.g. WM, GM, and CSF) at particular spatial location. The template creation is an iterative process comprising normalization, alignment, and averaging of a set of MR images from several different subjects. 
-- Structural T1‐weighted templates serve as a _common reference space_ and allows researchers to combine and compare data from multiple subjects. 
-- Templates play an important role in variety of neuroimaging tasks:
+- An anatomical template is an average MR volume whose voxels encode the average probability of different tissue classes (e.g. WM, GM, and CSF) at particular spatial location. The template creation is an iterative process comprising normalization, alignment, and averaging of a set of MR images from several different subjects. 
+
+- Structural T1‐weighted templates serve as a _common reference space_ and allow researchers to combine and compare data from multiple subjects. 
+
+- Templates play an important role in a variety of neuroimaging tasks:
     - Target image for spatial normalization in voxel‐wise analyses
-    - Automated internsity based WM, GM, and CSF tissue‐segmentation of MR images 
+    - Automated intensity based WM, GM, and CSF tissue‐segmentation of MR images 
     - Anatomical atlas creation for region of interest analyses
     - Automated seed selection for connectivity analyses
+
 - A _good_ template is supposed to be a _representative_ average of the study cohort. However for computational reasons (template creation is a computationally intensive process), and to maintain comparability across studies, image processing pipelines typically use publicly available templates. 
+
 - Commonly used templates:
     - [MNI 305](https://ieeexplore.ieee.org/document/373602)
         - an average of 305 T1-weighted MRI scans from young healthy adults
@@ -120,7 +124,7 @@ For examples:
         - Spherical alignment of 40 participants 
         - 163,842 vertices per hemispheres
 
-### T1 templates (MNI305, Collin27, MNI152 (linear)m MNI152 (nonlinear))
+### T1 templates (MNI305, Collin27, MNI152 (linear), MNI152 (nonlinear))
 ![MNI_spaces](../fig/episode_3/MNI_spaces_caption.jpeg)
 
 ### Multimodal MNI/ICBM152 atlas
@@ -129,22 +133,29 @@ For examples:
 
 
 ## Image registration
-- An process that aligns an image from one coordinate space to another. 
-- Used for
+
+#### A process that aligns an image from one coordinate space to another. 
+
+- Purpose
     - building templates 
     - native (subject) space to template-space alignment (normalization)
-    - inter-subject aligninment (typically for cohort specific)
-    - intra-subject aligment (co-registration of image modalities or longitudinal analyses)
-- Transfomrations
-    - Image similarity metrics: correlation ratio (CR), cross-correlation (CC), mutual information (MI)
+    - inter-subject alignment (typically for cohort specific)
+    - intra-subject alignment (co-registration of image modalities or longitudinal analyses)
+
+- Image similarity metrics
+    - correlation ratio (CR)
+    - cross-correlation (CC)
+    - mutual information (MI)
+
+- Transforms
     - Linear: global feature aligment
         - Rigid (6 parameters): rotation, translation 
         - Affine (12 parameters): rotation, translation, scaling, skewing  
     - Nonlinear (a.k.a elastic): local feature aligment via warping
         - Computationally intensive deformation models with large number of parameters
-        - Employ diffeomorphic models that preserve toplogy and source-target symmetry
+        - Employ diffeomorphic models that preserve topology and source-target symmetry
 
-_Note: Linear registrations are often used as a initialization step for non-linear registration._ 
+_Note: Linear registrations are often used as an initialization step for non-linear registration._ 
 
 ![registration_cartoon](../fig/episode_3/Registration.png)
 
@@ -173,11 +184,11 @@ _Note: Linear registrations are often used as a initialization step for non-line
 
 > ## Image registration quiz
 >
-> What would the information from non-linear deformation would tell you about the subject? 
+> What would the information encoded in the non-linear deformation tell you about the subject? 
 >
 > > ## Solution
 > > The deformation fields encode information regarding local morphometric brain changes. 
-> > These can be quantified using "Jacobians" of the deformation field, and can be used to assess subtle morphoetric differences in case-control studies.
+> > These can be quantified using "Jacobians" of the deformation field, and can be used to assess subtle morphometric differences between groups or timepoints.
 > > 
 > {: .solution}
 {: .challenge}
@@ -217,7 +228,7 @@ Subject space to refernce space mapping:
 ![nilearn_reg](../fig/episode_3/nilearn_registration.png)
 
 
-### Subject space vs refernce space: use cases
+### Subject space vs reference space: use cases
 ![subject_vs_ref_space](../fig/episode_3/Subject_vs_common_space.png)
 
 {% include links.md %}

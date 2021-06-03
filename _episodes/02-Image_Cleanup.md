@@ -9,13 +9,13 @@ objectives:
 - "Visualize bias fields and motion artifacts"
 - "Generate brain masks"
 keypoints:
-- "Presence of artifacts can lead to flawed analsis and incorrect findings"
+- "Presence of artifacts can lead to flawed analysis and incorrect findings"
 ---
 ## You Are Here!
 ![course_flow](../fig/episode_2/Course_flow_2.png)
 
 ## Why do we need image clean-ups?
-Correcting or cleaning-up certain artifacts from the raw (i.e. acquired) MR scans is cruical for the successful processing of subsequent image normalization tasks as well as the downstream statistical analyses. Some version (i.e. custom algorithm) of these two tasks is implemented in all commonly deployed processing pipelines such as FreeSurfer, FSL etc. 
+Correcting or cleaning-up certain artifacts from the raw (i.e. acquired) MR scans is crucial for the successful processing of subsequent image normalization tasks as well as the downstream statistical analyses. Some version (i.e. custom algorithm) of these two tasks is implemented in all commonly deployed processing pipelines such as FreeSurfer, FSL etc. 
 
 In this episode we will look at two common image clean-up tasks 1) Intensity normalization 2) Brain extraction. 
 
@@ -26,19 +26,20 @@ variations in the sensitivity of the reception coil, and the interaction between
 
 - It causes a smooth signal intensity variation within tissue of the same physical properties. 
 
-- The bias field is dependent on the strength of the magnetic field. If it is not corrected for 1.5T or higher MR scanners, it can considerably affect downstram analyses. 
+- The bias field is dependent on the strength of the magnetic field. If it is not corrected for 1.5T or higher MR scanners, it can considerably affect downstream analyses. Stronger magnets will induce higher bias. 
 
 - Commonly used tools
     - [ANTs N4 bias correction](https://pubmed.ncbi.nlm.nih.gov/20378467/) (See figure below)
     - [FSL FAST](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FAST) (_Note:FSL FAST is a multi-purpose segmentation tool that includes the bias field correction._)
 
 
-> ### Bias field correction quiz
+> ## Bias field correction quiz
 >
 > What is the difference between bias field and image noise?
 >
 > > ## Solution
-> > Bias field is modeled as multiplicative factor, whereas noise is typcally assumed as additive and spatially independent (Gaussian) factor.
+> > Bias field is modeled as multiplicative factor, whereas noise is typically assumed as additive and spatially independent (Gaussian) factor.
+> >  
 > > i.e. v(x) = u(x)f(x) + n(x), where v is the given image, u is the uncorrupted image, f is the bias field, and n is the noise.  
 > > 
 > {: .solution}
@@ -135,7 +136,7 @@ _Source: FSL Introduction to Brain Extraction_
 > Can we use this brain-mask as an estimate for brain volume?
 >
 > > ## Solution
-> > Brain mask at this stage only offers a crude estimate about total brain volume. It can be used for quality control (e.g. detecting preprocessing algorithm failures). More accurate estimates of total brain and intracranial volumes are calculated in subsequent steps, which are used as covariates or normalzing factors in statistical analysis. 
+> > Brain mask at this stage only offers a crude estimate about total brain volume. It can be used for quality control (e.g. detecting preprocessing algorithm failures). More accurate estimates of total brain and intracranial volumes are calculated in subsequent steps, which are used as covariates or normalizing factors in statistical analysis. 
 > > 
 > > 
 > {: .solution}

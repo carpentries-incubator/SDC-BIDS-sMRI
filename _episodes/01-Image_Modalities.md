@@ -3,10 +3,10 @@ title: "sMRI Acquisition and Modalities"
 teaching: 20
 exercises: 10
 questions:
-- "How is structural MR image acquired?"
+- "How is a structural MR image acquired?"
 - "What anatomical features do different modalities capture?"
 objectives:
-- "Visualize and understand differnces in T1,T2,PD/FLAIR weighted images."
+- "Visualize and understand differences in T1,T2,PD/FLAIR weighted images."
 keypoints:
 - "Different acquisition techniques will offer better quantification of specific brain tissues"
 ---
@@ -15,27 +15,27 @@ keypoints:
 
 
 ## Image acquisition
-1. The acquition starts with application of strong magnetic field B<sub>0</sub> (e.g. 1.5 or 3.0 Tesla > 10000x earth's magnetic field) which forces the hydrogen nuclei of the abundant water molecules in soft tissues in the body to align with the field. You can think of hydrogen nuclei as tiny magnets of their own.
+1. The acquisition starts with application of strong magnetic field B<sub>0</sub> (e.g. 1.5 or 3.0 Tesla > 10000x earth's magnetic field) which forces the hydrogen nuclei of the abundant water molecules in soft tissues in the body to align with the field. You can think of hydrogen nuclei as tiny magnets of their own.
 
-2. Then the scanner applies a RF pulse which tilts these nuclei from their alighment along B<sub>0</sub> and then _precess_ back to the alignment. The _precessing_ nuclei emit a signal, which is registered by the receiver coils in the scanner. 
+2. Then the scanner applies a radio-frequency (RF) (i.e. excitation) pulse which tilts these nuclei from their alignment along B<sub>0</sub>. The nuclei then _precess_ back to the alignment. The _precessing_ nuclei emit a signal, which is registered by the receiver coils in the scanner. 
 
-3. This signal has two components: 1) _Longitudinal_ (z-axis along the scanner's magnetic field) 2) _Transverse_ (xy-plane orthogonal to the scanner's magnetic field). 
+3. This signal has two components: 1) _Longitudinal_ (z-axis along the scanner's magnetic field) and 2) _Transverse_ (xy-plane orthogonal to the scanner's magnetic field). 
 
 4. Initially the longitudinal signal is weak as most nuclei are tilted away from the z-axis. However this signal grows as nuclei realign. The _time constant_ that dictates the speed of re-alignment is denoted by _T1_. 
 
 5. Initially the transverse signal is strong as most nuclei are in phase _coherence_. The signal decays as the nuclei dephase as they realign. This decay is denoted by the _T2 time constant_. 
 
-6. The tissue specific differences in T1 and T2 relaxation times is what enables us to _see_ anatomy from image contrast. The final image contrast depends on when you _listen_ to the signal (design parameter: echo time (TE)) and how fast you repeat the _tilt-relax_ process i.e. RF pulse freuqency (design parameter: repetition time (TR)). 
+6. The tissue specific differences in T1 and T2 relaxation times is what enables us to _see_ anatomy from image contrast. The final image contrast depends on when you _listen_ to the signal (design parameter: echo time (TE)) and how fast you repeat the _tilt-relax_ process i.e. RF pulse frequency (design parameter: repetition time (TR)). 
 
 
 ## T1 and T2 relaxation
 Here we see signal from two different tissues as the nuclei are tilted and realigned. 
-The figure on the left shows a single nucleus (i.e. tiny magnet) being tilted away and then precessing back to the the initial alighment along B<sub>0</sub>. The figure on the right shows the corresponding registered T1 and T2 signal profiles for two different "tissues". The difference in their signal intensties results in the image contrast. 
+The figure on the left shows a single nucleus (i.e. tiny magnet) being tilted away and then precessing back to the the initial alighment along B<sub>0</sub>. The figure on the right shows the corresponding registered T1 and T2 signal profiles for two different "tissues". The difference in their signal intensities results in the image contrast. 
 
 ![MR_relax](https://user-images.githubusercontent.com/7978607/112332334-08750c80-8c90-11eb-90fc-33956c037a1c.gif)
 
 ## Brain tissue comparison
-The dotted-black line represents the epoch when you "listen" to the signal (i.e. echo time or TE)
+The dotted-black line represents the epoch when you "listen" to the signal (i.e. echo time or TE).
 
 ![relax_tissue_contrast](../fig/episode_1/relax_tissue_contrast.png))
 
@@ -72,11 +72,11 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 
 > ## Tissue type and image contrast
 >
-> What is the brightest tissue in the T1w image?
+> In the T1w image,  which one is brighter: White matter, Grey Matter, or CSF?
 >
 > > ## Solution
 > >
-> > White-matter (i.e. axonal tracts)
+> > White Matter (i.e. axonal tracts)
 > {: .solution}
 {: .challenge}
 
@@ -92,7 +92,7 @@ _Note_: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence 
 
 |        Modality    | Contrast Characteristics  | Use Cases     |
 | :-------------: | :-----------: | :-----------: |
-|  T1w | Cerebrospinal fluid is dark  | Quantifying anatomy _e.g. measure structrual volumes_  |
+|  T1w | Cerebrospinal fluid is dark  | Quantifying anatomy _e.g. measure structural volumes_  |
 |  T2w | CSF is light, but white matter is darker than with T1  | Identify pathologies related to lesions and tumors |
 |  PD  | CSF is bright. Gray matter is brighter than white matter | Identify demyelination|
 |  FLAIR  | Similar to T2 with the CSF signal suppressed| Identify demyelination |

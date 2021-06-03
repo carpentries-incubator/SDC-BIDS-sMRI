@@ -40,6 +40,7 @@ For easy set-up we recommend [Anaconda](https://www.anaconda.com/download/) to m
 ```
 conda install -y numpy pandas scipy scikit-learn matplotlib seaborn jupyter ipykernel nb_conda 
 conda install -y -c conda-forge awscli lxml nilearn nibabel
+pip install pybids
 ```
 7. Close the terminal, click on the play button again and open **Jupyter Notebook**
 8. Navigate to <code>SDC-BIDS-sMRI</code> folder you downloaded earlier.
@@ -55,6 +56,7 @@ conda create -p ./SDC_sMRI_workshop_2021
 source activate $(pwd)/SDC_sMRI_workshop_2021
 conda install numpy pandas scipy scikit-learn matplotlib seaborn jupyter ipykernel nb_conda 
 conda install -c conda-forge awscli nibabel nilearn lxml
+pip install pybids
 ```
 
 ### Method 2: Using pyenv [Linux, MacOS]

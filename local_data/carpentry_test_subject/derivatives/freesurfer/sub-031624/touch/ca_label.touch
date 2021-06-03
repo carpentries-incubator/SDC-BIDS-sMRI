@@ -1,1 +1,0 @@
-mri_cc -aseg aseg.auto_noCCseg.mgz -o aseg.auto.mgz -lta /out/freesurfer/sub-031624/mri/transforms/cc_up.lta sub-031624

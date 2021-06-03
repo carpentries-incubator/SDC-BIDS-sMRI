@@ -1,1 +1,0 @@
-mris_register -curv -rusage /out/freesurfer/sub-031624/touch/rusage.mris_register.rh.dat ../surf/rh.sphere /opt/freesurfer/average/rh.folding.atlas.acfb40.noaparc.i12.2016-08-02.tif ../surf/rh.sphere.reg

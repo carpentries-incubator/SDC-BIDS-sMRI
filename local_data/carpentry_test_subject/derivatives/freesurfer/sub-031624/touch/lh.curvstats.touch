@@ -1,1 +1,0 @@
-mris_curvature_stats -m --writeCurvatureFiles -G -o ../stats/lh.curv.stats -F smoothwm sub-031624 lh curv sulc

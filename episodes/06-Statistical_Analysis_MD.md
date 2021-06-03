@@ -27,6 +27,44 @@ In this episode we will look at:
 * how to use these measurements in a statistical analysis: assessing the effect of age on the brain of young adults
 
 
+## Quantifying tissue properties
+
+Because atlases can be overlaid on a subject brain registered to the atlas template, one can extract measurements specific to that subject within each atlas ROI. We will first look at how to compute ourselves a simple metric from a subject atlas, and then how to extract more advanced pre-computed metrics from the output of a very common segmentation software, Freesurfer.
+
+### Metric from volumetric data: region volumes 
+
+A given MRI sequence is often acquired as a stack of slices. As such the in-plane voxel size (e.g. 0.9 mm x 0.9 mm) is not always equal to the slice thickness (e.g. 1 mm). This is important to keep in mind when measuring region volume. Another reason why one should extract the voxel size is that even if the voxels are isotropic (i.e. they have the same size in any dimension), one acquisition can be made with a given size (e.g. 1mm isotropic) and another acquisition with another size (e.g. 0.9 mm isotropic). The number of voxels is therefore not a useful quantity to compare between studies and a standard unit such that mm3 or cm3 should be used instead.  
+
+The voxel size of an image can be obtained from the metadata (i.e. the data annotation). This can be accomplished with `nibabel` as follows:
+
+~~~
+t1 = nib.load(t1_file)
+t1.affine
+~~~
+{: .language-python}
+
+~~~
+array([[   1.20000005,    0.        ,    0.        ,  -73.80000305],
+       [   0.        ,    0.9375    ,    0.        , -119.53125   ],
+       [   0.        ,    0.        ,    0.9375    , -119.53125   ],
+       [   0.        ,    0.        ,    0.        ,    1.        ]])
+~~~
+{: .output}
+
+
+We examine here an example on how to measure each region of a brain atlas in terms of number of voxels, and how to convert this number into mm3.
+
+### Metric from surface data: cortical thickness (using measurements pre-computed from Freesurfer)
+
+Freesurfer is one of the most commonly used software to carry out segmentation. By default Freesurfer compute a certain number of metrics. These metrics are often used directly rather than computing them from the segmentation data.
+
+Freesurfer segments the brain in terms of both volumes and surfaces. It also relies on two atlases to further segment the GM tissue: the Destrieux and the Desikan-Killiany atlas. To add confusion to the distinction between atlas, segmentation and parcellation, Freesurfer called the division of volumetric data into sub-regions "segmentation", and the division of surface data into sub-regions "parcellation". The associated data are named with the keyword `seg` and `parc` respectively.
+
+*Some more information on the type of data output by Freesurfer*
+
+*An example of extracting quantitative information from the Freesurfer stat file*
+
+
 # 5. Statistical Analysis
 Structural resonance images (sMRIs) provide information about various tissues type in the brain (e.g. gray matter, white matter, cerbrospinal fluid). sMRI (like fMRI), help study underlying causes of neuropsychiatric illnesses and their mechanisms by studying regional brain activities or atrophies. Statistical analysis of MRIs in individuals over time or cohorts provide region specific neuroanatomical information related to clinical questions in studies related to neuropsychiatric.
 

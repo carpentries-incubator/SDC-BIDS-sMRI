@@ -50,7 +50,7 @@ variations in the sensitivity of the reception coil, and the interaction between
 (a) Acquired T1w image (b) Estimated the bias field which can then be used to “correct” the image. (c) Bias field viewed as a surface to show the low frequency modulation.
 ![N4_bias](../fig/episode_2/N4_bias.jpeg)
 
-#### Side-note: [ANTs](http://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nypype](https://nipype.readthedocs.io/en/latest/) library. 
+#### Side-note: [ANTs](http://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nipype](https://nipype.readthedocs.io/en/latest/) library. 
 
 ~~~
 from nipype.interfaces.ants import N4BiasFieldCorrection
@@ -82,7 +82,7 @@ The top figure panel shows original and bias field corrected MR image slices. Th
 ![bias_correction](../fig/episode_2/Despotovic_bias_correction.png)
 
 
-### Visualizing "before" and "after" (see [this notebook](../code/2_sMRI_image_cleanup.ipynb) for detailed example.)
+### Visualizing "before" and "after" (see ../code/2_sMRI_image_cleanup.ipynb for detailed example.)
 ~~~
 import nibabel as nib
 from nilearn import plotting
@@ -176,7 +176,7 @@ brainextraction.cmdline
 ![FSL_brain_extract](../fig/episode_2/bet2_eg_small.png)
 
 
-### Visualizing "before" and "after" (see [this notebook](../code/2_sMRI_image_cleanup.ipynb) for detailed example.)
+### Visualizing "before" and "after" (see ../code/2_sMRI_image_cleanup.ipynb for detailed example.)
 ~~~
 from nipype.interfaces.ants.segmentation import BrainExtraction
 ~~~

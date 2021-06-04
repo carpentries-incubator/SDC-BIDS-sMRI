@@ -8,5 +8,6 @@ pybids==0.11.1
 seaborn
 scipy 
 scikit-learn  
+statsmodels
 jupyter
 lxml

@@ -1,664 +1,639 @@
 ---
 title: "sMRI Statistical Analysis"
-teaching: 30
-exercises: 15
+teaching: 25
+exercises: 10
 questions:
-- "How to look at group differences in regional anatomical features?"
+- "How to quantify brain morphology ?"
+- "How to assess statistically differences of brain morphology ?"
+- "Can we detect brain changes related to age in a cohort of young adults ?"
 objectives:
-- "Compare volumetric differences in a region-of-interest"
-- "Calculate cortical thickness differences in a case-control study"
+- "Understand the main metrics characterizing the brain morphology"
+- "Extract and rely on a set of metrics to assess the effect of age on multiple cortical regions"
+- "Understand and implement voxel based morphometry to investigate the effect of age without predefined regions"
 keypoints:
-- "Atlas driven analysis can be a powerful technique for biomarker development. Nevertheless it is important to be cognizant of confounding factors."
+- "Multiple volumetric and surface metrics exist to characterize brain structure morphology"
+- "Both conventional statistical models and specific neuroimaging approaches can be used"
+- "Caution should be exercised at both data inspection and model interpretation levels"
 ---
 
 ## You Are Here!
 ![course_flow](../fig/episode_6/Course_flow_6.png)
 
-
-The first step is done by segmenting the MRI images, and the second one by measuring differences in signal intensity across subjects (with techniques such as voxel based morphometry (VBM)) or in morphological properties such as volume or thickness. GM loss for example can be assessed by:
-* measuring GM volume when looking at volumetric data, i.e. voxels
-* measuring GM thickness when looking at surface data, i.e. meshes
-* comparing the intensity on MRI images with a group of normal control with patients suffering from GM
-The resulting measures can also be used as features for machine learning approaches.
-
-In this episode we will look at:
-* how to measure region volumes
-* how to extract surface measures pre-computed from a third party software (Freesurfer)
-* how to use these measurements in a statistical analysis: assessing the effect of age on the brain of young adults
-
+All the previous episodes presented the required steps to arrive at a stage where the data is ready for metrics extraction and statistical analysis. In this episode we will introduce common metrics used to characterize the brain structure and morphology, and we will investigate statistical approaches to assess if age related brain changes can be found in a cohort of young adults.
 
 ## Quantifying tissue properties
 
-Because atlases can be overlaid on a subject brain registered to the atlas template, one can extract measurements specific to that subject within each atlas ROI. We will first look at how to compute ourselves a simple metric from a subject atlas, and then how to extract more advanced pre-computed metrics from the output of a very common segmentation software, Freesurfer.
+As seen in previous episodes, brain structural data can be represented as volumes or surfaces. Each of these representations are associated to different characteristics. In this episode we will look at:
+* how to measure GM volume when looking at volumetric data, i.e. voxels
+* how to extract cortical thickness measures derived from surface data, i.e. meshes
 
 ### Metric from volumetric data: region volumes 
 
-A given MRI sequence is often acquired as a stack of slices. As such the in-plane voxel size (e.g. 0.9 mm x 0.9 mm) is not always equal to the slice thickness (e.g. 1 mm). This is important to keep in mind when measuring region volume. Another reason why one should extract the voxel size is that even if the voxels are isotropic (i.e. they have the same size in any dimension), one acquisition can be made with a given size (e.g. 1mm isotropic) and another acquisition with another size (e.g. 0.9 mm isotropic). The number of voxels is therefore not a useful quantity to compare between studies and a standard unit such that mm3 or cm3 should be used instead.  
+A simple metric to quantify brain imaging data is volume. The image is represented as voxels, however the voxel dimensions can vary from one MRI sequence to another. Some FLAIR sequences have 1.5 mm isotropic voxels (i.e. 1.5 mm wide in all directions), while T1 sequences have 1 mm isotropic voxels. Other sequences do not have isotropic voxels (the voxel dimensions vary depending on direction). As a result the number of voxels is not useful to compare subjects and a standard unit such that mm3 or cm3 should be used instead. 
 
-The voxel size of an image can be obtained from the metadata (i.e. the data annotation). This can be accomplished with `nibabel` as follows:
+We will consider here a volumetric atlas created by `smriprep/fmriprep` via `Freesurfer`. A particularity is that this atlas is mapped to the subject native space so that we can measure the volume of each atlas ROI in the space of the subject. Our aim is to measure the volume of the right caudate nucleus, in standard unit (mm3). We will first see how to obtain the volume manually, and then how to simply retrieve it from a file referencing several region volumes. 
+
+#### Measuring an ROI volume manually
+
+Consider a subject's native T1 volume `t1` and a parcellation of the subcortical GM provided by Freesurfer in that space, `t1_aseg`. We already know from episode 4 how to extract an ROI. According to the [Freesurfer Look-up Table](https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/AnatomicalROI/FreeSurferColorLUT) the right caudate has index 50.
 
 ~~~
-t1 = nib.load(t1_file)
-t1.affine
+roi_ix = 50
+roi_mask_arr_bool = (t1_aseg_data == roi_ix)
+roi_mask_arr = roi_mask_arr_bool.astype(int)
+roi_mask = nib.Nifti1Image(roi_mask_arr, affine=t1_aseg.affine)
+~~~
+{: .language-python}
+
+We can verify our ROI extraction by plotting it over the subject's T1 data with `nilearn` `plotting` function:
+~~~
+plotting.plot_roi(roi_img=roi_mask, bg_img=t1, alpha=0.4, title='Right Caudate');
+~~~
+{: .language-python}
+
+![Caudate nucleus from Freesurfer segmentation](../fig/episode_6/right_caudate_ROI.png)
+
+We can get the number of voxels by counting them in the mask.
+
+~~~
+caudate_R_n_vox = roi_mask_arr.sum()
+caudate_R_n_vox
 ~~~
 {: .language-python}
 
 ~~~
-array([[   1.20000005,    0.        ,    0.        ,  -73.80000305],
-       [   0.        ,    0.9375    ,    0.        , -119.53125   ],
-       [   0.        ,    0.        ,    0.9375    , -119.53125   ],
-       [   0.        ,    0.        ,    0.        ,    1.        ]])
+3854
+~~~
+{: .output}
+
+An image voxel size can be obtained from the file metadata (i.e. data annotation) stored in the image header. `nibabel` provide an `header` attribute with a method `get_zooms()` to obtain the voxel size.
+
+~~~
+voxel_dimensions = t1.header.get_zooms()
+voxel_dimensions
+~~~
+{: .language-python}
+
+~~~
+(1.0, 1.0, 1.0)
+~~~
+{: .output}
+
+In our case the volume of the voxel, the product of its dimensions, is simply 1mm3:
+~~~
+vox_size = np.array(voxel_dimensions).prod()
+vox_size
+~~~
+{: .language-python}
+
+~~~
+1.0
+~~~
+{: .output}
+
+The volume in mm3 of the right caudate of our subject is then:
+
+~~~
+caudate_R_vol_mm3 = caudate_R_n_vox * vox_size
+caudate_R_vol_mm3
+~~~
+{: .language-python}
+
+~~~
+3854.0
+~~~
+{: .output}
+
+Note that `nibabel` offers a utility function to compute the volume of a mask in mm3 according to the voxel size:
+
+~~~
+import nibabel.imagestats as imagestats
+imagestats.mask_volume(roi_mask)
+~~~
+{: .language-python}
+
+~~~
+3854.0
+~~~
+{: .output}
+
+#### Extracting ROI volume from software generated reports
+
+It turns out that characteristics of a number of ROIs are output by Freesurfer and saved in a text file. For example the volume of subcortical ROIs can be found in the file `stats/aseg.stats`. We use the function `islice` of the Python `itertools` module to extract the first lines of the file:
+
+~~~
+n_lines = 110
+with open(os.path.join(fs_rawstats_dir, "aseg.stats")) as fs_stats_file:
+    first_n_lines = list(islice(fs_stats_file, n_lines))
+~~~
+{: .language-python}
+
+
+~~~
+['# Title Segmentation Statistics \n',
+ '# \n',
+ '# generating_program mri_segstats\n',
+ '# cvs_version $Id: mri_segstats.c,v 1.121 2016/05/31 17:27:11 greve Exp $\n',
+ '# cmdline mri_segstats --seg mri/aseg.mgz --sum stats/aseg.stats --pv mri/norm.mgz --empty --brainmask mri/brainmask.mgz --brain-vol-from-seg --excludeid 0 --excl-ctxgmwm --supratent --subcortgray --in mri/norm.mgz --in-intensity-name norm --in-intensity-units MR --etiv --surf-wm-vol --surf-ctx-vol --totalgray --euler --ctab /opt/freesurfer/ASegStatsLUT.txt --subject sub-0001 \n',
+...
+ '# ColHeaders  Index SegId NVoxels Volume_mm3 StructName normMean normStdDev normMin normMax normRange  \n',
+ '  1   4      3820     4245.9  Left-Lateral-Ventricle            30.4424    13.2599     7.0000    83.0000    76.0000 \n',
+...
+ ' 23  49      7142     6806.7  Right-Thalamus-Proper             83.4105    10.4588    32.0000   104.0000    72.0000 \n',
+ ' 24  50      3858     3804.7  Right-Caudate                     73.2118     7.9099    37.0000    96.0000    59.0000 \n',
+ ' 25  51      5649     5586.9  Right-Putamen                     79.4707     7.1056    46.0000   103.0000    57.0000 \n',
+...
+~~~
+{: .output}
+
+Surprisingly the volume in mm3 is not the same as we found: 3804.7. This is because instead of counting each voxel in the GM mask as 100%, the fraction of estimated GM was taken into account.  The estimation of the so called "partial volume" can be done in several manners. One which will be useful for us later is to use the GM probability map `GM_probmap` as a surrogate of a GM partial volume map. Let's see the ROI volume we obtain in this way:
+
+~~~
+GM_roi_data = np.where(roi_mask_arr_bool, GM_probmap.get_fdata(), 0)
+GM_roi_data.sum() * vox_size
+~~~
+{: .language-python}
+
+~~~
+3354.5343634674136
+~~~
+{: .output}
+
+Like with Freesurfer we observe a reduction of GM, albeit significantly more pronounced.
+
+> ## Jupyter notebook challenge
+>
+> Taking into account partial volume, can you measure the volume of the Left Caudate ? And if you feel adventurous of the Left Lateral ventricle ?
+>
+> > ## Hint
+> >
+> > Use the Freesurfer LUT to identify the correct ROI index. For the lateral ventricle, make sure you use the appropriate tissue type to correct for partial volume effect.
+> >
+> {: .solution}
+{: .challenge}
+
+### Metric from surface data: cortical thickness
+
+As seen in the previous section, volumetric ROI metrics can be made available by dedicated software. This is also the case for surface metrics which are often more involved than computing the number of voxels. One of the most used surface metric is cortical thickness: the distance separating the GM pial surface from the WM surface directly underneath. We will use the output from Freesurfer to:
+- extract cortical thickness information
+- plot the associated surface data for one subject
+- generate and plot summary group measurements   
+
+#### Extracting cortical thickness information
+
+Freesurfer output a number of files including both volume and surface metrics. These files are generated by Freesurfer for each subject and can be found in `derivatives/freesurfer/stats` when using `smriprep/fmriprep`.
+
+~~~
+os.listdir(fs_rawstats_dir)
+~~~
+{: .language-python}
+
+~~~
+['lh.BA_exvivo.thresh.stats',
+ 'rh.aparc.a2009s.stats',
+ 'rh.aparc.pial.stats',
+ 'rh.aparc.DKTatlas.stats',
+ 'lh.curv.stats',
+ 'lh.w-g.pct.stats',
+ 'wmparc.stats',
+ 'lh.aparc.stats',
+ 'rh.BA_exvivo.thresh.stats',
+ 'rh.BA_exvivo.stats',
+ 'rh.w-g.pct.stats',
+ 'lh.aparc.pial.stats',
+ 'lh.BA_exvivo.stats',
+ 'rh.curv.stats',
+ 'aseg.stats',
+ 'lh.aparc.DKTatlas.stats',
+ 'lh.aparc.a2009s.stats',
+ 'rh.aparc.stats']
+~~~
+{: .output}
+
+`aseg` files are related to subcortical regions, as we just saw with `aseg.stats`, while `aparc` files include cortical metrics and are often separated into left (`lh`) and right hemisphere (`rh`). `aparc.stats` is for the Desikan-Killiany atlas while `aparc.a2009s.stats` is for the Destrieux atlas (148 ROIs vs 68 ROIs for Desikan-Killiany).
+
+Looking at the Destrieux ROI measurements in the left hemisphere from `lh.aparc.a2009s.stats` we get:
+
+~~~
+n_lines = 75
+with open(os.path.join(fs_rawstats_dir, "lh.aparc.a2009s.stats")) as fs_stats_file:
+    first_n_lines = list(islice(fs_stats_file, n_lines))
+~~~
+{: .language-python}
+
+
+~~~
+['# Table of FreeSurfer cortical parcellation anatomical statistics \n',
+ '# \n',
+ '# CreationTime 2019/03/02-22:05:09-GMT\n',
+ '# generating_program mris_anatomical_stats\n',
+ '# cvs_version $Id: mris_anatomical_stats.c,v 1.79 2016/03/14 15:15:34 greve Exp $\n',
+ '# mrisurf.c-cvs_version $Id: mrisurf.c,v 1.781.2.6 2016/12/27 16:47:14 zkaufman Exp $\n',
+ '# cmdline mris_anatomical_stats -th3 -mgz -cortex ../label/lh.cortex.label -f ../stats/lh.aparc.a2009s.stats -b -a ../label/lh.aparc.a2009s.annot -c ../label/aparc.annot.a2009s.ctab sub-0001 lh white \n',
+ ...
+ '# ColHeaders StructName NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv FoldInd CurvInd\n',
+ 'G&S_frontomargin                         1116    840   1758  1.925 0.540     0.128     0.025       14     1.0\n',
+ 'G&S_occipital_inf                        1980   1336   3775  2.517 0.517     0.144     0.028       27     2.1\n',
+ 'G&S_paracentral                          1784   1108   2952  2.266 0.581     0.105     0.018       17     1.3\n',
+ ...
+~~~
+{: .output}
+
+You can see a number of metrics, with more information in the skipped header on their units. The one of particular interest to us is the cortical thickness `ThickAvg`. Since the thickness is measured at each vertex of the mesh, both the man and standard deviation can be estimated for each ROI. The values at each vertex is available in the freesurfer native file `lh.thickness`. Let's use it to plot the values on a mesh.
+
+#### Plotting cortical thickness values on a subject mesh
+
+To plot the cortical thickness values on a subject cortical mesh we will use the native Freesurfer file formats (although the GII file output by `smriprep/fmriprep` could also be used as seen in episode 4). Considering we identified for the left hemispher the path to the pial mesh `lh_pial` and the mesh thickness values `lh_thickness` (as well as the sulcus mesh `lh_sulcus` for a better plot rendering), we can obtain mesh lateral and medial views with the following Python code:  
+
+~~~
+# Lateral
+plotting.plot_surf(lh_pial, surf_map=lh_thickness, hemi='left', view='lateral', bg_map=lh_sulcus);
+# Medial
+plotting.plot_surf(lh_pial, surf_map=lh_thickness, hemi='left', view='medial', bg_map=lh_sulcus);
+~~~
+{: .language-python}
+
+![Cortical thickness visualization for a given subject](../fig/episode_6/subject_cortical_thickness_mesh.png)
+
+
+#### Generating and plotting summary group measurements   
+
+Files including metrics for each subject can be leveraged to generate group results automatically. The first step is to generate more easily manipulatable CSV/TSV files from the Freesurfer native text files. This can be done with the Freesurfer `asegstats2table` command such as with the code below adapted from [this script](https://github.com/NILAB-UvA/AOMIC-common-scripts/blob/master/fs_stats/create_freesurfer_tables.sh):
+
+~~~
+SUBJECTS=(...)
+MEASURE=thickness
+PARC=aparc.a2009s
+for HEMI in lh rh; do
+    echo "Running aparcstats2table with measure ${MEASURE} and parcellation ${parc} for hemisphere ${HEMI}"
+    aparcstats2table --subjects ${SUBJECTS[@]} \
+        --hemi ${hemi} \
+        --parc ${parc} \
+        --measure ${MEASURE} \
+        --tablefile ../derivatives/fs_stats/data-cortical_type-${parc}_measure-${MEASURE}_hemi-${HEMI}.tsv \
+        --delimiter 'tab'           
+done
+~~~
+{: .language-bash}
+
+Then the resulting files can be read with pandas to create a dataframe including cortical thickness information for all our subjects.
+
+~~~
+hemi="lh"
+stats_file = os.path.join(fs_stats_dir, 
+                          f"data-cortical_type-aparc.a2009s_measure-thickness_hemi-{hemi}.tsv")
+fs_hemi_df = pd.read_csv(stats_file,sep='\t')
+fs_hemi_df
+~~~
+{: .language-python}
+
+As shown in the notebook associated with the lesson we can then create a dataframe `fs_df` combining both data from both hemispheres, while also renaming columns to facilitate subsequent analysis.
+
+~~~
+fs_df
+~~~
+{: .language-python}
+
+~~~
+participant_id	G_and_S_frontomargin	G_and_S_occipital_inf	G_and_S_paracentral	G_and_S_subcentral	G_and_S_transv_frontopol	G_and_S_cingul_Ant	G_and_S_cingul_Mid_Ant	G_and_S_cingul_Mid_Post	G_cingul_Post_dorsal	...	S_precentral_sup_part	S_suborbital	S_subparietal	S_temporal_inf	S_temporal_sup	S_temporal_transverse	MeanThickness	BrainSegVolNotVent	eTIV	hemi
+0	sub-0001	1.925	2.517	2.266	2.636	2.600	2.777	2.606	2.736	2.956	...	2.302	2.417	2.514	2.485	2.462	2.752	2.56319	1235952.0	1.560839e+06	lh
+1	sub-0002	2.405	2.340	2.400	2.849	2.724	2.888	2.658	2.493	3.202	...	2.342	3.264	2.619	2.212	2.386	2.772	2.45903	1056970.0	1.115228e+06	lh
+2	sub-0003	2.477	2.041	2.255	2.648	2.616	2.855	2.924	2.632	2.984	...	2.276	2.130	2.463	2.519	2.456	2.685	2.53883	945765.0	1.186697e+06	lh
+3	sub-0004	2.179	2.137	2.366	2.885	2.736	2.968	2.576	2.593	3.211	...	2.145	2.920	2.790	2.304	2.564	2.771	2.51093	973916.0	9.527770e+05	lh
+4	sub-0005	2.483	2.438	2.219	2.832	2.686	3.397	2.985	2.585	3.028	...	2.352	3.598	2.331	2.494	2.665	2.538	2.53830	1089881.0	1.497743e+06	lh
+5 rows × 79 columns
+~~~
+{: .output}
+
+We can then create a boxplot of the mean cortical thickness distribution in each ROI with `seaborn`, after first converting the dataframe from wide to long format:
+
+~~~
+plot_df = fs_df[["hemi"] + roi_cols]
+## Melt dataframe for easier visualization
+plot_long_df = pd.melt(plot_df, id_vars = ['hemi'], value_vars = roi_cols, 
+                       var_name ='ROI', value_name ='cortical thickness')
+plot_long_df
+~~~
+{: .language-python}
+
+~~~
+	hemi	ROI	cortical thickness
+0	lh	G_and_S_frontomargin	1.925
+1	lh	G_and_S_frontomargin	2.405
+2	lh	G_and_S_frontomargin	2.477
+3	lh	G_and_S_frontomargin	2.179
+4	lh	G_and_S_frontomargin	2.483
+...	...	...	...
+33443	rh	S_temporal_transverse	3.006
+33444	rh	S_temporal_transverse	2.683
+33445	rh	S_temporal_transverse	2.418
+33446	rh	S_temporal_transverse	2.105
+33447	rh	S_temporal_transverse	2.524
+
 ~~~
 {: .output}
 
 
-We examine here an example on how to measure each region of a brain atlas in terms of number of voxels, and how to convert this number into mm3.
+~~~
+g = sns.catplot(x='cortical thickness', y='ROI', hue='hemi', kind='box', data=plot_long_df)
+~~~
+{: .language-python}
 
-### Metric from surface data: cortical thickness (using measurements pre-computed from Freesurfer)
-
-Freesurfer is one of the most commonly used software to carry out segmentation. By default Freesurfer compute a certain number of metrics. These metrics are often used directly rather than computing them from the segmentation data.
-
-Freesurfer segments the brain in terms of both volumes and surfaces. It also relies on two atlases to further segment the GM tissue: the Destrieux and the Desikan-Killiany atlas. To add confusion to the distinction between atlas, segmentation and parcellation, Freesurfer called the division of volumetric data into sub-regions "segmentation", and the division of surface data into sub-regions "parcellation". The associated data are named with the keyword `seg` and `parc` respectively.
-
-*Some more information on the type of data output by Freesurfer*
-
-*An example of extracting quantitative information from the Freesurfer stat file*
+![Group cortical thickness boxplot](../fig/episode_6/group_cortical_thickness_boxplot.png)
 
 
-# 5. Statistical Analysis
-Structural resonance images (sMRIs) provide information about various tissues type in the brain (e.g. gray matter, white matter, cerbrospinal fluid). sMRI (like fMRI), help study underlying causes of neuropsychiatric illnesses and their mechanisms by studying regional brain activities or atrophies. Statistical analysis of MRIs in individuals over time or cohorts provide region specific neuroanatomical information related to clinical questions in studies related to neuropsychiatric.
+## Statistical analysis: cortical thickness analysis based on a surface atlas
 
-## 5.1. ROI driven analysis with Nilearn
-Nilearn is a Python module that provides statistical and machine learning tools for anayses of NeuroImaging. This module supports general linear model (GLM) and leverages the scikit-learn Python toolbox for multivariate statistics with applications such as predictive modelling, classification, decoding, or connectivity analysis.
+Can we measure cortical thickness changes with age in young adults ?
 
-Regions of interests (ROIs) in sMRI can be defined in terms of structural features, usually defined based on anatomy. Manual labeling done by experts are considered the gold standard, yet recently developed automated anatomical labeling offer the promise of highly reliable labeling. Brain atlases are commonly used for automatic labeling of regions, allowing further analysis specific to the ROIs. Atlas-based methods used to label ROIs will need to take in to account inter-subject variations across the population used to construct the atlas. 
+Now that we have cortical thickness measures, we can try to answer this question by:
+- adding subject demographic variables (age, sex) which will serve as predictors
+- creating and fitting a statistical model: we will use linear regression model
+- plotting the results
 
-### 5.1.1. Volumetric Atlases
-Brain atlases are used for identifying ROIs, often required to obtain statistical inferences in neuroimaging. For example, parcellation of ROIs in the cortex is achieved using cortical atlases and subcortical atlases are used for parcellation of subcortical structures of interest. Commonly used cortical and subcortical atlases are listed below. 
+### Gathering the model predictors
 
-Cortical atlas parcellations
-* Automated Anatomical Labeling (Tzourio-Mazoyer 2002)
-* Local-Global Parcellation of the Human Cerebral Cortex (Schaefer 2018)
-* Harvard-Oxford cortical/subcortical atlases (Makris 2006)
-* Destrieux Atlas (Destrieux 2010)
-  
-Subcortical atlas parcellations
-* CIT168 Reinforcement Learning Atlas (Pauli 2017)
-* Computational Brain Anatomy Lab Merged Atlas (CoBrALab Atlas) in MNI Space (Pipitone 2014)
-* Melbourne Subcortex Atlas (Tian 2020)
-* Chakravarty 2006 Atlas
-* THOMAS Atlas (Saranathan 2019)
+Since we are interested in the effect of age, we will collect the subject demographics information which is readily available from the BIDS dataset. In addition of the age information, we will use sex as a covariate.
 
-#### 5.1.1.1. Visualizing anatomical atlases
-#### • Cortical Parcellations
-###### Automated Anatomical Labeling (Tzourio-Mazoyer 2002)
-```
-dataset = datasets.fetch_atlas_aal('SPM12')
-atlas_filename = dataset.maps
-plotting.plot_roi(atlas_filename, title="AAL")
-```
-<img src="../fig/episode_6/5_Fig1_corAtlas_AAL.png" width="400" height="170" />
+~~~
+subjects_info_withna = bids_layout.get(suffix="participants", extension=".tsv")[0].get_df()
+subjects_info_withna
+~~~
+{: .language-python}
 
-###### Local-Global Parcellation of the Human Cerebral Cortex (Schaefer 2018)
-```
-dataset = datasets.fetch_atlas_schaefer_2018()
-atlas_filename = dataset.maps
-plotting.plot_roi(atlas_filename, title="Schaefer 2018")
+~~~
+participant_id	age	sex	BMI	handedness	education_category	raven_score	NEO_N	NEO_E	NEO_O	NEO_A	NEO_C
+0	sub-0001	25.50	M	21.0	right	academic	33.0	23	40	52	47	32
+1	sub-0002	23.25	F	22.0	right	academic	19.0	22	47	34	53	46
+2	sub-0003	25.00	F	23.0	right	applied	29.0	26	42	37	48	48
+3	sub-0004	20.00	F	18.0	right	academic	24.0	32	42	36	48	52
+4	sub-0005	24.75	M	27.0	right	academic	24.0	32	51	41	51	53
+...	...	...	...	...	...	...	...	...	...	...	...	...
+221	sub-0222	22.00	F	20.0	right	academic	30.0	41	35	51	48	42
+222	sub-0223	20.75	F	23.0	left	applied	26.0	33	41	54	36	41
+223	sub-0224	21.75	M	20.0	right	academic	34.0	22	45	47	46	46
+224	sub-0225	20.25	F	28.0	right	academic	27.0	48	32	43	42	37
+225	sub-0226	20.00	M	20.0	right	applied	19.0	28	40	39	42	29
+~~~
+{: .output}
 
-# By default, the number of ROIs is 400 and  and ROI annotations according neo networks is 7.
-# This may be changed by changing the inputs to the function as below.
-# nilearn.datasets.fetch_atlas_schaefer_2018(n_rois=400, yeo_networks=7)
-```
-<img src="../fig/episode_6/5_Fig2_corAtlas_Schaefer.png" width="400" height="170" />
+> ## Jupyter notebook challenge
+>
+> As the name of our dataframe implies, there may be an issue with the data. Can you spot it ? 
+>
+> > ## Hint
+> >
+> > You'll need to use your `pandas`-fu for this exercise.  Check for NA (aka missing) values in your `pandas` dataframe. You can use the `isnull()`, `any()` and `.loc` methods for filtering rows.
+> > 
+> >
+> {: .solution}
+{: .challenge}
 
-###### Harvard-Oxford cortical/subcortical atlases (Makris 2006)
-```
-dataset = datasets.fetch_atlas_harvard_oxford('cort-maxprob-thr25-2mm')
-atlas_filename = dataset.maps
-plotting.plot_roi(atlas_filename, title="Harvard Oxford atlas")
-```
-<img src="../fig/episode_6/5_Fig3_corAtlas_Harvard-Oxford.png" width="400" height="170" />
+> ## Jupyter notebook challenge
+>
+> If you spotted the issue in the previous challenge, what would you propose to solve it ? 
+>
+> > ## Hint
+> >
+> > Data imputation can be applied to appropriate columns, with the `fillna()` method. You may be interested in the `.mean()` and/our `mode()` methods to get the mean and most frequent values. 
+> >
+> {: .solution}
+{: .challenge}
 
+Now that we have our predictors, to make subsequent analyses easier we can merge them with our response/predicted cortical thickness variable in a single dataframe.
 
-#### • Subcortical Parcellations
-###### CIT168 Reinforcement Learning Atlas (Pauli 2017)
-```
-dataset = datasets.fetch_atlas_pauli_2017()
-atlas_filename = dataset.maps 
-plotting.plot_prob_atlas(atlas_filename, title="Pauli 2017")
-```
-<img src="../fig/episode_6/5_Fig5_subAtlas_Pauli.png" width="400" height="170" />
+~~~
+demo_cols = ["participant_id", "age", "sex"]
+fs_all_df = pd.merge(subjects_info[demo_cols], fs_df, on='participant_id')
+fs_all_df
+~~~
+{: .language-python}
 
+~~~
+	participant_id	age	sex	G_and_S_frontomargin	G_and_S_occipital_inf	G_and_S_paracentral	G_and_S_subcentral	G_and_S_transv_frontopol	G_and_S_cingul_Ant	G_and_S_cingul_Mid_Ant	...	S_precentral_sup_part	S_suborbital	S_subparietal	S_temporal_inf	S_temporal_sup	S_temporal_transverse	MeanThickness	BrainSegVolNotVent	eTIV	hemi
+0	sub-0001	25.50	M	1.925	2.517	2.266	2.636	2.600	2.777	2.606	...	2.302	2.417	2.514	2.485	2.462	2.752	2.56319	1235952.0	1.560839e+06	lh
+1	sub-0001	25.50	M	2.216	2.408	2.381	2.698	2.530	2.947	2.896	...	2.324	2.273	2.588	2.548	2.465	2.675	2.51412	1235952.0	1.560839e+06	rh
+2	sub-0002	23.25	F	2.405	2.340	2.400	2.849	2.724	2.888	2.658	...	2.342	3.264	2.619	2.212	2.386	2.772	2.45903	1056970.0	1.115228e+06	lh
+3	sub-0002	23.25	F	2.682	2.454	2.511	2.725	2.874	3.202	3.012	...	2.429	2.664	2.676	2.220	2.291	2.714	2.48075	1056970.0	1.115228e+06	rh
+4	sub-0003	25.00	F	2.477	2.041	2.255	2.648	2.616	2.855	2.924	...	2.276	2.130	2.463	2.519	2.456	2.685	2.53883	945765.0	1.186697e+06	lh
+...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...
+447	sub-0224	21.75	M	2.076	2.653	2.098	2.307	2.463	2.735	2.602	...	2.136	3.253	2.495	2.309	2.562	2.418	2.41761	1140289.0	1.302062e+06	rh
+448	sub-0225	20.25	F	2.513	2.495	2.141	2.492	2.757	2.553	2.238	...	2.304	2.870	2.275	2.481	2.533	2.009	2.43156	1080245.0	1.395822e+06	lh
+449	sub-0225	20.25	F	3.061	2.164	2.097	2.462	2.753	3.134	2.786	...	2.174	3.429	2.385	2.378	2.303	2.105	2.41200	1080245.0	1.395822e+06	rh
+450	sub-0226	20.00	M	3.010	2.189	2.562	3.142	4.072	3.051	2.292	...	2.375	2.812	2.756	2.524	2.617	2.495	2.62877	1257771.0	1.583713e+06	lh
+451	sub-0226	20.00	M	3.851	2.270	2.274	2.610	4.198	3.421	3.007	...	2.371	4.938	2.894	2.663	2.445	2.524	2.63557	1257771.0	1.583713e+06	rh
+452 rows × 81 columns
+~~~
+{: .output}
 
-#### 5.1.1.2. Regional volumetric analysis
-Software such as FSL and FreeSurfer can be used for segmentation of regions of interest. For us to conveniently use such pipelines on this platform, we use [NiPype](https://nipype.readthedocs.io/en/0.12.0/index.html) which is an open-source Python project that provides a uniform interface to existing neuroimaging software.
+We can plot the cortical thickness data as a function of age for a single ROI to have an idea of what we may find when applying our model on all ROIs. Let's look for example at the anterior mid-cingulate cortex (`G_and_S_cingul_Mid_Ant`). 
 
-Several interfaces available through NiPype maybe used for this task. We will be looking at one example for the sake of simplicity.
+~~~
+response = 'G_and_S_cingul_Mid_Ant'
+predictor = 'age'
+g = sns.scatterplot(x=predictor, y=response, hue='hemi', data=plot_df)
+~~~
+{: .language-python}
 
-#### • Using FSL to segment a region of interest
-We use a single sMRI ([```structural.nii.gz```](local_data/6_Statistical_Analysis/structural.nii.gz)) from the haxby dataset and make a copy of it in our current working directory to make processing easier.
-```
-haxby_dataset = datasets.fetch_haxby()
-anat_file = haxby_dataset.anat[0]
-```
-```
-import shutil
-shutil.copyfile(anat_file,os.path.join(os.getcwd(),'structural.nii.gz'))
-```
-FSL First can be used for segmentation of the required structures. For this example, we focus on the left hippocampus (a subcortical structure). 
-```
-first = fsl.FIRST()
-first.inputs.in_file  = 'structural.nii.gz'
-first.inputs.out_file = 'segmented.nii.gz'
-first.inputs.list_of_specific_structures=['L_Hipp']
-res = first.run()
-```
-If you need to segment for all the structures provided, simply comment ```first.inputs.list_of_specific_structures=['L_Hipp']```.
-Once the process is complete, the segmented output can be viewed as follows:
-```
-T1w_img   =nib.load('structural.nii.gz')
-seg_labels=nib.load('segmented-L_Hipp_first.nii.gz')
-from nilearn import plotting
-plotting.plot_roi(roi_img=seg_labels, bg_img=T1w_img, alpha=0.9, cmap="cool",dim=-.5);
-```
-Within your working directory, there will be several output files created by FSL. Here, the _first.nii.gz_ is the original output, while the _corr.nii.gz_ files may have had boundary correction applied to them (depending on the structure).
-(Fun fact: the value assigned to _dim_ in _plotting_roi_ controls the visibility of the background image). 
+![Example of cortical thickness variation with age in an ROI](../fig/episode_6/roi_thickness_age.png)
 
-<img src="../fig/episode_6/5_HippL_FSL.png" width="470" height="200" />
-The volume of the segemented region can be found using _imagestats_. 
+Interesting ! Let's investigate more formally a potential association of cortical thickness with age in young adults.
 
-(You will also be able to notice a considerable difference in volume estimations in _first.nii.gz_ and _corr.nii.gz_.) 
+### Creating and fitting a statistical model
 
-```
-import nibabel.imagestats as imagestats
-imagestats.mask_volume(nib.Nifti1Image(seg_labels.get_fdata(), np.eye(4)))
-```
+We will implement an ordinary least square (OLS) regression model. Before applying to all ROIs and correcting for multiple comparison, let's test it on our previous ROI example.
 
-```
-OUT[]: 4189.0
-```
-💡 **Exercise 5.1**: (a) Can you follow the same steps above to segment a different structure of interest? <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                     (b) Can you edit the code above (using the suggestions in the comments) to segment all ROIs using FSL FIRST? 
-<details> <summary markdown="span"> Click here to see what the overlayed segmented labels would look like.</summary>
-  
-<img src="../fig/episode_6/5_All_FSL.png" width="1000" height="300" />
-  
-The volume of the segemented regions can be found using _imagestats_.
-  </details>
+For this purpose we use the Python `statsmodels` package. We can create a model formula `{response} ~ {predictor} + {covariates}` (similar to R) and passing it as an argument to the `ols` method before fitting our model. In addition of sex, we will use the total intra-cranial volume (TIV) as covariate.
 
-#### • Using FreeSurfer to segment regions of interest
-Similar to FSL, FreeSurfer can be used through the NiPype interface as well. The ```recon-all``` process on freesurfer allows us to obtain all or any part of the cortical reconstruction process. This process is fairly time consuming. The code below, adapted from the [NiPype beginners guide](https://miykael.github.io/nipype-beginner-s-guide/prepareData.html), can be used to achieve this.  
+~~~
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
 
-```
-# Import modules
-import os
-from os.path import join as opj
-from nipype.interfaces.freesurfer import ReconAll
-from nipype.interfaces.utility import IdentityInterface
-from nipype.pipeline.engine import Workflow, Node
+response = 'G_and_S_cingul_Mid_Ant'
+predictor = 'age'
+hemi = 'lh'
+hemi_df = fs_all_df[fs_all_df['hemi']==hemi]
+covariates = 'eTIV + C(sex)'
+# Fit regression model
+results = smf.ols(f"{response} ~ {predictor} + {covariates}", data=hemi_df).fit()
+~~~
+{: .language-python}
 
-# Specify important variables
-experiment_dir = '~/nipype_tutorial'           # location of experiment folder
-data_dir = opj(experiment_dir, 'data')         # location of data folder
-fs_folder = opj(experiment_dir, 'freesurfer')  # location of freesurfer folder
+we can now look at the results to check for variance explained and statistical significance.
 
-subject_list = ['sub001', 'sub002', 'sub003', 'sub004', 'sub005', 'sub006',
-                'sub007', 'sub008', 'sub009','sub010']   # subject identifier
+~~~
+results.summary()
+~~~
+{: .language-python}
 
-T1_identifier = 'struct.nii.gz'                  # Name of T1-weighted image
+~~~
+OLS Regression Results
+Dep. Variable:	G_and_S_cingul_Mid_Ant	R-squared:	0.060
+Model:	OLS	Adj. R-squared:	0.047
+Method:	Least Squares	F-statistic:	4.728
+Date:	Thu, 03 Jun 2021	Prob (F-statistic):	0.00322
+Time:	02:41:24	Log-Likelihood:	62.682
+No. Observations:	226	AIC:	-117.4
+Df Residuals:	222	BIC:	-103.7
+Df Model:	3		
+Covariance Type:	nonrobust		
 
-# Create the output folder - FreeSurfer can only run if this folder exists
-os.system('mkdir -p %s'%fs_folder)
+              coef	    std err	     t	    P>|t|	    [0.025	0.975]
+Intercept     3.2906	     0.183	     17.954	  0.000	    2.929	    3.652
+C(sex)[T.M]  -0.0097	   0.033	    -0.296	  0.768	   -0.074	    0.055
+age          -0.0258	   0.007	    -3.706	  0.000	   -0.040	   -0.012
+eTIV          1.612e-08	 7.58e-08	 0.213	    0.832	   -1.33e-07	1.66e-07
 
-# Create the pipeline that runs the recon-all command
-reconflow = Workflow(name="reconflow")
-reconflow.base_dir = opj(experiment_dir, 'workingdir_reconflow')
+Omnibus:	2.038	Durbin-Watson:	2.123
+Prob(Omnibus):	0.361	Jarque-Bera (JB):	1.683
+Skew:	-0.157	Prob(JB):	0.431
+Kurtosis:	3.282	Cond. No.	2.03e+07
+~~~
+{: .output}
 
-# Some magical stuff happens here (not important for now)
-infosource = Node(IdentityInterface(fields=['subject_id']),
-                  name="infosource")
-infosource.iterables = ('subject_id', subject_list)
+> ## Rapid statistical interpretation
+>
+> Can you provide one sentence summarizing the results of the OLS model regarding cortical thickness and age ?
+>
+{: .challenge}
 
-# This node represents the actual recon-all command
-reconall = Node(ReconAll(directive='all', subjects_dir=fs_folder), name="reconall")
+To apply the model to all the ROIs, we use the same code as before but within a for loop. Note that a custom function `format_ols_results` has been created to save the results from the previous output in a dataframe.
 
-# This function returns for each subject the path to struct.nii.gz
-def pathfinder(subject, foldername, filename):
-    from os.path import join as opj
-    struct_path = opj(foldername, subject, filename)
-    return struct_path
+~~~
+# OLS result df
+ols_df = pd.DataFrame()
+predictor = 'age'
+covariates = 'eTIV + C(sex)'
+for hemi in ['lh','rh']:
+    hemi_df = fs_all_df[fs_all_df['hemi']==hemi]
+    for response in roi_cols:
+        res = smf.ols(f"{response} ~ {predictor} + {covariates}", data=hemi_df).fit()
+        res_df = format_ols_results(res)
+        res_df['response'] = response
+        res_df['hemi'] = hemi
+        ols_df = ols_df.append(res_df)
+ols_df
+~~~
+{: .language-python}
 
-# This section connects all the nodes of the pipeline to each other
-reconflow.connect([(infosource, reconall, [('subject_id', 'subject_id')]),
-                   (infosource, reconall, [(('subject_id', pathfinder,
-                                             data_dir, T1_identifier),
-                                            'T1_files')]),
-                   ])
+~~~
+          index          coef       std err       t  P>|t|        [0.025        0.975]        R2  \
+0     Intercept  2.481300e+00  2.210000e-01  11.239  0.000  2.046000e+00  2.916000e+00  0.004184   
+1   C(sex)[T.M] -7.200000e-03  3.900000e-02  -0.182  0.856 -8.500000e-02  7.100000e-02  0.004184   
+2           age -7.700000e-03  8.000000e-03  -0.921  0.358 -2.400000e-02  9.000000e-03  0.004184   
+3          eTIV  1.781000e-08  9.140000e-08   0.195  0.846 -1.620000e-07  1.980000e-07  0.004184   
+0     Intercept  2.593400e+00  1.650000e-01  15.732  0.000  2.269000e+00  2.918000e+00  0.018302   
+..          ...           ...           ...     ...    ...           ...           ...       ...   
+3          eTIV  4.495000e-08  4.820000e-08   0.933  0.352 -5.000000e-08  1.400000e-07  0.075192   
+0     Intercept  3.044100e+00  2.870000e-01  10.589  0.000  2.478000e+00  3.611000e+00  0.040983   
+1   C(sex)[T.M] -8.830000e-02  5.100000e-02  -1.718  0.087 -1.900000e-01  1.300000e-02  0.040983   
+2           age -2.590000e-02  1.100000e-02  -2.370  0.019 -4.700000e-02 -4.000000e-03  0.040983   
+3          eTIV  1.439000e-07  1.190000e-07   1.210  0.228 -9.050000e-08  3.780000e-07  0.040983  
+~~~
+{: .output}
 
-# This command runs the recon-all pipeline in parallel (using 8 cores)
-reconflow.run('MultiProc', plugin_args={'n_procs': 8})
+We correct the results for multiple comparison with Bonferonni correction before plotting.
 
-```
-If you want to use the same dataset made available by nipype, you can download and arrange the data by running [this script](local_data/6_Statistical_Analysis/5_Download_NiPypeTutorial_Data.sh). 
-Also, make sure that your ```$FREESURFER_HOME``` (```path/to/freesufer/location```) and ```$SUBJECTS_DIR``` (```/path/to/subjects/outputs``` e.g. ```SUBJECTS_DIR=~/nipype_tutorial/freesurfer```) paths are set properly.
+~~~
+predictors = ['age']
+all_rois_df = ols_df[ols_df['index'].isin(predictors)]
+# Multiple comparison correction
+n_comparisons = 2 * len(roi_cols) # 2 hemispheres
+alpha = 0.05
+alpha_corr = 0.05 / n_comparisons
+# Get significant ROIs and hemis
+sign_rois = all_rois_df[all_rois_df['P>|t|'] < alpha_corr]['response'].values
+sign_hemis = all_rois_df[all_rois_df['P>|t|'] < alpha_corr]['hemi'].values
+# Printing correction properties and results
+print(f"Bonferroni correction with {n_comparisons} multiple comparisons")
+print(f'Using corrected alpha threshold of {alpha_corr:5.4f}')
+print("Significant ROIs:")
+print(list(zip(sign_rois, sign_hemis)))
+~~~
+{: .language-python}
 
-Once the process is complete, your folder structure containing original data and output files will be available in your working directory/SUBJECTS_DIR.
-<details> <summary markdown="span">Click here to take a look at the overview of the folder structure.</summary>
+~~~
+Bonferroni correction with 148 multiple comparisons
+Using corrected alpha threshold of 0.0003
+Significant ROIs:
+[('G_and_S_cingul_Mid_Ant', 'lh'), ('G_and_S_cingul_Mid_Post', 'lh'), ('G_front_inf_Opercular', 'lh'), ('G_front_middle', 'lh'), ('G_front_sup', 'lh'), ('G_occipital_middle', 'lh'), ('G_temp_sup_G_T_transv', 'lh'), ('S_circular_insula_sup', 'lh'), ('S_front_middle', 'lh'), ('S_front_sup', 'lh'), ('S_parieto_occipital', 'lh'), ('S_precentral_sup_part', 'lh'), ('S_temporal_sup', 'lh'), ('G_and_S_cingul_Mid_Post', 'rh'), ('G_cuneus', 'rh'), ('G_front_inf_Triangul', 'rh'), ('G_front_middle', 'rh'), ('G_front_sup', 'rh'), ('G_pariet_inf_Angular', 'rh'), ('G_precentral', 'rh'), ('G_rectus', 'rh'), ('G_temporal_middle', 'rh'), ('S_circular_insula_sup', 'rh'), ('S_front_sup', 'rh')]
+~~~
+{: .output}
 
-```
-nipype_tutorial
-|_data
-    |_sub001
-    |_sub002
-    ...
-    |_sub010
-|_freesurfer
-    |_sub001
-      |_label
-      |_mri
-      |_scripts 
-      |_stats   
-      |_surf    
-      |_tmp    
-      |_touch   
-      |_trash
-    ...
-    |_sub010
-```
-</details>
+We plot the p-values on a log scale, indicating both the non-corrected and corrected alpha level.
+~~~
+g = sns.catplot(x='P>|t|', y='response', kind='bar', hue='index', col='hemi', data=all_rois_df)
+g.set(xscale='log', xlim=(1e-5,2))
+for ax in g.axes.flat:
+    ax.axvline(alpha, ls='--',c='tomato')
+    ax.axvline(alpha_corr, ls='--',c='darkred')
+~~~
+{: .language-python}
 
-Considering a single subject: The required stats could be found within the respective folders. Segmentation statistics of subcortical structures can be found in _aseg.stats_ . 
+![Cortical thickness vs age - p values](../fig/episode_6/ct_age_pvals.png)
 
-A _.zip_ file containing FreeSurfer ```recon-all``` outputs for a single subject ```sub001``` can be downloaded [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/devdinie/SDC-BIDS-sMRI/tree/gh-pages/local_data/6_Statistical_Analysis/sub001_ReconAll).
+And the adjusted R-squared
+~~~
+g = sns.catplot(x='R2_adj', y='response', col='hemi', kind='bar', data=all_rois_df)
+~~~
+{: .language-python}
 
-For this subject, the segmented left hippocampal volume is: ``` 4287 mm^3 ```
+![Cortical thickness vs age - adjusted R squared](../fig/episode_6/ct_age_r2.png)
 
-#### ROI differences in Young, Middle Aged, Nondemented and Demented Older Adults
+Finally we can plot the t-scores on a mesh for global brain results visualization.
 
-Once a dataset is processed, the volumes of each ROI can be collected and included in a .csv file (or other formats you prefer). 
-
-As processing takes time, for this example we use processed freesurfer outputs for ROI that is available on the OASIS website. The summarized freesurfer outputs from the OASIS1 dataset can be downloaded [here](local_data/6_Statistical_Analysis/OASIS_FS_ASEG.csv).
-Older adults who are demented at the time of scanning and those who are progressing have been given a Clinical Dementia Rating (CDR).
-
-We can observe the ROI volumetric differences in adults and how these volumes vary based on their CDR. For this example, we consider 6 regions of interest: Left/Right Amygdala, Hippocampus and Lateral ventricle.
-
-```
-import pandas     as pd
-import seaborn    as sns
-import matplotlib
-import matplotlib.pyplot as plt
-oasis_aseg = pd.read_csv("/Users/swapna/DataCarpentry_sMRI/OASIS_FS_ASEG.CSV")
-../fig, axes = plt.subplots(2, 3, ../figsize=(18, 10))
-
-sns.boxplot(ax=axes[0, 0], data=oasis_aseg, x='CDR', y='Right-Amygdala VOLUME',hue='CDR',palette='pastel')
-sns.boxplot(ax=axes[0, 1], data=oasis_aseg, x='CDR', y='Right-Hippocampus VOLUME',hue='CDR',palette='pastel')
-sns.boxplot(ax=axes[0, 2], data=oasis_aseg, x='CDR', y='Right-Lateral-Ventricle VOLUME',hue='CDR',palette='pastel')
-
-sns.boxplot(ax=axes[1, 0], data=oasis_aseg, x='CDR', y='Left-Amygdala VOLUME',hue='CDR',palette='pastel')
-sns.boxplot(ax=axes[1, 1], data=oasis_aseg, x='CDR', y='Left-Hippocampus VOLUME',hue='CDR',palette='pastel')
-sns.boxplot(ax=axes[1, 2], data=oasis_aseg, x='CDR', y='Left-Lateral-Ventricle VOLUME',hue='CDR',palette='pastel')
-```
-We can observe that the ROI volumes are smaller when subject is likely to have a higher CDR.
-<img src="../fig/episode_6/5_SubVolumes.png" width="760" height="390" />
-
-💡 **Exercise 5.2**: Can you find the effect size for the ROIs in adults over 60? (Download the .csv [here](local_data/6_Statistical_Analysis/OASIS_FS_ASEG_OVER60.csv)).
-
-<details>
-  <summary markdown="span">Hint: You need to look cohen's D effect size between demented and non-demented adults. Click for more help</summary>
-
-```
-import numpy as np
-def calc_effect_size(group1,group2):
-    mean1 = np.mean(group1)
-    mean2 = np.mean(group2)
-    std1  = np.std(group1)
-    std2  = np.std(group2)
-    
-    numerator   = (mean1-mean2)
-    denominator = np.sqrt(np.square(std1)+np.square(std2))/2
-    effect_size= numerator/denominator
-    return effect_size
-```
-</details>
-
-
-The output we got looks like:
-
-<img src="../fig/episode_6/5_EffectSize.png" width="400" height="230" />
-
-Click [here](local_data/6_Statistical_Analysis/5_RelatedStudies_statAnalysis.md) to look at releated analysis from studies! 
-
-### 5.1.2. Cortical surface parcellations 
-Cortical surfaces can be parcellated into anatomically and functionally meaningful regions. This fascilitates identification and characterization of morphometric and connectivity alterations in the brain that may occur as a result of a disease or aging. 
-For example utilities in the FreeSurfer software includes a technique for automatically assigning a neuroanatomical label to each location on a cortical surface model based on probabilistic information estimated from a manually labeled training set. As this procedure incorporates both geometric information derived from the cortical model, and neuroanatomical convention, the result is a complete labeling of cortical sulci and gyri.
-Some commonly used cortical surface parcellations are shown below. 
-
-#### 5.1.2.1. Visualizing cortical surface parcellations
-###### Destrieux Atlas (Destrieux 2010)
-```
+First we import the Destrieux mesh and labels from `nilearn`.
+~~~
+# Retrieve both the Destrieux atlas and labels
 destrieux_atlas = datasets.fetch_atlas_surf_destrieux()
 parcellation = destrieux_atlas['map_left']
-
-# Retrieve fsaverage5 surface dataset for the plotting background. It contains
-# the surface template as pial and inflated version and a sulcal depth maps which is used for shading
+labels = destrieux_atlas['labels']
+labels = [l.decode('utf-8') for l in labels]
+# Retrieve fsaverage5 surface dataset for the plotting background.
 fsaverage = datasets.fetch_surf_fsaverage()
+~~~
+{: .language-python}
 
-# Lateral view is observed in this example.
-# Other views (e.g. posterior, ventral may also be used)
-plotting.plot_surf_roi(fsaverage['pial_left'], roi_map=parcellation,hemi='left', 
-                       view='lateral',bg_map=fsaverage['sulc_left'], bg_on_data=True,darkness=.5)
-```
-<img src="../fig/episode_6/5_Fig4_corAtlas_Destrieux.png" width="230" height="170" />
+Then we a create a statistical map containing one t-score value for each ROI of the mesh. Because the ROI labels are not identical between Freesurfer and `nilearn`, we use a custom function `map_fs_names_to_nilearn` to convert them.
 
-#### 5.1.2.2. Regional cortical thickness analysis
+~~~
+### Assign a t-score to each surface atlas ROI
+stat_map_lh = np.zeros(parcellation.shape[0], dtype=int)
+nilearn_stats_lh, nilearn_stats_rh = map_fs_names_to_nilearn(all_rois_df, new2old_roinames)
+# For left hemisphere
+for roi, t_stat in nilearn_stats_lh.items():
+    stat_labels = np.where(parcellation == labels.index(roi))[0]
+    stat_map_lh[stat_labels] = t_stat
+# For right hemisphere
+stat_map_rh = np.zeros(parcellation.shape[0], dtype=int)
+for roi, t_stat in nilearn_stats_rh.items():
+    stat_labels = np.where(parcellation == labels.index(roi))[0]
+    stat_map_rh[stat_labels] = t_stat
+~~~
+{: .language-python}
 
-#### • Using FreeSurfer to find Cortical thicknesses
-Regional cortical thickness values are also provided by the FreeSurfer ```recon-all``` process. 
-An easy way to view this requires the ```freesurfer-stats``` package (which you can get using ```pip install freesurfer-stats```). 
-For example, if we were to view the related stats for the right hemisphere [_rh.aparc.stats_] in the ```ReconAll``` outputs for ```sub001``` provided [here](https://github.com/devdinie/sMRI_StatisticalAnalysis/tree/main/5_OtherFiles/sub001_ReconAll) [Click to download .zip](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/devdinie/sMRI_StatisticalAnalysis/tree/main/5_OtherFiles/sub001_ReconAll), then we can:
+Finally we plot the results with `nilearn` `plot_surf_roi` function.
+~~~
+# Lateral view of left hemisphere
+plotting.plot_surf_roi(fsaverage['pial_left'], roi_map=stat_map_lh, hemi='left', view='lateral', 
+                       bg_map=fsaverage['sulc_left'], bg_on_data=True);
+# Medial view of right hemisphere
+plotting.plot_surf_roi(fsaverage['pial_right'], roi_map=stat_map_rh, hemi='right', view='medial',
+                       bg_map=fsaverage['sulc_right'], bg_on_data=True);
+~~~
+{: .language-python}
 
-```
-from freesurfer_stats import CorticalParcellationStats
-stats = CorticalParcellationStats.read('/Users/swapna/DataCarpentry_sMRI/nipype_tutorial/freesurfer/sub001/stats/rh.aparc.stats')
-stats.headers['subjectname']
-stats.headers['CreationTime'].isoformat()
-stats.headers['cvs_version']
-stats.headers['cmdline'][:64]
-stats.hemisphere
-```
-```
-stats.structural_measurements
-```
-The whole brain measurements can be viewed using:
+![Cortical thickness vs age - surface t values on left hemi](../fig/episode_6/ct_age_tvals_left_hemi.png)
 
-```
-stats.whole_brain_measurements
-```
-If we were to view the mean thickness from the whole brain measurements loaded, we can:
+![Cortical thickness vs age - surface t values on right hemi](../fig/episode_6/ct_age_tvals_right_hemi.png)
 
-```
-stats.whole_brain_measurements[['mean_thickness_mm']]
-```
-```
-OUT[] mean_thickness_mm
-      0	2.46222
-```
 
-#### • Cortical thickness analysis: Effects of aerobic exercise on regional cortical thicknesses of patients with schizophrenia
+## Statistical analysis: local GM changes assessed with Voxel Based Morphometry (VBM)
 
-Data and Processed Data used in this example are adapted from [https://osf.io/sfgxk/](https://osf.io/sfgxk/), with reference to the paper by [Takahashi et al (2020)](https://www.sciencedirect.com/science/article/pii/S092099641930502X).
-Download the adapted .csv file containing measures provided by Freesurfer recon-all for this dataset [here](local_data/6_Statistical_Analysis/cortical_thickness_results.csv). 
 
-In this study the effect of aerobic exercise on cortical thickness was observed across 3 different groups at 4 time points over a period of 24 weeks (i.e. at 0, 6, 12 and 24 weeks). The given .csv file contains cortical thickness for 8 regions. 
+#### Preprocessing for VBM
 
-The 3 groups are: 1. Schizophrenia patients with exercise (SCZ_EXERCISE) 2. Schizophrenia without exercise (SCZ_EXERCISECONT) and 3. Healthy controls with exercise (HC_EXERCISE).
-The 8 regions of interest include left and right entorhinal, parahippocampal, medial prefrontal and lateral prefrontal cortices.
 
-You can load and view the data from the give .csv file using the following code:
+#### VBM statistical analysis
 
-```
-SCZ_CT = pd.read_csv("cortical_thickness_results.csv")
-```
-The cortical thicknesses for the ROIs can be plotted as follows over the four time points.
-
-```
-../fig, axes = plt.subplots(2, 4, ../figsize=(18, 10))
-row=0; colm=3
-for col in range(3,11): 
-    colm=col-2
-    if col>6: row=1; colm=colm-4
-    
-    sns.boxplot(ax=axes[row, colm-2],x='time point', y=SCZ_CT.columns.tolist()[col], 
-                width=0.5, data=SCZ_CT, hue='Experimental_group', 
-                palette='pastel').set(xlabel='Time point/weeks', ylabel='Cortical thickness/mm',title=SCZ_CT.columns.tolist()[col])
-    
-    sns.stripplot(ax=axes[row, colm-2],x='time point', y=SCZ_CT.columns.tolist()[col], data=SCZ_CT, 
-                  hue='Experimental_group',jitter=0.5, dodge=True,alpha=0.7,palette='pastel')
-
-    h, l = axes[row, colm-2].get_legend_handles_labels()
-    axes[row, colm-2].legend(h, ['SCZ_EXERCISE', 'SCZ_EXERCISECONT','HC_EXERCISE'], title="EXPERIMENTAL GROUP:", loc='lower right',fontsize='small')
-```
-
-<img src="../fig/episode_6/5_CorticalThickness_Img1.png" width="990" height="520" />
-
-
-To clearly observe the effect of aerobic exercise on schizophrenia patients and schizophrenia controls, the mean cortical thickness of across all ROIs for each subject can be observed over time.
-
-💡 **Exercise 5.3**:
-                     (a) For each ROI, can you calculate the mean cortical thickness across the subjects for each group at each time point?
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                     (b) What do you observe when the cortical thickness for each subject is plotted over the 4 time points for:                 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                     (i)  the schizophrenia group with exercise and         
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                     (ii) the schizophrenia group controls.
-
-<details> <summary markdown="span">Click here for hints (overview of the expected outputs).</summary>
-  
-  (a) Mean cortical thickness across the subjects for each group at each time point
-  
-  <img src="../fig/episode_6/5_MeanCT_forGroups_A.png" width="700" height="420" />
-  
-  _Hint_ : Refer to the the _groupby_ attribute in pandas.Dataframe ( [click for example](https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.GroupBy.mean.html) ). Specifically, you would want to group by both experimental group and time point, to calculate the mean of the remaining column.
-  
-  (b) CT for each subject over the 4 time points for SCZ_EXERCISE
-  
-  For example, for the left entorhinal cortex
-  
-  <img src="../fig/episode_6/5_CTchanges_SCZexercise_Bi.png" width="700" height="310" />
-
-</details>
-
-
-## 5.2. Voxel-Based Morphometry (VBM)
-
-Voxel-based morphometry (VBM) involves a voxel-wise comparison of the local concentration of gray matter between two groups of subjects. This process involves spatially normalizing all the images in the dataset being used into the same stereotactic space. The gray matter (GM) regions are then segmented from the spatially normalized images and the gray matter segments are smoothed afterwards. Voxel-wise parametric statistical tests which compare the smoothed GM images from the two groups are performed. Corrections for multiple comparisons are
-made using the theory of Gaussian random fields. 
-
-#### • Preprocessing for VBM
-
-The statistical parametric mapping software (latest: SPM12) provided through the NiPype interface allows preprocessing required for VBM analysis.
-[SPM12](https://www.fil.ion.ucl.ac.uk/spm/software/spm12/) can be downloaded [here](https://www.fil.ion.ucl.ac.uk/spm/software/download/) and MATLAB (> ver 7) needs to have been installed.
-
-The [tutorial](https://www.fil.ion.ucl.ac.uk/~john/misc/VBMclass10.pdf) by Ashburner and [installation guide](https://en.wikibooks.org/wiki/SPM/Installation_on_64bit_Mac_OS_(Intel)#Installation_2) in the SPM wiki will be helpful during setting up. Make sure the following is included when running your code:
-
-```spm.SPMCommand.set_mlab_paths(paths='/path/to/spm12/', matlab_cmd='/path/to/MATLAB_R20xxa.app/bin/matlab -nodesktop -nosplash')```
-
-The process using **SPM** mainly involves three steps:
-1. Using NewSegment
-2. Using DARTEL
-3. Normlizing to MNI space
-
-
-**1. Using NewSegment**
-
-To observe the outputs over these tasks, we have used a single T1w image [```structural.nii```](local_data/6_Statistical_Analysis/structural.nii).
-
-This lets us separate structural images into different tissue classes. Tissues types identified by this process are grey matter (c1), white matter (c2) and CSF (c3), where an output image with the filename format _cXstructural.nii_ will be generated for each tissue type. 
-
-Two more images with the filname format _rcXstructural.nii_ will also be generated, which are the DARTEL imported versions of the tissue class images,
-which will be aligned together next.
-
-```
-import nipype
-import nipype.interfaces.spm    as spm
-import nipype.interfaces.matlab as matlab
-
-spm.SPMCommand.set_mlab_paths(paths=os.path.join(tutorial_root,'/VBM/spm12/'), matlab_cmd='/Applications/MATLAB_R2021a.app/bin/matlab -nodesktop -nosplash')
-```
-
-```
-seg = spm.NewSegment()
-seg.inputs.channel_files = 'structural.nii'
-
-tissue1 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 1), 2, (True,True)  , (False, False))
-tissue2 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 2), 2, (True,True)  , (False, False))
-tissue3 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 3), 2, (True,False) , (False, False))
-tissue4 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 4), 2, (False,False), (False, False))
-tissue5 = ((os.path.join(tutorial_root,'/VBM/spm12/tpm/TPM.nii'), 5), 2, (False,False), (False, False))
-
-seg.inputs.tissues = [tissue1, tissue2, tissue3, tissue4, tissue5]
-seg.run()
-
-```
-Outputs from this step will be as follows:
-
-<img src="../fig/episode_6/5_VBM_PP_NewSeg.png" width="700" height="310" />
-
-**2. Run DARTEL (create Templates)**
-
-This step is performed to increase the accuracy of inter-subject alignment by modelling the shape of each brain using numerous parameters (specifically, 3 parameters per voxel). During this process, gray matter between images are aligned, while simultaneously aligning white matter. Average template data are generated as a result, and data are iteratively assigned to this. The inputs to this stage are the “rc1” and “rc2” images, that are generated in the previous step. The outputs generated during this stage include the “u_rc1” file, as well as a series of template images.
-
-Repeat step one for two structural images [```structural_1.nii```](local_data/6_Statistical_Analysis/structural_2.nii) and [```structural_2.nii```].(local_data/6_Statistical_Analysis/structural_2.nii).
-Then process the generated output rcX files using the following code.
-
-```
-rc1_NewSeg1 = nib.load('rc1structural_1.nii')
-rc2_NewSeg1 = nib.load('rc2structural_1.nii')
-
-rc1_NewSeg2 = nib.load('rc1structural_2.nii')
-rc2_NewSeg2 = nib.load('rc2structural_2.nii')
-
-dartel = spm.DARTEL()
-dartel.inputs.image_files = [['rc1structural_1.nii','rc1structural_2.nii'],['rc2structural_1.nii', 'rc2structural_2.nii']]
-dartel.run()
-```
-
-The inputs to this step (rc1 and rc2 for ```structural_1.nii``` and ```structural_2.nii```) are shown below:
-
-<img src="../fig/episode_6/5_VBM_PP_DARTELinput.png" width="700" height="310" />
-
-The ```u_rc1``` outputs generated in this stage (```u_rc1structural_1_Template.nii``` and ```u_rc1structural_2_Template.nii```) and the final template (i.e. ```Template_6.nii```), will be inputs to the next stage in VBM preprocessing. 
-
-
-**3. Normalise to MNI Space**
-
-This step is to generate smoothed, spatially normalised and Jacobian scaled grey matter images in MNI space, using the u_rc1 files from the previous step.
-
-The smoothed images represent the regional volume of tissue. Statistical analysis are performed on these data. Therefore, it is likely that significant differences among the preprocessed data will better reflect differences among the regional volumes of grey matter.
-
-To achieve this, the following code can be used:
-
-```
-urc1_dartel_1 = nib.load('u_rc1structural_1_Template.nii')
-urc1_dartel_2 = nib.load('u_rc1structural_2_Template.nii')
-
-c1_structural_1 = nib.load('c1structural_1.nii')
-c1_structural_2 = nib.load('c1structural_2.nii')
-
-nm = spm.DARTELNorm2MNI()
-
-nm.inputs.template_file   = 'Template_6.nii'
-nm.inputs.flowfield_files = ['u_rc1structural_1_Template.nii','u_rc1structural_2_Template.nii']
-nm.inputs.apply_to_files  = ['c1structural_1.nii', 'c1structural_1.nii']
-nm.inputs.modulate        = True
-nm.run()
-```
-Example of the expected output:
-
-<img src="../fig/episode_6/5_VBM_PP_norm2mni_OP.png" width="400" height="170" />
-
-
-A simple example for a VBM application is detailed below.
-
-#### • Voxel-based morphometry to study the relationship between aging and gray matter density (adapted from [Nilearn examples](https://nilearn.github.io/auto_examples/02_decoding/plot_oasis_vbm.html)
-
-The OASIS dataset is used in this example and it has been preprocessed using standard VBM pipeline (as described above) to create VBM maps, which will be used here.
-
-**Predictive modeling analysis: VBM bio-markers of aging?**
-
-A SVM-ANOVA nilearn pipeline is used to predict age from the VBM data, based on 100 subjects from the OASIS dataset.
-
-Note that for an actual predictive modeling study of aging, the study should be run on the full set of subjects. (Note: the number of subjects may not be ideal for a prediction model that performs well. The number of subjects is limited in this case for simplicity and because of memory and time limitations.)
-
-To load data and initialize: 
-
-```
-import numpy as np
-import matplotlib.pyplot as plt
-from nilearn import datasets
-from nilearn.input_data import NiftiMasker
-from nilearn.image import get_data
-
-n_subjects = 100 
-
-oasis_dataset             = datasets.fetch_oasis_vbm(n_subjects=n_subjects)
-gray_matter_map_filenames = oasis_dataset.gray_matter_maps
-
-age = oasis_dataset.ext_vars['age'].astype(float)
-
-# Split data into training set and test set
-from sklearn.model_selection import train_test_split
-gm_imgs_train, gm_imgs_test, age_train, age_test = train_test_split(gray_matter_map_filenames, age, train_size=.6, random_state=0)
-
-# print basic information on the dataset
-print('First gray-matter anatomy image (3D) is located at: %s' % oasis_dataset.gray_matter_maps[0])  # 3D data
-print('First white-matter anatomy image (3D) is located at: %s'% oasis_dataset.white_matter_maps[0]) # 3D data
-```
-
-Then, the loaded data are preprocessed:
-
-```
-nifti_masker   = NiftiMasker(standardize=False, smoothing_fwhm=2, memory='nilearn_cache')  # cache options
-gm_maps_masked = nifti_masker.fit_transform(gm_imgs_train)
-
-# The features with too low between-subject variance are removed using:class:sklearn.feature_selection.VarianceThreshold.
-
-from sklearn.feature_selection import VarianceThreshold
-variance_threshold = VarianceThreshold(threshold=.01)
-
-gm_maps_thresholded = variance_threshold.fit_transform(gm_maps_masked)
-gm_maps_masked      = variance_threshold.inverse_transform(gm_maps_thresholded)
-
-# The data is then converted back to the mask image in order to use it for decoding process
-mask = nifti_masker.inverse_transform(variance_threshold.get_support())
-
-```
-
-We then implement a **prediction pipeline with ANOVA and SVR** using nilearn.decoding.DecoderRegressor Object, as shown in the code below.
-
-For this, the built-in DecoderRegressor object is used to do ANOVA with SVR, where its estimator uses Cross Validation to select best models. In order to save time in this example, we only use 1-percent voxels that are most correlated with the age variable to fit. 
-
-```
-from nilearn.decoding import DecoderRegressor
-
-decoder = DecoderRegressor(estimator='svr', mask=mask, scoring='neg_mean_absolute_error',
-                           screening_percentile=1, n_jobs=1)
-
-# Fit and predict with the decoder
-decoder.fit(gm_imgs_train, age_train)
-
-
-# Sort test data for better visualization (trend, etc.)
-perm         = np.argsort(age_test)[::-1]
-age_test     = age_test[perm]
-gm_imgs_test = np.array(gm_imgs_test)[perm]
-age_pred     = decoder.predict(gm_imgs_test)
-
-prediction_score = -np.mean(decoder.cv_scores_['beta'])
-
-print("=== DECODER ===")
-print("explained variance for the cross-validation: %f" % prediction_score)
-print("")
-```
-
-To visualize the resulting outputs:
-
-```
-weight_img = decoder.coef_img_['beta']
-
-from nilearn.plotting import plot_stat_map, show
-
-bg_filename = gray_matter_map_filenames[0]
-
-z_slice = 0
-display = plot_stat_map(weight_img, bg_img=bg_filename, display_mode='z', cut_coords=[z_slice])
-display.title("SVM weights")
-show()
-```
-<img src="../fig/episode_6/5_VBM_OASIS_Eg.png" width="230" height="200" />
-
-<sub> Related citations: </sub>\
-<sub> "[Voxel-Based Morphometry—The Methods](https://www.fil.ion.ucl.ac.uk/~karl/Voxel-Based%20Morphometry.pdf)", John Ashburner and Karl J. Friston, NeuroImage(2000). </sub>\
-<sub> "[Voxel Based Morphometry of the Human Brain: Methods and Applications](https://www.fil.ion.ucl.ac.uk/spm/doc/papers/am_vbmreview.pdf)", Andrea Machelli, Cathy Price, Karl Friston, John Ashburner, Curr. Med. Imaging Reviews (2005). </sub>
+{% include links.md %}

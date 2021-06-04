@@ -15,14 +15,14 @@ keypoints:
 ![course_flow](../fig/episode_3/Course_flow_3.png)
 
 ## Why do we need spatial normalization
-- Compare and combine brain images across modalities, individuals, and studies
+### Compare and combine brain images across modalities, individuals, and studies
 
 ## What do we need for spatial normalization
-- A reference frame: A 3D space that assigns x,y,z coordinates to anatomical regions (independent of voxel dimensions!). 
-- A common template: a single or an average image volume as an alignment target 
-- An image registration algorithm
+#### 1. A reference frame: A 3D space that assigns x,y,z coordinates to anatomical regions (independent of voxel dimensions!). 
+#### 2. A common template: a single or an average image volume as an alignment target 
+#### 3. An image registration algorithm
 
-## Coordinate systems and spaces
+## 1. Coordinate systems and spaces
 - World coordinates
 - Anatomical coordinates
 - Image coordinates 
@@ -51,9 +51,10 @@ The origin and directions of anatomical coordinate system are defined by convent
         - Second dimension (Y) points towards the Anterior aspect of the head
         - Third dimension (Z) points towards the top of the head 
         - Directions are from the subject's perspective. In the RAS coordinate system, a point to the subject's left will have a negative x value.
+
 - Talairach space
-    - Derived from an unrepresentative single 60-yr old female cadaver brain 
-    - Ignores left-right hemispheric differences    
+    - Derived from a single 60-yr old female cadaver brain 
+
 - MNI space(s)
     - Similar to the original Talairach space but the Z-coordinate has approximately +3.5 mm offset relative to the Talairach coordinate.
 
@@ -74,7 +75,7 @@ For examples:
 #### _Image [source](https://www.slicer.org/wiki/Coordinate_systems)_ 
 
 
-> ## Coordinate systems
+> ## Quiz: coordinate systems
 >
 > What happens when you downsample a MR image? 
 >
@@ -86,7 +87,7 @@ For examples:
 {: .challenge}
 
 
-## MR image templates 
+## 2. MR image templates 
 - An anatomical template is an average MR volume whose voxels encode the average probability of different tissue classes (e.g. WM, GM, and CSF) at particular spatial location. The template creation is an iterative process comprising normalization, alignment, and averaging of a set of MR images from several different subjects. 
 
 - Structural T1‐weighted templates serve as a _common reference space_ and allow researchers to combine and compare data from multiple subjects. 
@@ -132,7 +133,7 @@ For examples:
 
 
 
-## Image registration
+## 3. Image registration
 
 #### A process that aligns an image from one coordinate space to another. 
 
@@ -182,7 +183,7 @@ _Note: Linear registrations are often used as an initialization step for non-lin
 
 
 
-> ## Image registration quiz
+> ## Quiz: Image registration
 >
 > What would the information encoded in the non-linear deformation tell you about the subject? 
 >
@@ -194,7 +195,7 @@ _Note: Linear registrations are often used as an initialization step for non-lin
 {: .challenge}
 
 
-### Python snippet (see [this notebook](../code/3_sMRI_spatial_norm.ipynb) for detailed example.)
+### Python snippet (see ../code/3_sMRI_spatial_norm.ipynb for detailed example.)
 ~~~
 from nilearn import plotting
 from nilearn import image

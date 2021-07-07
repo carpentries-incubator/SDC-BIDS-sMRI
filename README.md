@@ -6,7 +6,7 @@
 
 ## Background
 
-This is one sub-module within the [Neuroimaging cirriculum][neuro_cirriculum]. Visit the link to view all the modules associated with the Neuroimaging Carpentries program.
+This is one sub-module within the [Neuroimaging curriculum][neuro_curriculum]. Visit the link to view all the modules associated with the Neuroimaging Carpentries program.
 
 **sMRI Analysis in Python** is a programme developed to facilitate reproducibility in structural neuroimaging analyses. Python is emerging as a standard language of data analysis, visualization, and workflow building. More recently, it has rapidly been adopted by the neuroimaging community as a means of developing powerful open-source tools in favour of historically used opaque software such as AFNI, FSL and SPM. In addition, the barrier to entry to Python is low - meaning that you as the user can easily develop your own packages and contribute to the open-source codebase of neuroimaging!
 

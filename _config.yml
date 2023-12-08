@@ -10,7 +10,7 @@
 carpentry: "incubator"
 
 # Overall title for pages.
-title: "Structural MRI (Pre)processing and Neuroimaging Analysis" # FIXME
+title: "Overview of Structural MRI (Pre)processing and Neuroimaging Analysis" # FIXME
 
 # Life cycle stage of the lesson
 # See this page for more details: https://cdh.carpentries.org/the-lesson-life-cycle.html
@@ -30,7 +30,7 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "team@carpentries.org" # FIXME
+email: "nikhil.bhagwat@mcgill.ca" # FIXME
 
 # Sites.
 amy_site: "https://amy.carpentries.org/"

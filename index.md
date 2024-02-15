@@ -37,10 +37,6 @@ _Note: All of this may sound complicated, but we'll explain things step-by-step 
 ![course_flow](fig/index/Course_flow_0.png)
 
 
-<!-- this is an html comment -->
-
-{% comment %} This is a comment in Liquid {% endcomment %}
-
 > ## Prerequisites
 > Attendees must have some base familiarity with Python and NIfTI images in order to comfortably progress through the lesson
 {: .prereq}

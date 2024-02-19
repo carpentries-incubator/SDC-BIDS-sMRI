@@ -1,6 +1,7 @@
 ---
 title: Setup
 ---
+
 ## Setting up the tutorial environment
 
 ## Getting workshop material
@@ -24,12 +25,15 @@ git clone https://github.com/carpentries-incubator/SDC-BIDS-sMRI.git
 This will download the repository directly into your current directory.
 
 ### Setting up Python environment
+
 We use python version 3.6.0, but any newer version should also work (Python 2 versions haven't been tested). There are many methods to setting up a python environment but we'd recommend using some sort of virtual environment as to not break your system python install. Two methods (of many) are listed below:
 
 ### Method 1: Setting up conda environment (easiest) [Windows, Linux, MacOS]
+
 For easy set-up we recommend [Anaconda](https://www.anaconda.com/download/) to manage python packages for scientific computing. Once installed, setting up the python environment can be done quite easily:
 
 #### Windows
+
 1. Install Anaconda Python version 3.7
 2. Open **Anaconda Navigator**
 3. Click on **Environments** on the left pane
@@ -42,6 +46,7 @@ conda install -y numpy pandas scipy scikit-learn matplotlib seaborn jupyter ipyk
 conda install -y -c conda-forge awscli lxml nilearn nibabel statsmodels
 pip install pybids
 ```
+
 7. Close the terminal, click on the play button again and open **Jupyter Notebook**
 8. Navigate to <code>SDC-BIDS-sMRI</code> folder you downloaded earlier.
 9. Done!
@@ -60,6 +65,7 @@ pip install pybids
 ```
 
 ### Method 2: Using pyenv [Linux, MacOS]
+
 An alternative method uses [pyenv](https://github.com/pyenv/pyenv) with [pyenv virtualenv](https://github.com/pyenv/pyenv-virtualenv). This is a favourite because it seamlessly integrates multiple python versions and environments into your system while maintaining use of pip (instead of conda).
 
 ```
@@ -67,7 +73,7 @@ cd SDC-BIDS-sMRI
 pyenv virtualenv 3.6.0 SDC_sMRI_workshop_2021
 echo SDC_sMRI_workshop_2021 > .python-version
 pip install --requirement requirements.txt
-``` 
+```
 
 Finally open up the jupyter notebook to explore the tutorials:
 
@@ -80,9 +86,11 @@ cd SDC-BIDS-sMRI
 jupyter notebook
 
 ```
+
 ## Data used by the notebooks
-All datasets needed for the notebook examples are inside the ./SDC-BIDS-sMRI/local_data/ directory. 
+
+All datasets needed for the notebook examples are inside the ./SDC-BIDS-sMRI/local\_data/ directory.
 
 
-{% include links.md %}
+
 

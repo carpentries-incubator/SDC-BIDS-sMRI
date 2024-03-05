@@ -429,7 +429,7 @@ image origin and the spacing between two voxels (typically in mm).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Downsampling reduces the number of total voxels in the image.
 Consequently the voxel-spacing is increased as more anatomical space is
@@ -600,7 +600,7 @@ you about the subject?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The deformation fields encode information regarding local
 morphometric brain changes. These can be quantified using “Jacobians” of
@@ -617,25 +617,25 @@ example.)<a class="anchor" aria-label="anchor" href="#python-snippet-see---code3
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nilearn <span class="im">import</span> plotting</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nilearn <span class="im">import</span> image</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nibabel.affines <span class="im">import</span> apply_affine</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> nilearn <span class="im">import</span> plotting</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> nilearn <span class="im">import</span> image</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">from</span> nibabel.affines <span class="im">import</span> apply_affine</span></code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cut_coords <span class="op">=</span> (<span class="op">-</span><span class="dv">40</span>,<span class="dv">10</span>,<span class="dv">0</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="fl">1.053177</span>, <span class="op">-</span><span class="fl">0.061204</span>, <span class="op">-</span><span class="fl">0.060685</span>, <span class="fl">90.310684</span>],</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>             [<span class="fl">0.070210</span>, <span class="fl">1.009246</span>, <span class="fl">0.117766</span>, <span class="op">-</span><span class="fl">9.806847</span>],</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>             [<span class="fl">0.023069</span>, <span class="op">-</span><span class="fl">0.117785</span>, <span class="fl">1.186777</span>, <span class="fl">13.209366</span>],</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>             [<span class="fl">0.</span> ,<span class="fl">0.</span> , <span class="fl">0.</span>, <span class="fl">1.</span>]])</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>cut_coords_affine_transformed <span class="op">=</span> apply_affine(A, cut_coords)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>x,y,z <span class="op">=</span> cut_coords_affine_transformed</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>cut_coords_affine_transformed_str <span class="op">=</span> <span class="st">"(</span><span class="sc">{}</span><span class="st">,</span><span class="sc">{}</span><span class="st">,</span><span class="sc">{}</span><span class="st">)"</span>.<span class="bu">format</span>(<span class="bu">int</span>(x),<span class="bu">int</span>(y),<span class="bu">int</span>(z))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Subject space to refernce space mapping:</span><span class="ch">\n</span><span class="st"> </span><span class="sc">{}</span><span class="st"> --&gt; </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(cut_coords,cut_coords_affine_transformed_str))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>cut_coords <span class="op">=</span> (<span class="op">-</span><span class="dv">40</span>,<span class="dv">10</span>,<span class="dv">0</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="fl">1.053177</span>, <span class="op">-</span><span class="fl">0.061204</span>, <span class="op">-</span><span class="fl">0.060685</span>, <span class="fl">90.310684</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>             [<span class="fl">0.070210</span>, <span class="fl">1.009246</span>, <span class="fl">0.117766</span>, <span class="op">-</span><span class="fl">9.806847</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>             [<span class="fl">0.023069</span>, <span class="op">-</span><span class="fl">0.117785</span>, <span class="fl">1.186777</span>, <span class="fl">13.209366</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>             [<span class="fl">0.</span> ,<span class="fl">0.</span> , <span class="fl">0.</span>, <span class="fl">1.</span>]])</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>cut_coords_affine_transformed <span class="op">=</span> apply_affine(A, cut_coords)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>x,y,z <span class="op">=</span> cut_coords_affine_transformed</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>cut_coords_affine_transformed_str <span class="op">=</span> <span class="st">"(</span><span class="sc">{}</span><span class="st">,</span><span class="sc">{}</span><span class="st">,</span><span class="sc">{}</span><span class="st">)"</span>.<span class="bu">format</span>(<span class="bu">int</span>(x),<span class="bu">int</span>(y),<span class="bu">int</span>(z))</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Subject space to refernce space mapping:</span><span class="ch">\n</span><span class="st"> </span><span class="sc">{}</span><span class="st"> --&gt; </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(cut_coords,cut_coords_affine_transformed_str))</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -720,7 +720,7 @@ studies</li>
   "identifier": "https://carpentries-incubator.github.io/SDC-BIDS-sMRI/instructor/03-Image_Spatial_Normalization.html",
   "dateCreated": "2024-02-19",
   "dateModified": "2024-02-19",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

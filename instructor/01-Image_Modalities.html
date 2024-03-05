@@ -522,26 +522,26 @@ example.)<a class="anchor" aria-label="anchor" href="#interacting-with-images-se
 <hr class="half-width"><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nibabel <span class="im">as</span> nib</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nilearn</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nilearn <span class="im">import</span> plotting</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> nibabel <span class="im">as</span> nib</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> nilearn</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">from</span> nilearn <span class="im">import</span> plotting</span></code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>local_data_dir <span class="op">=</span> <span class="st">'../local_data/1_sMRI_modalities/'</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>T1_filename <span class="op">=</span> local_data_dir <span class="op">+</span> <span class="st">'craving_sub-SAXSISO01b_T1w.nii.gz'</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>T2_filename <span class="op">=</span> local_data_dir <span class="op">+</span><span class="st">'craving_sub-SAXSISO01b_T2w.nii.gz'</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>T1_img <span class="op">=</span> nib.load(T1_filename)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>T2_img <span class="op">=</span> nib.load(T2_filename)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># grab data array</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>T1_data <span class="op">=</span> T1_img.get_fdata()</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>T2_data <span class="op">=</span> T2_img.get_fdata()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plotting.plot_anat(T1_filename, title<span class="op">=</span><span class="st">"T1"</span>, vmax<span class="op">=</span><span class="dv">500</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plotting.plot_anat(T2_filename, title<span class="op">=</span><span class="st">"T2"</span>, vmax<span class="op">=</span><span class="dv">300</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>local_data_dir <span class="op">=</span> <span class="st">'../local_data/1_sMRI_modalities/'</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>T1_filename <span class="op">=</span> local_data_dir <span class="op">+</span> <span class="st">'craving_sub-SAXSISO01b_T1w.nii.gz'</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>T2_filename <span class="op">=</span> local_data_dir <span class="op">+</span><span class="st">'craving_sub-SAXSISO01b_T2w.nii.gz'</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>T1_img <span class="op">=</span> nib.load(T1_filename)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>T2_img <span class="op">=</span> nib.load(T2_filename)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># grab data array</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>T1_data <span class="op">=</span> T1_img.get_fdata()</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>T2_data <span class="op">=</span> T2_img.get_fdata()</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>plotting.plot_anat(T1_filename, title<span class="op">=</span><span class="st">"T1"</span>, vmax<span class="op">=</span><span class="dv">500</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>plotting.plot_anat(T2_filename, title<span class="op">=</span><span class="st">"T2"</span>, vmax<span class="op">=</span><span class="dv">300</span>)</span></code></pre>
 </div>
 <table class="table"><colgroup><col width="24%"><col width="75%"></colgroup><thead><tr class="header"><th align="center">T1w</th>
 <th align="center">T2w</th>
@@ -619,7 +619,7 @@ specific brain tissues</li>
   "identifier": "https://carpentries-incubator.github.io/SDC-BIDS-sMRI/instructor/01-Image_Modalities.html",
   "dateCreated": "2024-02-19",
   "dateModified": "2024-02-19",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

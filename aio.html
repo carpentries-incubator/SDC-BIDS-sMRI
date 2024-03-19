@@ -793,7 +793,7 @@ the bias field correction.</em>)</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Bias field is modeled as multiplicative factor, whereas noise is
 typically assumed as additive and spatially independent (Gaussian)
@@ -960,7 +960,7 @@ arbitrarily cut-off point is selected.</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Brain mask at this stage only offers a crude estimate about total
 brain volume. It can be used for quality control (e.g. detecting
@@ -1244,7 +1244,7 @@ image origin and the spacing between two voxels (typically in mm).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Downsampling reduces the number of total voxels in the image.
 Consequently the voxel-spacing is increased as more anatomical space is
@@ -1483,7 +1483,7 @@ you about the subject?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The deformation fields encode information regarding local
 morphometric brain changes. These can be quantified using “Jacobians” of
@@ -1643,12 +1643,12 @@ for the case of GM</li>
 <li>how to visualize segmentation results both for volumetric and
 surface data</li>
 </ul>
-<div id="callout1" class="callout">
+<div id="which-software-to-use-for-segmentation-and-parcellation" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="which-software-to-use-for-segmentation-and-parcellation">Which software to use for segmentation and
+<div id="which-software-to-use-for-segmentation-and-parcellation" class="callout-inner">
+<h3 class="callout-title">Which software to use for segmentation and
 parcellation ?<a class="anchor" aria-label="anchor" href="#which-software-to-use-for-segmentation-and-parcellation"></a>
 </h3>
 <div class="callout-content">
@@ -1928,12 +1928,12 @@ A correct registration to the template is therefore essential for a
 correct labelling of the brain voxels / vertices. The template the
 images are registered to should also be the template on which the atlas
 has been defined (or highly similar).</p>
-<div id="callout2" class="callout">
+<div id="atlas-vs-parcellation" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="atlas-vs-parcellation">Atlas vs Parcellation<a class="anchor" aria-label="anchor" href="#atlas-vs-parcellation"></a>
+<div id="atlas-vs-parcellation" class="callout-inner">
+<h3 class="callout-title">Atlas vs Parcellation<a class="anchor" aria-label="anchor" href="#atlas-vs-parcellation"></a>
 </h3>
 <div class="callout-content">
 <p>A parcellation can be defined as the splitting of an object into
@@ -3759,7 +3759,7 @@ your findings to avoid reproducibility crisis.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.2" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.3" class="external-link">sandpaper (0.16.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
 			</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -3782,8 +3782,8 @@ your findings to avoid reproducibility crisis.</li>
   "url": "https://carpentries-incubator.github.io/SDC-BIDS-sMRI/aio.html",
   "identifier": "https://carpentries-incubator.github.io/SDC-BIDS-sMRI/aio.html",
   "dateCreated": "2024-02-19",
-  "dateModified": "2024-03-12",
-  "datePublished": "2024-03-12"
+  "dateModified": "2024-03-19",
+  "datePublished": "2024-03-19"
 }
 
   </script><script>

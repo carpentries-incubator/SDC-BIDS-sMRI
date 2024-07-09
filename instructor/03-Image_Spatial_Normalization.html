@@ -27,7 +27,7 @@
             <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
           </abbr>
         </span>
-        
+
       </div>
     </div>
     <div class="selector-container">
@@ -56,7 +56,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -180,7 +180,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -199,7 +199,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -208,7 +208,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="01-Image_Modalities.html">1. sMRI Acquisition and Modalities</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -217,7 +217,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="02-Image_Cleanup.html">2. sMRI Clean-up</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -231,7 +231,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#you-are-here">You Are Here!</a></li>
@@ -242,7 +242,7 @@
 <li><a href="#image-registration">3. Image registration</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -251,7 +251,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="04-Image_Quantification.html">4. sMRI Segmentation and Parcellation</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -260,7 +260,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="05-Image_QC.html">5. sMRI Quality Control</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -269,7 +269,7 @@
     <div class="accordion-header" id="flush-heading7">
         <a href="06-Statistical_Analysis.html">6. sMRI Statistical Analysis</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -278,7 +278,7 @@
     <div class="accordion-header" id="flush-heading8">
         <a href="07-Reproducibility.html">7. sMRI Analysis: Reproducibility Considerations</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -310,10 +310,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -334,20 +334,20 @@
           Previous: sMRI Clean-up
         </a>
         <a class="chapter-link float-end" href="../instructor/04-Image_Quantification.html" rel="next">
-          Next: sMRI Segmentation... 
+          Next: sMRI Segmentation...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>sMRI Spatial Normalization</h1>
         <p>Last updated on 2024-02-19 |
-        
+
         <a href="https://github.com/carpentries-incubator/SDC-BIDS-sMRI/edit/main/episodes/03-Image_Spatial_Normalization.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 45 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -377,16 +377,16 @@
 </div>
 </div>
 </div>
-<section id="you-are-here"><h2 class="section-heading">You Are Here!<a class="anchor" aria-label="anchor" href="#you-are-here"></a>
-</h2>
-<hr class="half-width"><figure><img src="../fig/episode_3/Course_flow_3.png" alt="course_flow" class="figure mx-auto d-block"></figure></section><section id="why-do-we-need-spatial-normalization"><h2 class="section-heading">Why do we need spatial normalization<a class="anchor" aria-label="anchor" href="#why-do-we-need-spatial-normalization"></a>
-</h2>
+<section><h2 class="section-heading" id="you-are-here">You Are Here!<a class="anchor" aria-label="anchor" href="#you-are-here"></a>
+<a class="anchor" aria-label="anchor" href="#you-are-here"></a></h2>
+<hr class="half-width"><figure><img src="../fig/episode_3/Course_flow_3.png" alt="course_flow" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="why-do-we-need-spatial-normalization">Why do we need spatial normalization<a class="anchor" aria-label="anchor" href="#why-do-we-need-spatial-normalization"></a>
+<a class="anchor" aria-label="anchor" href="#why-do-we-need-spatial-normalization"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="compare-and-combine-brain-images-across-modalities-individuals-and-studies">Compare and combine brain images across modalities, individuals, and
 studies<a class="anchor" aria-label="anchor" href="#compare-and-combine-brain-images-across-modalities-individuals-and-studies"></a></h3>
 </div>
-</section><section id="what-do-we-need-for-spatial-normalization"><h2 class="section-heading">What do we need for spatial normalization<a class="anchor" aria-label="anchor" href="#what-do-we-need-for-spatial-normalization"></a>
-</h2>
+</section><section><h2 class="section-heading" id="what-do-we-need-for-spatial-normalization">What do we need for spatial normalization<a class="anchor" aria-label="anchor" href="#what-do-we-need-for-spatial-normalization"></a>
+<a class="anchor" aria-label="anchor" href="#what-do-we-need-for-spatial-normalization"></a></h2>
 <hr class="half-width"><div class="section level4">
 <h4 id="a-reference-frame-a-3d-space-that-assigns-xyz-coordinates-to-anatomical-regions-independent-of-voxel-dimensions-">1. A reference frame: A 3D space that assigns x,y,z coordinates to
 anatomical regions (independent of voxel dimensions!).<a class="anchor" aria-label="anchor" href="#a-reference-frame-a-3d-space-that-assigns-xyz-coordinates-to-anatomical-regions-independent-of-voxel-dimensions-"></a></h4>
@@ -398,8 +398,8 @@ alignment target<a class="anchor" aria-label="anchor" href="#a-common-template-a
 <div class="section level4">
 <h4 id="an-image-registration-algorithm">3. An image registration algorithm<a class="anchor" aria-label="anchor" href="#an-image-registration-algorithm"></a></h4>
 </div>
-</section><section id="coordinate-systems-and-spaces"><h2 class="section-heading">1. Coordinate systems and spaces<a class="anchor" aria-label="anchor" href="#coordinate-systems-and-spaces"></a>
-</h2>
+</section><section><h2 class="section-heading" id="coordinate-systems-and-spaces">1. Coordinate systems and spaces<a class="anchor" aria-label="anchor" href="#coordinate-systems-and-spaces"></a>
+<a class="anchor" aria-label="anchor" href="#coordinate-systems-and-spaces"></a></h2>
 <hr class="half-width"><ul><li>World coordinates</li>
 <li>Anatomical coordinates</li>
 <li>Image coordinates</li>
@@ -488,7 +488,7 @@ image origin and the spacing between two voxels (typically in mm).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Downsampling reduces the number of total voxels in the image.
 Consequently the voxel-spacing is increased as more anatomical space is
@@ -501,8 +501,8 @@ used.</p>
 </div>
 </div>
 </div>
-</section><section id="mr-image-templates"><h2 class="section-heading">2. MR image templates<a class="anchor" aria-label="anchor" href="#mr-image-templates"></a>
-</h2>
+</section><section><h2 class="section-heading" id="mr-image-templates">2. MR image templates<a class="anchor" aria-label="anchor" href="#mr-image-templates"></a>
+<a class="anchor" aria-label="anchor" href="#mr-image-templates"></a></h2>
 <hr class="half-width"><ul><li><p>An anatomical template is an average MR volume whose voxels
 encode the average probability of different tissue classes (e.g. WM, GM,
 and CSF) at particular spatial location. The template creation is an
@@ -580,8 +580,8 @@ faces/triangles”</li>
 <div class="section level3">
 <h3 id="multimodal-mniicbm152-atlas">Multimodal MNI/ICBM152 atlas<a class="anchor" aria-label="anchor" href="#multimodal-mniicbm152-atlas"></a></h3>
 <figure><img src="../fig/episode_3/mni_icbm152_sym_09c_small.jpeg" alt="mni_icbm152" class="figure mx-auto d-block"></figure></div>
-</section><section id="image-registration"><h2 class="section-heading">3. Image registration<a class="anchor" aria-label="anchor" href="#image-registration"></a>
-</h2>
+</section><section><h2 class="section-heading" id="image-registration">3. Image registration<a class="anchor" aria-label="anchor" href="#image-registration"></a>
+<a class="anchor" aria-label="anchor" href="#image-registration"></a></h2>
 <hr class="half-width"><div class="section level4">
 <h4 id="a-process-that-aligns-an-image-from-one-coordinate-space-to-another-">A process that aligns an image from one coordinate space to
 another.<a class="anchor" aria-label="anchor" href="#a-process-that-aligns-an-image-from-one-coordinate-space-to-another-"></a></h4>
@@ -659,7 +659,7 @@ you about the subject?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The deformation fields encode information regarding local
 morphometric brain changes. These can be quantified using “Jacobians” of
@@ -732,7 +732,7 @@ studies</li>
           Previous: sMRI Clean-up
         </a>
         <a class="chapter-link float-end" href="../instructor/04-Image_Quantification.html" rel="next">
-          Next: sMRI Segmentation... 
+          Next: sMRI Segmentation...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -743,18 +743,18 @@ studies</li>
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/carpentries-incubator/SDC-BIDS-sMRI/edit/main/episodes/03-Image_Spatial_Normalization.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/carpentries-incubator/SDC-BIDS-sMRI/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/carpentries-incubator/SDC-BIDS-sMRI/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/carpentries-incubator/SDC-BIDS-sMRI/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:nikhil.bhagwat@mcgill.ca">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -779,7 +779,7 @@ studies</li>
   "identifier": "https://carpentries-incubator.github.io/SDC-BIDS-sMRI/instructor/03-Image_Spatial_Normalization.html",
   "dateCreated": "2024-06-25",
   "dateModified": "2024-02-19",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-09"
 }
 
   </script><script>

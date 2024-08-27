@@ -286,10 +286,10 @@ Morphometry (VBM)</a></li>
               </div>
             </div>
 
-            <hr class="half-width"><div class="accordion accordion-flush resources" id="accordionFlush12">
+            <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -309,7 +309,7 @@ Morphometry (VBM)</a></li>
                 </div>
               </div>
             </div>
-            <hr class="half-width resources"><a href="aio.html">See all in one page</a>
+            <hr class="half-width lesson-resources"><a href="aio.html">See all in one page</a>
 
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
@@ -380,16 +380,14 @@ effect of age without predefined regions</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="you-are-here">You Are Here!<a class="anchor" aria-label="anchor" href="#you-are-here"></a>
-<a class="anchor" aria-label="anchor" href="#you-are-here"></a></h2>
+<section><h2 class="section-heading" id="you-are-here">You Are Here!<a class="anchor" aria-label="anchor" href="#you-are-here"></a></h2>
 <hr class="half-width"><figure><img src="fig/episode_6/Course_flow_6.png" alt="course_flow" class="figure mx-auto d-block"></figure><p>All the previous episodes presented the required steps to arrive at a
 stage where the data is ready for metrics extraction and statistical
 analysis. In this episode we will introduce common metrics used to
 characterize the brain structure and morphology, and we will investigate
 statistical approaches to assess if age related brain changes can be
 found in a cohort of young adults.</p>
-</section><section><h2 class="section-heading" id="quantifying-tissue-properties">Quantifying tissue properties<a class="anchor" aria-label="anchor" href="#quantifying-tissue-properties"></a>
-<a class="anchor" aria-label="anchor" href="#quantifying-tissue-properties"></a></h2>
+</section><section><h2 class="section-heading" id="quantifying-tissue-properties">Quantifying tissue properties<a class="anchor" aria-label="anchor" href="#quantifying-tissue-properties"></a></h2>
 <hr class="half-width"><p>As seen in previous episodes, brain structural data can be
 represented as volumes or surfaces. Each of these representations are
 associated to different characteristics. In this episode we will look
@@ -561,8 +559,7 @@ significantly more pronounced.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="jupyter-notebook-challenge" class="callout-inner">
-<h3 class="callout-title">Jupyter notebook challenge<a class="anchor" aria-label="anchor" href="#jupyter-notebook-challenge"></a>
-</h3>
+<h3 class="callout-title">Jupyter notebook challenge</h3>
 <div class="callout-content">
 <p>Taking into account partial volume, can you measure the volume of the
 Left Caudate ? And if you feel adventurous of the Left Lateral ventricle
@@ -577,7 +574,7 @@ Left Caudate ? And if you feel adventurous of the Left Lateral ventricle
   Hint
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Use the Freesurfer LUT to identify the correct ROI index. For the
 lateral ventricle, make sure you use the appropriate tissue type to
@@ -785,8 +782,7 @@ converting the dataframe from wide to long format:</p>
 <figure><img src="fig/episode_6/group_cortical_thickness_boxplot.png" alt="Group cortical thickness boxplot" class="figure mx-auto d-block"></figure></div>
 </div>
 </section><section><h2 class="section-heading" id="statistical-analysis-cortical-thickness-analysis-based-on-a-surface-atlas">Statistical analysis: cortical thickness analysis based on a surface
-atlas<a class="anchor" aria-label="anchor" href="#statistical-analysis-cortical-thickness-analysis-based-on-a-surface-atlas"></a>
-<a class="anchor" aria-label="anchor" href="#statistical-analysis-cortical-thickness-analysis-based-on-a-surface-atlas"></a></h2>
+atlas<a class="anchor" aria-label="anchor" href="#statistical-analysis-cortical-thickness-analysis-based-on-a-surface-atlas"></a></h2>
 <hr class="half-width"><p>Can we measure cortical thickness changes with age in young adults
 ?</p>
 <p>Now that we have cortical thickness measures, we can try to answer
@@ -829,8 +825,7 @@ covariate.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="jupyter-notebook-challenge-1" class="callout-inner">
-<h3 class="callout-title">Jupyter notebook challenge<a class="anchor" aria-label="anchor" href="#jupyter-notebook-challenge-1"></a>
-</h3>
+<h3 class="callout-title">Jupyter notebook challenge</h3>
 <div class="callout-content">
 <p>As the name of our dataframe implies, there may be an issue with the
 data. Can you spot it ?</p>
@@ -844,7 +839,7 @@ data. Can you spot it ?</p>
   Hint
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>You’ll need to use your <code>pandas</code>-fu for this exercise.
 Check for NA (aka missing) values in your <code>pandas</code> dataframe.
@@ -859,8 +854,7 @@ You can use the <code>isnull()</code>, <code>any()</code> and
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="jupyter-notebook-challenge-2" class="callout-inner">
-<h3 class="callout-title">Jupyter notebook challenge<a class="anchor" aria-label="anchor" href="#jupyter-notebook-challenge-2"></a>
-</h3>
+<h3 class="callout-title">Jupyter notebook challenge</h3>
 <div class="callout-content">
 <p>If you spotted the issue in the previous challenge, what would you
 propose to solve it ?</p>
@@ -874,7 +868,7 @@ propose to solve it ?</p>
   Hint
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Data imputation can be applied to appropriate columns, with the
 <code>fillna()</code> method. You may be interested in the
@@ -987,8 +981,7 @@ Kurtosis:	3.282	Cond. No.	2.03e+07</code></pre>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="rapid-statistical-interpretation" class="callout-inner">
-<h3 class="callout-title">Rapid statistical interpretation<a class="anchor" aria-label="anchor" href="#rapid-statistical-interpretation"></a>
-</h3>
+<h3 class="callout-title">Rapid statistical interpretation</h3>
 <div class="callout-content">
 <p>Can you provide one sentence summarizing the results of the OLS model
 regarding cortical thickness and age ?</p>
@@ -1126,8 +1119,7 @@ Freesurfer and <code>nilearn</code>, we use a custom function
 </div>
 <figure><img src="fig/episode_6/ct_age_tvals_left_hemi.png" alt="Cortical thickness vs age - surface t values on left hemi" class="figure mx-auto d-block"></figure><figure><img src="fig/episode_6/ct_age_tvals_right_hemi.png" alt="Cortical thickness vs age - surface t values on right hemi" class="figure mx-auto d-block"></figure></div>
 </section><section><h2 class="section-heading" id="statistical-analysis-local-gm-changes-assessed-with-voxel-based-morphometry-vbm">Statistical analysis: local GM changes assessed with Voxel Based
-Morphometry (VBM)<a class="anchor" aria-label="anchor" href="#statistical-analysis-local-gm-changes-assessed-with-voxel-based-morphometry-vbm"></a>
-<a class="anchor" aria-label="anchor" href="#statistical-analysis-local-gm-changes-assessed-with-voxel-based-morphometry-vbm"></a></h2>
+Morphometry (VBM)<a class="anchor" aria-label="anchor" href="#statistical-analysis-local-gm-changes-assessed-with-voxel-based-morphometry-vbm"></a></h2>
 <hr class="half-width"><p>Relying on an atlas to identify and characterize brain changes or/and
 group differences is a common practice. While it offers more statistical
 power by limiting the comparisons to a limited set of regions, it
@@ -1159,8 +1151,7 @@ corresponding cohort pre-computed results in the
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="how-to-create-a-template" class="callout-inner">
-<h3 class="callout-title">How to create a template ?<a class="anchor" aria-label="anchor" href="#how-to-create-a-template"></a>
-</h3>
+<h3 class="callout-title">How to create a template ?</h3>
 <div class="callout-content">
 <p>We want to create a template on which to align the GM probability
 maps of all our subjects. Do you have an idea on how to create this
@@ -1175,7 +1166,7 @@ templa?</p>
   Hint
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>You can have a look at the outputs generated by
 <code>smriprep/fmriprep</code>.</p>
@@ -1276,8 +1267,7 @@ when it contracts.</p>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="jupyter-notebook-challenge-3" class="callout-inner">
-<h3 class="callout-title">Jupyter notebook challenge<a class="anchor" aria-label="anchor" href="#jupyter-notebook-challenge-3"></a>
-</h3>
+<h3 class="callout-title">Jupyter notebook challenge</h3>
 <div class="callout-content">
 <p>Considering the definition of J output by FSL. In place of the
 question mark (?), what should be in the code below the mathematical
@@ -1539,8 +1529,7 @@ an arbitrary cluster threshold for visualization):</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Multiple volumetric and surface metrics exist to characterize brain
 structure morphology</li>
@@ -1589,7 +1578,7 @@ interpretation levels</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1612,7 +1601,7 @@ interpretation levels</li>
   "identifier": "https://carpentries-incubator.github.io/SDC-BIDS-sMRI/06-Statistical_Analysis.html",
   "dateCreated": "2024-06-25",
   "dateModified": "2024-02-19",
-  "datePublished": "2024-08-20"
+  "datePublished": "2024-08-27"
 }
 
   </script><script>

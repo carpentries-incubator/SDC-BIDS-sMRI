@@ -35,7 +35,7 @@ Things to keep in mind:
 
 ## You Are Here!
 
-![](fig/index/Course_flow_0.png){alt='course\_flow'}
+![](episodes/fig/index/Course_flow_0.png){alt='course\_flow'}
 
 ::::::::::::::::::::::::::::::::::::::::::  prereq
 

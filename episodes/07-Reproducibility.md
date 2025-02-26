@@ -49,7 +49,7 @@ exercises: 10
 
 <img src="fig/episode_7/Reproducibility.png" alt="Drawing" align="middle" width="700px"/> 
 
-*Note: See [this]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) for details on brain plots*
+*Note: See [this article]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) for details on brain plots*
 
 ## Correlation between thickness measurements:
 

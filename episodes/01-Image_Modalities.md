@@ -141,9 +141,9 @@ White Matter (i.e. axonal tracts)
 
 e.g. MPRAGE: Magnetization Prepared - RApid Gradient Echo (Commonly used in neuroimaging)
 
-| MP-RAGE            | MP2-RAGE                                                 | 
+| MP-RAGE            | MP2-RAGE                                                 |
 | :----------------: | :------------------------------------------------------: |
-| ![](fig/episode_1/mprage1.jpg){alt='mprage'}     | <img src="../fig/episode_1/mp2rage.png" alt="Drawing" align="middle" width="425px"/>                                                         | 
+| ![](fig/episode_1/mprage1.jpg){alt='mprage'}     | <img src="fig/episode_1/mp2rage.png" alt="Drawing" align="middle" width="425px"/>                                                         |
 
 ### Spatial encoding of the signal
 

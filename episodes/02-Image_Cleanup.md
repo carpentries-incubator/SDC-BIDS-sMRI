@@ -139,9 +139,9 @@ plotting.plot_anat(T1_corrected, title="T1_corrected_img", cut_coords=cut_coords
 
 ### Example brain extractions pass / fail
 
-| Pass                       | Fail                          | 
+| Pass                       | Fail                          |
 | :------------------------: | :---------------------------: |
-| <img src="../fig/episode_2/BET_Brain_mask_QC_pass.png" alt="Drawing" align="middle" width="400px"/>                           | <img src="../fig/episode_2/BET_Brain_mask_QC_fail.png" alt="Drawing" align="middle" width="400px"/>                              | 
+| <img src="fig/episode_2/BET_Brain_mask_QC_pass.png" alt="Drawing" align="middle" width="400px"/> | <img src="fig/episode_2/BET_Brain_mask_QC_fail.png" alt="Drawing" align="middle" width="400px"/> |
 
 *Source: FSL Introduction to Brain Extraction*
 

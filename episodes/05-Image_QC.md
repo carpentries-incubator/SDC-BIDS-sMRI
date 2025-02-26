@@ -61,7 +61,7 @@ Usage of new method will require your own QC protocols. Especially for highly sp
 
 | Individual report        | Group report                                   | 
 | :----------------------: | :--------------------------------------------: |
-| <img src="../fig/episode_5/mriqc_individual_report.png" alt="Drawing" align="middle" width="700px"/>                         | <img src="../fig/episode_5/mriqc_group_report.png" alt="Drawing" align="middle" width="450px"/>                                               | 
+| <img src="fig/episode_5/mriqc_individual_report.png" alt="Drawing" align="middle" width="700px"/> | <img src="fig/episode_5/mriqc_group_report.png" alt="Drawing" align="middle" width="450px"/> |
 
 #### [VisualQC](https://github.com/raamana/visualqc): assistive tool to improve the quality control workflow of neuroimaging data (Author: Pradeep Reddy Raamana).
 

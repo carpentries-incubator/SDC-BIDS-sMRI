@@ -100,9 +100,6 @@ import nibabel as nib
 from nilearn import plotting
 ```
 
-import nibabel as nib
-from nilearn import plotting
-
 ```python
 T1_orig = subject_dir + 'orig.mgz'
 T1_corrected = subject_dir + 'nu.mgz'

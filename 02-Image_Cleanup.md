@@ -38,7 +38,7 @@ In this episode we will look at two common image clean-up tasks 1) Intensity nor
 - The bias field is dependent on the strength of the magnetic field. If it is not corrected for 1.5T or higher MR scanners, it can considerably affect downstream analyses. Stronger magnets will induce higher bias.
 
 - Commonly used tools
-  
+
   - [ANTs N4 bias correction](https://pubmed.ncbi.nlm.nih.gov/20378467/) (See figure below)
   - [FSL FAST](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FAST) (*Note:FSL FAST is a multi-purpose segmentation tool that includes the bias field correction.*)
 
@@ -79,7 +79,7 @@ n4.inputs.input_image = 'structural.nii'
 n4.inputs.bspline_fitting_distance = 300
 n4.inputs.shrink_factor = 3
 n4.inputs.n_iterations = [50,50,30,20]
-n4.cmdline 
+n4.cmdline
 
 ```
 
@@ -93,15 +93,12 @@ The top figure panel shows original and bias field corrected MR image slices. Th
 
 ![](fig/episode_2/Despotovic_bias_correction.png){alt='bias\_correction'}
 
-### Visualizing "before" and "after" (see ../code/2\_sMRI\_image\_cleanup.ipynb for detailed example.)
+### Visualizing "before" and "after"
 
 ```python
 import nibabel as nib
 from nilearn import plotting
 ```
-
-import nibabel as nib
-from nilearn import plotting
 
 ```python
 T1_orig = subject_dir + 'orig.mgz'
@@ -115,9 +112,9 @@ plotting.plot_anat(T1_orig, title="T1_orig", cut_coords=cut_coords, vmax=255)
 plotting.plot_anat(T1_corrected, title="T1_corrected_img", cut_coords=cut_coords, vmax=255)
 ```
 
-| Before                     | After                         | 
+| Before                     | After                         |
 | :------------------------: | :---------------------------: |
-| ![](fig/episode_2/nilearn_bias_orig.png){alt='nilearn\_bias\_orig'}  | ![](fig/episode_2/nilearn_bias_corr.png){alt='nilearn\_bias\_corr'}     | 
+| ![](fig/episode_2/nilearn_bias_orig.png){alt='nilearn\_bias\_orig'}  | ![](fig/episode_2/nilearn_bias_corr.png){alt='nilearn\_bias\_corr'}     |
 
 ### Brain extraction (a.k.a skull-stripping)
 
@@ -129,7 +126,7 @@ plotting.plot_anat(T1_corrected, title="T1_corrected_img", cut_coords=cut_coords
 - The scalp, dura matter, fat, skin, muscles, eyes, and bones are classified as nonbrain voxels.
 
 - Commonly used tools
-  
+
   - [antsBrainExtraction](https://nipype.readthedocs.io/en/latest/api/generated/nipype.interfaces.ants.html#brainextraction)
   - [FSL brain extraction tool (BET)](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET)
 
@@ -211,9 +208,9 @@ plotting.plot_anat(T1_img_brain_extract, title="T1_img_brain_extract", cut_coord
 
 ```
 
-| Before                     | After                         | 
+| Before                     | After                         |
 | :------------------------: | :---------------------------: |
-| ![](fig/episode_2/nilearn_brain_orig.png){alt='nilearn\_brain\_orig'} | ![](fig/episode_2/nilearn_brain_extract.png){alt='nilearn\_brain\_extract'} | 
+| ![](fig/episode_2/nilearn_brain_orig.png){alt='nilearn\_brain\_orig'} | ![](fig/episode_2/nilearn_brain_extract.png){alt='nilearn\_brain\_extract'} |
 
 
 

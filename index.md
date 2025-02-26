@@ -22,7 +22,7 @@ Things to keep in mind:
 3. An MR (pre)processing pipeline is a set of sequential image processing tasks performed on acquired MR scans prior to the statistical analysis.
 
 4. MR software packages: In order to standardize and simplify computational effort, several software packages encapsulate MR (pre)processing pipelines. Thus as a user, you need not know the details of each image processing algorithm. Nevertheless it is useful to understand the key objectives of these tasks, the corresponding computational approaches, and their impact on the downstream analyses. This will 1) help developers to improve the underlying algorithms and 2) help users to customize the neuroimaging pipelines according to specific dataset requirements. Here are a few common software packages:
-  
+
   - [FreeSurfer](https://surfer.nmr.mgh.harvard.edu/)
   - [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
   - [CIVET](https://www.bic.mni.mcgill.ca/ServicesSoftware/CIVET-2-1-0-Table-of-Contents)

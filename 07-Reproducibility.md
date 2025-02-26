@@ -23,23 +23,23 @@ exercises: 10
 ## MR image processing pipeline selection choices
 
 - Compute environment
-  
-  - OS / system math libararies
+
+  - OS / system math libraries
   - Programming libraries Python / R versions
 
 - Software (algorithms and their versions)
-  
+
   - Image clean-up
   - Image normalization
   - Image quantification
 
 - Quality control
-  
+
   - Manual protocol specifics
   - Automatic outlier criteria
 
 - Biological priors
-  
+
   - Templates
   - Atlases/parcellations: ROI definitions
 
@@ -47,7 +47,7 @@ exercises: 10
 
 ### Task: compare cortical thickness between FreeSurfer and CIVET
 
-<img src="fig/episode_7/Reproducibility.png" alt="Drawing" align="middle" width="700px"/> 
+<img src="fig/episode_7/Reproducibility.png" alt="Drawing" align="middle" width="700px"/>
 
 *Note: See [this article]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) for details on brain plots*
 
@@ -57,7 +57,7 @@ exercises: 10
 
 ### Parcellation: DKT
 
-<img src="fig/episode_7/CT_compare_software.png" alt="Drawing" align="middle" width="700px"/> 
+<img src="fig/episode_7/CT_compare_software.png" alt="Drawing" align="middle" width="700px"/>
 
 ## Possible choices for FreeSurfer parcellations
 
@@ -65,7 +65,7 @@ exercises: 10
 
 ### Inference pertaining to neuroantomical differences and/or prediction models based on individual neuroanatomical feature sets can be sensitive to parcellation choice.
 
-<img src="fig/episode_7/FreeSurfer_parcels.jpg" alt="Drawing" align="middle" width="700px"/> 
+<img src="fig/episode_7/FreeSurfer_parcels.jpg" alt="Drawing" align="middle" width="700px"/>
 
 *Note: Image adopted from [Madan 2021](https://link.springer.com/article/10.1007/s12021-021-09519-6)*
 

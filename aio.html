@@ -850,7 +850,7 @@ the bias field correction.</em>)</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Bias field is modeled as multiplicative factor, whereas noise is
 typically assumed as additive and spatially independent (Gaussian)
@@ -893,7 +893,7 @@ library.<a class="anchor" aria-label="anchor" href="#side-note-ants-is-a-softwar
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>n4.inputs.bspline_fitting_distance <span class="op">=</span> <span class="dv">300</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>n4.inputs.shrink_factor <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>n4.inputs.n_iterations <span class="op">=</span> [<span class="dv">50</span>,<span class="dv">50</span>,<span class="dv">30</span>,<span class="dv">20</span>]</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>n4.cmdline </span></code></pre>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>n4.cmdline</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -914,8 +914,7 @@ task.</p>
 <figure><img src="fig/episode_2/Despotovic_bias_correction.png" alt="bias_correction" class="figure mx-auto d-block"></figure>
 </div>
 <div class="section level3">
-<h3 id="visualizing-before-and-after-see---code2_smri_image_cleanup-ipynb-for-detailed-example-">Visualizing “before” and “after” (see
-../code/2_sMRI_image_cleanup.ipynb for detailed example.)<a class="anchor" aria-label="anchor" href="#visualizing-before-and-after-see---code2_smri_image_cleanup-ipynb-for-detailed-example-"></a>
+<h3 id="visualizing-before-and-after">Visualizing “before” and “after”<a class="anchor" aria-label="anchor" href="#visualizing-before-and-after"></a>
 </h3>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -923,7 +922,6 @@ task.</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> nibabel <span class="im">as</span> nib</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="im">from</span> nilearn <span class="im">import</span> plotting</span></code></pre>
 </div>
-<p>import nibabel as nib from nilearn import plotting</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1016,7 +1014,7 @@ arbitrarily cut-off point is selected.</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Brain mask at this stage only offers a crude estimate about total
 brain volume. It can be used for quality control (e.g. detecting
@@ -1069,8 +1067,8 @@ library.<a class="anchor" aria-label="anchor" href="#side-note-ants-is-a-softwar
 </div>
 </div>
 <div class="section level3">
-<h3 id="visualizing-before-and-after-see---code2_smri_image_cleanup-ipynb-for-detailed-example--1">Visualizing “before” and “after” (see
-../code/2_sMRI_image_cleanup.ipynb for detailed example.)<a class="anchor" aria-label="anchor" href="#visualizing-before-and-after-see---code2_smri_image_cleanup-ipynb-for-detailed-example--1"></a>
+<h3 id="visualizing-before-and-after-see---code2_smri_image_cleanup-ipynb-for-detailed-example-">Visualizing “before” and “after” (see
+../code/2_sMRI_image_cleanup.ipynb for detailed example.)<a class="anchor" aria-label="anchor" href="#visualizing-before-and-after-see---code2_smri_image_cleanup-ipynb-for-detailed-example-"></a>
 </h3>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2653,7 +2651,7 @@ Left Caudate ? And if you feel adventurous of the Left Lateral ventricle
   Hint
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Use the Freesurfer LUT to identify the correct ROI index. For the
 lateral ventricle, make sure you use the appropriate tissue type to
@@ -2931,7 +2929,7 @@ data. Can you spot it ?</p>
   Hint
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>You’ll need to use your <code>pandas</code>-fu for this exercise.
 Check for NA (aka missing) values in your <code>pandas</code> dataframe.
@@ -2960,7 +2958,7 @@ propose to solve it ?</p>
   Hint
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Data imputation can be applied to appropriate columns, with the
 <code>fillna()</code> method. You may be interested in the
@@ -3264,7 +3262,7 @@ templa?</p>
   Hint
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>You can have a look at the outputs generated by
 <code>smriprep/fmriprep</code>.</p>
@@ -3699,7 +3697,7 @@ interpretation levels</li>
 <li>
 <p>Compute environment</p>
 <ul>
-<li>OS / system math libararies</li>
+<li>OS / system math libraries</li>
 <li>Programming libraries Python / R versions</li>
 </ul>
 </li>

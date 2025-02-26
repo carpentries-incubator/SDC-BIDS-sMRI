@@ -93,7 +93,7 @@ The top figure panel shows original and bias field corrected MR image slices. Th
 
 ![](fig/episode_2/Despotovic_bias_correction.png){alt='bias\_correction'}
 
-### Visualizing "before" and "after" (see ../code/2\_sMRI\_image\_cleanup.ipynb for detailed example.)
+### Visualizing "before" and "after"
 
 ```python
 import nibabel as nib

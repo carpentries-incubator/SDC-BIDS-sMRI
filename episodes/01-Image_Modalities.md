@@ -50,10 +50,10 @@ The dotted-black line represents the epoch when you "listen" to the signal (i.e.
 
 ## T1w, T2w, and PD acquisition
 
-|                    | TE short                                                 | TE long (~ T2 of tissue of interest)               | 
+|                    | TE short                                                 | TE long (~ T2 of tissue of interest)               |
 | :----------------: | :------------------------------------------------------: | :------------------------------------------------: |
-| **TR short (~ T1 of tissue of interest)**                   | T1w                                                      | \-                                                  | 
-| **TR long**                   | Proton Density (PD)                                      | T2w                                                | 
+| **TR short (~ T1 of tissue of interest)**                   | T1w                                                      | \-                                                  |
+| **TR long**                   | Proton Density (PD)                                      | T2w                                                |
 
 *Note*: More recently, the FLAIR (Fluid Attenuated Inversion Recovery) sequence has replaced the PD image. FLAIR images are T2-weighted with the CSF signal suppressed.
 
@@ -78,12 +78,12 @@ TR > TE.
 
 ### T1 and T2 relaxation times for various tissues
 
-|                    | T1 (ms)                                                  | T2 (ms)                                            | 
+|                    | T1 (ms)                                                  | T2 (ms)                                            |
 | :----------------: | :------------------------------------------------------: | :------------------------------------------------: |
-| Bones              | 500                                                      | 50                                                 | 
-| CSF                | 4000                                                     | 500                                                | 
-| Grey Matter        | 1300                                                     | 110                                                | 
-| White Matter       | 800                                                      | 80                                                 | 
+| Bones              | 500                                                      | 50                                                 |
+| CSF                | 4000                                                     | 500                                                |
+| Grey Matter        | 1300                                                     | 110                                                |
+| White Matter       | 800                                                      | 80                                                 |
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -105,22 +105,22 @@ White Matter (i.e. axonal tracts)
 
 ### T1w, T2w image contrasts
 
-| T1w                | T2w                                                      | 
+| T1w                | T2w                                                      |
 | :----------------: | :------------------------------------------------------: |
-| ![](fig/episode_1/T1.gif){alt='T1'}         | ![](fig/episode_1/T2.gif){alt='T2'}                                               | 
+| ![](fig/episode_1/T1.gif){alt='T1'}         | ![](fig/episode_1/T2.gif){alt='T2'}                                               |
 
 ### Applications per modality
 
-| Modality           | Contrast Characteristics                                 | Use Cases                                          | 
+| Modality           | Contrast Characteristics                                 | Use Cases                                          |
 | :----------------: | :------------------------------------------------------: | :------------------------------------------------: |
-| T1w                | Cerebrospinal fluid is dark                              | Quantifying anatomy *e.g. measure structural volumes*                               | 
-| T2w                | CSF is light, but white matter is darker than with T1    | Identify pathologies related to lesions and tumors | 
-| PD                 | CSF is bright. Gray matter is brighter than white matter | Identify demyelination                             | 
-| FLAIR              | Similar to T2 with the CSF signal suppressed             | Identify demyelination                             | 
+| T1w                | Cerebrospinal fluid is dark                              | Quantifying anatomy *e.g. measure structural volumes*                               |
+| T2w                | CSF is light, but white matter is darker than with T1    | Identify pathologies related to lesions and tumors |
+| PD                 | CSF is bright. Gray matter is brighter than white matter | Identify demyelination                             |
+| FLAIR              | Similar to T2 with the CSF signal suppressed             | Identify demyelination                             |
 
 ## Image acquisition process and parameters
 
-<img src="fig/episode_1/Pulse_seq.png" alt="Drawing" align="middle" width="1000px"/> 
+<img src="fig/episode_1/Pulse_seq.png" alt="Drawing" align="middle" width="1000px"/>
 
 ## What do we want?
 
@@ -179,9 +179,9 @@ plotting.plot_anat(T2_filename, title="T2", vmax=300)
 
 ```
 
-| T1w                | T2w                                                      | 
+| T1w                | T2w                                                      |
 | :----------------: | :------------------------------------------------------: |
-| ![](fig/episode_1/nilearn_T1.png){alt='nilearn\_T1'} | ![](fig/episode_1/nilearn_T2.png){alt='nilearn\_T2'}                                       | 
+| ![](fig/episode_1/nilearn_T1.png){alt='nilearn\_T1'} | ![](fig/episode_1/nilearn_T2.png){alt='nilearn\_T2'}                                       |
 
 
 

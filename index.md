@@ -23,17 +23,17 @@ Things to keep in mind:
 
 4. MR software packages: In order to standardize and simplify computational effort, several software packages encapsulate MR (pre)processing pipelines. Thus as a user, you need not know the details of each image processing algorithm. Nevertheless it is useful to understand the key objectives of these tasks, the corresponding computational approaches, and their impact on the downstream analyses. This will 1) help developers to improve the underlying algorithms and 2) help users to customize the neuroimaging pipelines according to specific dataset requirements. Here are a few common software packages:
 
-  - [FreeSurfer](https://surfer.nmr.mgh.harvard.edu/)
-  - [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
-  - [CIVET](https://www.bic.mni.mcgill.ca/ServicesSoftware/CIVET-2-1-0-Table-of-Contents)
-  - [ANTs](https://stnava.github.io/ANTs/)
-  - [SPM](https://www.fil.ion.ucl.ac.uk/spm/) (mostly for functional data)
-  - [AFNI](https://afni.nimh.nih.gov/) (mostly for functional data)
-  - [sMRIprep](https://github.com/nipreps/smriprep) or [fMRIprep](https://github.com/nipreps/fmriprep) (pipeline customization)
+- [FreeSurfer](https://surfer.nmr.mgh.harvard.edu/)
+- [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
+- [CIVET](https://www.bic.mni.mcgill.ca/ServicesSoftware/CIVET-2-1-0-Table-of-Contents)
+- [ANTs](https://stnava.github.io/ANTs/)
+- [SPM](https://www.fil.ion.ucl.ac.uk/spm/) (mostly for functional data)
+- [AFNI](https://afni.nimh.nih.gov/) (mostly for functional data)
+- [sMRIprep](https://github.com/nipreps/smriprep) or [fMRIprep](https://github.com/nipreps/fmriprep) (pipeline customization)
 
 *Note: All of this may sound complicated, but we'll explain things step-by-step in depth with practical examples as the course goes along. We will begin our computational journey starting from how an MR image is acquired, followed by several pre-processing tasks, with the end goal of conducting a statistical analysis to investigate neuroanatomical differences between patients and healthy control groups.*
 
-## You Are Here!
+## You Are Here
 
 ![](episodes/fig/index/Course_flow_0.png){alt='course\_flow'}
 
@@ -43,9 +43,4 @@ Things to keep in mind:
 
 Attendees must have some base familiarity with Python and NIfTI images in order to comfortably progress through the lesson
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-
-

@@ -18,7 +18,7 @@ exercises: 15
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## You Are Here!
+## You Are Here
 
 ![](fig/episode_2/Course_flow_2.png){alt='course\_flow'}
 
@@ -65,7 +65,7 @@ i.e. v(x) = u(x)f(x) + n(x), where v is the given image, u is the uncorrupted im
 (a) Acquired T1w image (b) Estimated the bias field which can then be used to "correct" the image. (c) Bias field viewed as a surface to show the low frequency modulation.
 ![](fig/episode_2/N4_bias.jpeg){alt='N4\_bias'}
 
-#### Side-note: [ANTs](https://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nipype](https://nipype.readthedocs.io/en/latest/) library.
+#### Side-note: [ANTs](https://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nipype](https://nipype.readthedocs.io/en/latest/) library
 
 ```python
 from nipype.interfaces.ants import N4BiasFieldCorrection
@@ -158,7 +158,7 @@ Brain mask at this stage only offers a crude estimate about total brain volume. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-#### Side-note: [ANTs](https://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nipype](https://nipype.readthedocs.io/en/latest/) library.
+#### Side-note: [ANTs](https://stnava.github.io/ANTs/) is a software comprising several tools and image processing algorithms. ANTs can be run independently or we can import ANTs scripts in python using [nipype](https://nipype.readthedocs.io/en/latest/) library
 
 ```python
 from nipype.interfaces.ants.segmentation import BrainExtraction
@@ -212,12 +212,8 @@ plotting.plot_anat(T1_img_brain_extract, title="T1_img_brain_extract", cut_coord
 | :------------------------: | :---------------------------: |
 | ![](fig/episode_2/nilearn_brain_orig.png){alt='nilearn\_brain\_orig'} | ![](fig/episode_2/nilearn_brain_extract.png){alt='nilearn\_brain\_extract'} |
 
-
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Presence of artifacts can lead to flawed analysis and incorrect findings
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

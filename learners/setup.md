@@ -90,7 +90,3 @@ jupyter notebook
 ## Data used by the notebooks
 
 All datasets needed for the notebook examples are inside the ./SDC-BIDS-sMRI/local\_data/ directory.
-
-
-
-

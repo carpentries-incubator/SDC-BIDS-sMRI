@@ -3,7 +3,3 @@ title: Discussion
 ---
 
 FIXME
-
-
-
-

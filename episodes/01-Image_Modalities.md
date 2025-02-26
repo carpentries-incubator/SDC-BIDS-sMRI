@@ -17,7 +17,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## You Are Here!
+## You Are Here
 
 ![](fig/episode_1/Course_flow_1.png){alt='course\_flow'}
 
@@ -70,8 +70,6 @@ What are the two basic pulse sequence parameters that impact T1w and T2w image c
 Repetition time (TR) and echo time (TE) are the two pulse sequence parameters that dictate the T1w and T2w image contrasts.
 TR > TE.
 
-
-
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -96,8 +94,6 @@ In the T1w image,  which one is brighter: White matter, Grey Matter, or CSF?
 ## Solution
 
 White Matter (i.e. axonal tracts)
-
-
 
 :::::::::::::::::::::::::
 
@@ -183,12 +179,8 @@ plotting.plot_anat(T2_filename, title="T2", vmax=300)
 | :----------------: | :------------------------------------------------------: |
 | ![](fig/episode_1/nilearn_T1.png){alt='nilearn\_T1'} | ![](fig/episode_1/nilearn_T2.png){alt='nilearn\_T2'}                                       |
 
-
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Different acquisition techniques will offer better quantification of specific brain tissues
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

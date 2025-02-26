@@ -20,7 +20,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## You Are Here!
+## You Are Here
 
 ![](fig/episode_6/Course_flow_6.png){alt='course\_flow'}
 
@@ -282,12 +282,12 @@ fs_df
 ```
 
 ```output
-participant_id	G_and_S_frontomargin	G_and_S_occipital_inf	G_and_S_paracentral	G_and_S_subcentral	G_and_S_transv_frontopol	G_and_S_cingul_Ant	G_and_S_cingul_Mid_Ant	G_and_S_cingul_Mid_Post	G_cingul_Post_dorsal	...	S_precentral_sup_part	S_suborbital	S_subparietal	S_temporal_inf	S_temporal_sup	S_temporal_transverse	MeanThickness	BrainSegVolNotVent	eTIV	hemi
-0	sub-0001	1.925	2.517	2.266	2.636	2.600	2.777	2.606	2.736	2.956	...	2.302	2.417	2.514	2.485	2.462	2.752	2.56319	1235952.0	1.560839e+06	lh
-1	sub-0002	2.405	2.340	2.400	2.849	2.724	2.888	2.658	2.493	3.202	...	2.342	3.264	2.619	2.212	2.386	2.772	2.45903	1056970.0	1.115228e+06	lh
-2	sub-0003	2.477	2.041	2.255	2.648	2.616	2.855	2.924	2.632	2.984	...	2.276	2.130	2.463	2.519	2.456	2.685	2.53883	945765.0	1.186697e+06	lh
-3	sub-0004	2.179	2.137	2.366	2.885	2.736	2.968	2.576	2.593	3.211	...	2.145	2.920	2.790	2.304	2.564	2.771	2.51093	973916.0	9.527770e+05	lh
-4	sub-0005	2.483	2.438	2.219	2.832	2.686	3.397	2.985	2.585	3.028	...	2.352	3.598	2.331	2.494	2.665	2.538	2.53830	1089881.0	1.497743e+06	lh
+participant_id G_and_S_frontomargin G_and_S_occipital_inf G_and_S_paracentral G_and_S_subcentral G_and_S_transv_frontopol G_and_S_cingul_Ant G_and_S_cingul_Mid_Ant G_and_S_cingul_Mid_Post G_cingul_Post_dorsal ... S_precentral_sup_part S_suborbital S_subparietal S_temporal_inf S_temporal_sup S_temporal_transverse MeanThickness BrainSegVolNotVent eTIV hemi
+0 sub-0001 1.925 2.517 2.266 2.636 2.600 2.777 2.606 2.736 2.956 ... 2.302 2.417 2.514 2.485 2.462 2.752 2.56319 1235952.0 1.560839e+06 lh
+1 sub-0002 2.405 2.340 2.400 2.849 2.724 2.888 2.658 2.493 3.202 ... 2.342 3.264 2.619 2.212 2.386 2.772 2.45903 1056970.0 1.115228e+06 lh
+2 sub-0003 2.477 2.041 2.255 2.648 2.616 2.855 2.924 2.632 2.984 ... 2.276 2.130 2.463 2.519 2.456 2.685 2.53883 945765.0 1.186697e+06 lh
+3 sub-0004 2.179 2.137 2.366 2.885 2.736 2.968 2.576 2.593 3.211 ... 2.145 2.920 2.790 2.304 2.564 2.771 2.51093 973916.0 9.527770e+05 lh
+4 sub-0005 2.483 2.438 2.219 2.832 2.686 3.397 2.985 2.585 3.028 ... 2.352 3.598 2.331 2.494 2.665 2.538 2.53830 1089881.0 1.497743e+06 lh
 5 rows × 79 columns
 ```
 
@@ -302,18 +302,18 @@ plot_long_df
 ```
 
 ```output
-	hemi	ROI	cortical thickness
-0	lh	G_and_S_frontomargin	1.925
-1	lh	G_and_S_frontomargin	2.405
-2	lh	G_and_S_frontomargin	2.477
-3	lh	G_and_S_frontomargin	2.179
-4	lh	G_and_S_frontomargin	2.483
-...	...	...	...
-33443	rh	S_temporal_transverse	3.006
-33444	rh	S_temporal_transverse	2.683
-33445	rh	S_temporal_transverse	2.418
-33446	rh	S_temporal_transverse	2.105
-33447	rh	S_temporal_transverse	2.524
+ hemi ROI cortical thickness
+0 lh G_and_S_frontomargin 1.925
+1 lh G_and_S_frontomargin 2.405
+2 lh G_and_S_frontomargin 2.477
+3 lh G_and_S_frontomargin 2.179
+4 lh G_and_S_frontomargin 2.483
+... ... ... ...
+33443 rh S_temporal_transverse 3.006
+33444 rh S_temporal_transverse 2.683
+33445 rh S_temporal_transverse 2.418
+33446 rh S_temporal_transverse 2.105
+33447 rh S_temporal_transverse 2.524
 
 ```
 
@@ -343,18 +343,18 @@ subjects_info_withna
 ```
 
 ```output
-participant_id	age	sex	BMI	handedness	education_category	raven_score	NEO_N	NEO_E	NEO_O	NEO_A	NEO_C
-0	sub-0001	25.50	M	21.0	right	academic	33.0	23	40	52	47	32
-1	sub-0002	23.25	F	22.0	right	academic	19.0	22	47	34	53	46
-2	sub-0003	25.00	F	23.0	right	applied	29.0	26	42	37	48	48
-3	sub-0004	20.00	F	18.0	right	academic	24.0	32	42	36	48	52
-4	sub-0005	24.75	M	27.0	right	academic	24.0	32	51	41	51	53
-...	...	...	...	...	...	...	...	...	...	...	...	...
-221	sub-0222	22.00	F	20.0	right	academic	30.0	41	35	51	48	42
-222	sub-0223	20.75	F	23.0	left	applied	26.0	33	41	54	36	41
-223	sub-0224	21.75	M	20.0	right	academic	34.0	22	45	47	46	46
-224	sub-0225	20.25	F	28.0	right	academic	27.0	48	32	43	42	37
-225	sub-0226	20.00	M	20.0	right	applied	19.0	28	40	39	42	29
+participant_id age sex BMI handedness education_category raven_score NEO_N NEO_E NEO_O NEO_A NEO_C
+0 sub-0001 25.50 M 21.0 right academic 33.0 23 40 52 47 32
+1 sub-0002 23.25 F 22.0 right academic 19.0 22 47 34 53 46
+2 sub-0003 25.00 F 23.0 right applied 29.0 26 42 37 48 48
+3 sub-0004 20.00 F 18.0 right academic 24.0 32 42 36 48 52
+4 sub-0005 24.75 M 27.0 right academic 24.0 32 51 41 51 53
+... ... ... ... ... ... ... ... ... ... ... ... ...
+221 sub-0222 22.00 F 20.0 right academic 30.0 41 35 51 48 42
+222 sub-0223 20.75 F 23.0 left applied 26.0 33 41 54 36 41
+223 sub-0224 21.75 M 20.0 right academic 34.0 22 45 47 46 46
+224 sub-0225 20.25 F 28.0 right academic 27.0 48 32 43 42 37
+225 sub-0226 20.00 M 20.0 right applied 19.0 28 40 39 42 29
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -398,18 +398,18 @@ fs_all_df
 ```
 
 ```output
-	participant_id	age	sex	G_and_S_frontomargin	G_and_S_occipital_inf	G_and_S_paracentral	G_and_S_subcentral	G_and_S_transv_frontopol	G_and_S_cingul_Ant	G_and_S_cingul_Mid_Ant	...	S_precentral_sup_part	S_suborbital	S_subparietal	S_temporal_inf	S_temporal_sup	S_temporal_transverse	MeanThickness	BrainSegVolNotVent	eTIV	hemi
-0	sub-0001	25.50	M	1.925	2.517	2.266	2.636	2.600	2.777	2.606	...	2.302	2.417	2.514	2.485	2.462	2.752	2.56319	1235952.0	1.560839e+06	lh
-1	sub-0001	25.50	M	2.216	2.408	2.381	2.698	2.530	2.947	2.896	...	2.324	2.273	2.588	2.548	2.465	2.675	2.51412	1235952.0	1.560839e+06	rh
-2	sub-0002	23.25	F	2.405	2.340	2.400	2.849	2.724	2.888	2.658	...	2.342	3.264	2.619	2.212	2.386	2.772	2.45903	1056970.0	1.115228e+06	lh
-3	sub-0002	23.25	F	2.682	2.454	2.511	2.725	2.874	3.202	3.012	...	2.429	2.664	2.676	2.220	2.291	2.714	2.48075	1056970.0	1.115228e+06	rh
-4	sub-0003	25.00	F	2.477	2.041	2.255	2.648	2.616	2.855	2.924	...	2.276	2.130	2.463	2.519	2.456	2.685	2.53883	945765.0	1.186697e+06	lh
-...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...
-447	sub-0224	21.75	M	2.076	2.653	2.098	2.307	2.463	2.735	2.602	...	2.136	3.253	2.495	2.309	2.562	2.418	2.41761	1140289.0	1.302062e+06	rh
-448	sub-0225	20.25	F	2.513	2.495	2.141	2.492	2.757	2.553	2.238	...	2.304	2.870	2.275	2.481	2.533	2.009	2.43156	1080245.0	1.395822e+06	lh
-449	sub-0225	20.25	F	3.061	2.164	2.097	2.462	2.753	3.134	2.786	...	2.174	3.429	2.385	2.378	2.303	2.105	2.41200	1080245.0	1.395822e+06	rh
-450	sub-0226	20.00	M	3.010	2.189	2.562	3.142	4.072	3.051	2.292	...	2.375	2.812	2.756	2.524	2.617	2.495	2.62877	1257771.0	1.583713e+06	lh
-451	sub-0226	20.00	M	3.851	2.270	2.274	2.610	4.198	3.421	3.007	...	2.371	4.938	2.894	2.663	2.445	2.524	2.63557	1257771.0	1.583713e+06	rh
+ participant_id age sex G_and_S_frontomargin G_and_S_occipital_inf G_and_S_paracentral G_and_S_subcentral G_and_S_transv_frontopol G_and_S_cingul_Ant G_and_S_cingul_Mid_Ant ... S_precentral_sup_part S_suborbital S_subparietal S_temporal_inf S_temporal_sup S_temporal_transverse MeanThickness BrainSegVolNotVent eTIV hemi
+0 sub-0001 25.50 M 1.925 2.517 2.266 2.636 2.600 2.777 2.606 ... 2.302 2.417 2.514 2.485 2.462 2.752 2.56319 1235952.0 1.560839e+06 lh
+1 sub-0001 25.50 M 2.216 2.408 2.381 2.698 2.530 2.947 2.896 ... 2.324 2.273 2.588 2.548 2.465 2.675 2.51412 1235952.0 1.560839e+06 rh
+2 sub-0002 23.25 F 2.405 2.340 2.400 2.849 2.724 2.888 2.658 ... 2.342 3.264 2.619 2.212 2.386 2.772 2.45903 1056970.0 1.115228e+06 lh
+3 sub-0002 23.25 F 2.682 2.454 2.511 2.725 2.874 3.202 3.012 ... 2.429 2.664 2.676 2.220 2.291 2.714 2.48075 1056970.0 1.115228e+06 rh
+4 sub-0003 25.00 F 2.477 2.041 2.255 2.648 2.616 2.855 2.924 ... 2.276 2.130 2.463 2.519 2.456 2.685 2.53883 945765.0 1.186697e+06 lh
+... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+447 sub-0224 21.75 M 2.076 2.653 2.098 2.307 2.463 2.735 2.602 ... 2.136 3.253 2.495 2.309 2.562 2.418 2.41761 1140289.0 1.302062e+06 rh
+448 sub-0225 20.25 F 2.513 2.495 2.141 2.492 2.757 2.553 2.238 ... 2.304 2.870 2.275 2.481 2.533 2.009 2.43156 1080245.0 1.395822e+06 lh
+449 sub-0225 20.25 F 3.061 2.164 2.097 2.462 2.753 3.134 2.786 ... 2.174 3.429 2.385 2.378 2.303 2.105 2.41200 1080245.0 1.395822e+06 rh
+450 sub-0226 20.00 M 3.010 2.189 2.562 3.142 4.072 3.051 2.292 ... 2.375 2.812 2.756 2.524 2.617 2.495 2.62877 1257771.0 1.583713e+06 lh
+451 sub-0226 20.00 M 3.851 2.270 2.274 2.610 4.198 3.421 3.007 ... 2.371 4.938 2.894 2.663 2.445 2.524 2.63557 1257771.0 1.583713e+06 rh
 452 rows × 81 columns
 ```
 
@@ -452,26 +452,26 @@ results.summary()
 
 ```output
 OLS Regression Results
-Dep. Variable:	G_and_S_cingul_Mid_Ant	R-squared:	0.060
-Model:	OLS	Adj. R-squared:	0.047
-Method:	Least Squares	F-statistic:	4.728
-Date:	Thu, 03 Jun 2021	Prob (F-statistic):	0.00322
-Time:	02:41:24	Log-Likelihood:	62.682
-No. Observations:	226	AIC:	-117.4
-Df Residuals:	222	BIC:	-103.7
-Df Model:	3		
-Covariance Type:	nonrobust		
+Dep. Variable: G_and_S_cingul_Mid_Ant R-squared: 0.060
+Model: OLS Adj. R-squared: 0.047
+Method: Least Squares F-statistic: 4.728
+Date: Thu, 03 Jun 2021 Prob (F-statistic): 0.00322
+Time: 02:41:24 Log-Likelihood: 62.682
+No. Observations: 226 AIC: -117.4
+Df Residuals: 222 BIC: -103.7
+Df Model: 3  
+Covariance Type: nonrobust  
 
-              coef	    std err	     t	    P>|t|	    [0.025	0.975]
-Intercept     3.2906	     0.183	     17.954	  0.000	    2.929	    3.652
-C(sex)[T.M]  -0.0097	   0.033	    -0.296	  0.768	   -0.074	    0.055
-age          -0.0258	   0.007	    -3.706	  0.000	   -0.040	   -0.012
-eTIV          1.612e-08	 7.58e-08	 0.213	    0.832	   -1.33e-07	1.66e-07
+              coef     std err      t     P>|t|     [0.025 0.975]
+Intercept     3.2906      0.183      17.954   0.000     2.929     3.652
+C(sex)[T.M]  -0.0097    0.033     -0.296   0.768    -0.074     0.055
+age          -0.0258    0.007     -3.706   0.000    -0.040    -0.012
+eTIV          1.612e-08  7.58e-08  0.213     0.832    -1.33e-07 1.66e-07
 
-Omnibus:	2.038	Durbin-Watson:	2.123
-Prob(Omnibus):	0.361	Jarque-Bera (JB):	1.683
-Skew:	-0.157	Prob(JB):	0.431
-Kurtosis:	3.282	Cond. No.	2.03e+07
+Omnibus: 2.038 Durbin-Watson: 2.123
+Prob(Omnibus): 0.361 Jarque-Bera (JB): 1.683
+Skew: -0.157 Prob(JB): 0.431
+Kurtosis: 3.282 Cond. No. 2.03e+07
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -938,8 +938,6 @@ plotting.plot_stat_map(zmap226, threshold=zthr, colorbar=True, display_mode='z')
 
 ![](fig/episode_6/VBM_zmap_cohort_static.png){alt='VBM mean warped maps'}
 
-
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Multiple volumetric and surface metrics exist to characterize brain structure morphology
@@ -947,5 +945,3 @@ plotting.plot_stat_map(zmap226, threshold=zthr, colorbar=True, display_mode='z')
 - Caution should be exercised at both data inspection and model interpretation levels
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

@@ -17,11 +17,11 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## You Are Here!
+## You Are Here
 
 ![](fig/episode_5/Course_flow_5.png){alt='course\_flow'}
 
-## Things that can go wrong...
+## Things that can go wrong
 
 ### Acquistion
 
@@ -63,18 +63,14 @@ Usage of new method will require your own QC protocols. Especially for highly sp
 | :----------------------: | :--------------------------------------------: |
 | <img src="fig/episode_5/mriqc_individual_report.png" alt="Drawing" align="middle" width="700px"/> | <img src="fig/episode_5/mriqc_group_report.png" alt="Drawing" align="middle" width="450px"/> |
 
-#### [VisualQC](https://github.com/raamana/visualqc): assistive tool to improve the quality control workflow of neuroimaging data (Author: Pradeep Reddy Raamana).
+#### [VisualQC](https://github.com/raamana/visualqc): assistive tool to improve the quality control workflow of neuroimaging data (Author: Pradeep Reddy Raamana)
 
 | T1w acquisition          | Alignment                                      | Cortical Parcellation      |
 | :----------------------: | :--------------------------------------------: | :------------------------: |
 | ![](fig/episode_5/t1_mri_visual_QC.png){alt='t1\_mri\_visual\_QC'} | ![](fig/episode_5/alignment_mismatched_colormix_visualQC.png){alt='alignment\_mismatched\_colormix\_visualQC'} | ![](fig/episode_5/cortical_zoomed_in.png){alt='cortical\_zoomed\_in'} |
-
-
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Image processing failures happen! It is important to perform systematic quality control to minimize biases
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

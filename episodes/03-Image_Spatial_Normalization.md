@@ -18,7 +18,7 @@ exercises: 15
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## You Are Here!
+## You Are Here
 
 ![](fig/episode_3/Course_flow_3.png){alt='course\_flow'}
 
@@ -28,7 +28,7 @@ exercises: 15
 
 ## What do we need for spatial normalization
 
-#### 1\. A reference frame: A 3D space that assigns x,y,z coordinates to anatomical regions (independent of voxel dimensions!).
+#### 1\. A reference frame: A 3D space that assigns x,y,z coordinates to anatomical regions (independent of voxel dimensions!)
 
 #### 2\. A common template: a single or an average image volume as an alignment target
 
@@ -164,7 +164,7 @@ Note that the new intensity values of the resampled voxels are determined based 
 
 ## 3\. Image registration
 
-#### A process that aligns an image from one coordinate space to another.
+#### A process that aligns an image from one coordinate space to another
 
 - Purpose
   
@@ -194,12 +194,12 @@ Note that the new intensity values of the resampled voxels are determined based 
 
 - Commonly used algorithms
 
-| Algorithm      | Deformation                               | \~ parameters | 
+| Algorithm      | Deformation                               | \~ parameters |
 | :------------: | :---------------------------------------: | :----------: |
-| FSL FLIRT      | Linear                                    | 9            | 
-| ANIMAL         | Non-linear (Local translation)            | 69K          | 
-| DARTEL Toolbox | Non-linear (diffeomorphic)                | 6\.4M         | 
-| ANTs (SyN)     | Non-linear (bi-directional diffeomorphic) | 28M          | 
+| FSL FLIRT      | Linear                                    | 9            |
+| ANIMAL         | Non-linear (Local translation)            | 69K          |
+| DARTEL Toolbox | Non-linear (diffeomorphic)                | 6\.4M         |
+| ANTs (SyN)     | Non-linear (bi-directional diffeomorphic) | 28M          |
 
 - Rigid registration example (*source: [SimpleITK](https://github.com/InsightSoftwareConsortium/SimpleITK-Notebooks)*):
   - The figure below shows the source image being registered to the target (left) in an iterative process. The optimized loss is shown on the right.
@@ -263,12 +263,8 @@ Subject space to refernce space mapping:
 
 ![](fig/episode_3/Subject_vs_common_space.png){alt='subject\_vs\_ref\_space'}
 
-
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Reference coordinate spaces and spatial normalization offer a way to map and compare brain anatomy across modalities, individuals, and studies
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

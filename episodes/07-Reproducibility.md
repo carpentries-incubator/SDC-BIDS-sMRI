@@ -16,7 +16,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## You Are Here!
+## You Are Here
 
 ![](fig/episode_7/Course_flow_7.png){alt='course\_flow'}
 
@@ -51,7 +51,7 @@ exercises: 10
 
 *Note: See [this article]([https://academic.oup.com/cercor/article/30/9/5014/5831485]) for details on brain plots*
 
-## Correlation between thickness measurements:
+## Correlation between thickness measurements
 
 ### Software: FreeSurfer (v5.1, v5.3, v6.0), CIVET (2.1) and ANTs
 
@@ -63,18 +63,14 @@ exercises: 10
 
 ### Different parcellation different results?
 
-### Inference pertaining to neuroantomical differences and/or prediction models based on individual neuroanatomical feature sets can be sensitive to parcellation choice.
+### Inference pertaining to neuroantomical differences and/or prediction models based on individual neuroanatomical feature sets can be sensitive to parcellation choice
 
 <img src="fig/episode_7/FreeSurfer_parcels.jpg" alt="Drawing" align="middle" width="700px"/>
 
 *Note: Image adopted from [Madan 2021](https://link.springer.com/article/10.1007/s12021-021-09519-6)*
-
-
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - It is crucial to assess biological vs methodological variation in your findings to avoid reproducibility crisis.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-

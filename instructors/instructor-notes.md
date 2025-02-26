@@ -3,7 +3,3 @@ title: Instructor Notes
 ---
 
 FIXME
-
-
-
-

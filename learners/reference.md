@@ -5,7 +5,3 @@ title: 'Glossary'
 ## Glossary
 
 FIXME
-
-
-
-

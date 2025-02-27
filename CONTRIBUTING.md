@@ -106,7 +106,9 @@ email][contact].
 [contact]: mailto:team@carpentries.org
 [cp-site]: https://carpentries.org/
 [dc-issues]: https://github.com/issues?q=user%3Adatacarpentry
+[dc-lessons]: https://datacarpentry.org/lessons/
 [dc-site]: https://datacarpentry.org/
+[discuss-list]: https://carpentries.topicbox.com/groups/discuss
 [github]: https://github.com
 [github-flow]: https://guides.github.com/introduction/flow/
 [github-join]: https://github.com/join
@@ -114,6 +116,7 @@ email][contact].
 [issues]: https://carpentries.org/help-wanted-issues/
 [lc-issues]: https://github.com/issues?q=user%3ALibraryCarpentry
 [swc-issues]: https://github.com/issues?q=user%3Aswcarpentry
+[swc-lessons]: https://software-carpentry.org/lessons/
 [swc-site]: https://software-carpentry.org/
 [lc-site]: https://librarycarpentry.org/
 [template-doc]: https://carpentries.github.io/workbench/

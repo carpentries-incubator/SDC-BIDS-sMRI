@@ -10,9 +10,9 @@ message: >-
 type: dataset
 authors:
   - given-names: Nikhil
-    affiliation: McGill University
     family-names: Bhagwat
     orcid: 'https://orcid.org/0000-0001-6073-7141'
+    affiliation: McGill University
   - given-names: Michael
     family-names: Dayan
     orcid: 'https://orcid.org/0000-0002-2666-0969'
@@ -31,9 +31,9 @@ authors:
     family-names: Legarreta Gorroño
     orcid: 'https://orcid.org/0000-0002-9661-1396'
     affiliation: Université de Sherbrooke
-  - orcid: 'https://orcid.org/0000-0002-9794-749X'
-    given-names: Jean-Baptiste
+  - given-names: Jean-Baptiste
     family-names: Poline
+    orcid: 'https://orcid.org/0000-0002-9794-749X'
     affiliation: McGill University
   - given-names: Swapna
     family-names: Premasiri

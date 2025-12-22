@@ -34,6 +34,9 @@
     <loc>https://carpentries-incubator.github.io/SDC-BIDS-sMRI/aio.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/SDC-BIDS-sMRI/citation.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/SDC-BIDS-sMRI/discuss.html</loc>
   </url>
   <url>
@@ -74,6 +77,9 @@
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/SDC-BIDS-sMRI/instructor/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/SDC-BIDS-sMRI/instructor/citation.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/SDC-BIDS-sMRI/instructor/discuss.html</loc>

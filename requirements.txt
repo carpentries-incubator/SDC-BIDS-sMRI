@@ -1,4 +1,4 @@
-awscli==1.44.78
+awscli==1.45.28
 numpy
 matplotlib
 nibabel
